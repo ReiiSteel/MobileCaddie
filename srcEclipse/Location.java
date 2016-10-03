@@ -5,4 +5,8 @@ public class Location {
 	private String dateFin;
 	private ArrayList<Article> articles;
 	private Client client;
+	
+	public Location(Time temps) {
+		
+	}
 }
