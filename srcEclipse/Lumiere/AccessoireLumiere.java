@@ -1,5 +1,5 @@
 package Lumiere;
 
-public class AccessoireLumiere {
+public abstract class AccessoireLumiere {
 
 }
