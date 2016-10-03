@@ -83,4 +83,9 @@ public class Magasin {
 	    }
 		return artReturned;
 	}
+	
+	public Location louer(Client client, ArrayList<Article> articles){
+		Location location = new Location();
+		return null;
+	}
 }
