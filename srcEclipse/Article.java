@@ -1,3 +1,7 @@
+/**
+*
+*@author Flambard William Martin Johan
+*/
 public class Article {
 	
 	private String reference;
