@@ -1,12 +1,14 @@
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Location {
-	private String dateDebut;
-	private String dateFin;
+	private Calendar dateDebut;
+	private Calendar dateFin;
 	private ArrayList<Article> articles;
 	private Client client;
 	
-	public Location(Time temps) {
-		
+	public Location(Client client, ArrayList<Article> articles) {
+		Calendar cal = Calendar.getInstance();
+		this.dateDebut = cal.set(year, month, date);;
 	}
 }
