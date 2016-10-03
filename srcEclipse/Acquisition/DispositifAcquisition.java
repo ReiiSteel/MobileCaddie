@@ -1,3 +1,4 @@
+package Acquisition;
 public abstract class DispositifAcquisition {
 	
 	private String typeObjectif;
