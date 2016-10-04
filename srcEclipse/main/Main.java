@@ -17,7 +17,7 @@ public class Main {
 		arts.add(obj);
 		arts.add(cam);
 		
-		Location loc1 = new Location(c1, arts, 2018, 10, 20);
+		m1.louer(c1, arts, 2020, 10, 20);
 		try {
 			m1.archive();
 		} catch (IOException e) {

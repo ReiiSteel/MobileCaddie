@@ -128,11 +128,11 @@ public class Magasin {
 		return artReturned;
 	}
 	
-	public Location louer(Client client, ArrayList<Article> articles){
+	public Location louer(Client client, ArrayList<Article> articles, int yearFin, int monthFin, int dayFin){
 		// TODO nbStock article à gérer
-		//Location location = new Location();
-		//client.ajoutLocation(location);
-		//this.locations.add(location);
+		Location location = new Location(client, articles, yearFin, monthFin, dayFin);
+		client.ajoutLocation(location);
+		this.locations.add(location);
 		
 		return null;
 	}
