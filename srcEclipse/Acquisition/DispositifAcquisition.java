@@ -11,9 +11,8 @@ public abstract class DispositifAcquisition extends main.Article {
 	private Objectif objectif;
 	
 	public DispositifAcquisition(String nom, String reference, String modele, float prixLocationParJour, int nombre,
-			String typeObjectif, int nbPixels, String resolution, Objectif objectif) {
+			String typeObjectif, int nbPixels, String resolution) {
 		super(nom, reference, modele, prixLocationParJour, nombre);
-		this.typeObjectif = typeObjectif;
 		this.nbMillionsPixels = nbPixels;
 		this.resolution = resolution;
 		this.objectif = objectif;

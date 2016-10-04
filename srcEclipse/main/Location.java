@@ -17,15 +17,15 @@ public class Location {
 	 * @param month : nombre de mois de location
 	 * @param day : nombre de jours de location
 	 */
-	public Location(Client client, ArrayList<Article> articles, int year, int month, int day) {
+	public Location(Client client, ArrayList<Article> articles, int yearFin, int monthFin, int dayFin) {
 		GregorianCalendar datedebut = new GregorianCalendar();
 		this.dateDebut = datedebut;
 		this.client = client;
 		this.articles.addAll(articles);
 		this.dateFin = (GregorianCalendar) this.dateDebut.clone();
-		this.dateFin.add(Calendar.YEAR, year);
-		this.dateFin.add(Calendar.MONTH, month);
-		this.dateFin.add(Calendar.DATE, day);
+		this.dateFin.add(Calendar.YEAR, yearFin);
+		this.dateFin.add(Calendar.MONTH, monthFin);
+		this.dateFin.add(Calendar.DATE, dayFin);
 	}
 	
 	/**
