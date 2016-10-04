@@ -12,9 +12,9 @@ public class Location {
 	 * Constructeur de la class Location
 	 * @param client : client qui fait la location
 	 * @param articles : articles loues par le client
-	 * @param year
-	 * @param month
-	 * @param day
+	 * @param year : nombre d'annees de location
+	 * @param month : nombre de mois de location
+	 * @param day : nombre de jours de location
 	 */
 	public Location(Client client, ArrayList<Article> articles, int year, int month, int day) {
 		GregorianCalendar datedebut = new GregorianCalendar();
@@ -29,12 +29,16 @@ public class Location {
 	
 	/**
 	 * Donne le montant a facturer sur la période complete
-	 * @return : 
+	 * @return : montant a facturer
 	 */
 	public float getMontantAFacturer(){
 		float montant = 0.0f;
+		int nbAnnees = this.dateFin.get(Calendar.YEAR) - this.dateDebut.get(Calendar.YEAR);
+		int moisActu = this.dateDebut.get(Calendar.DAY_OF_MONTH);
+		int nbMois = this.dateFin.get(Calendar.MONTH) - this.dateDebut.get(Calendar.MONTH);
+		int nbJours = this.dateFin.get(Calendar.DATE) - this.dateDebut.get(Calendar.DATE) + nbMois;
 		for ( Article article : this.articles) {
-			montant += article.getPrixLocationParJour()*(this.dateDebut.get(2));
+			montant += article.getPrixLocationParJour();
 		}
 		return montant;
 	}
