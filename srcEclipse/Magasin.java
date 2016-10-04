@@ -1,4 +1,10 @@
+import java.io.DataOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 
 public class Magasin {
@@ -12,6 +18,7 @@ public class Magasin {
 		this.articles = new ArrayList<Article>();
 	}
 	
+	/* GETTER AND SETTER */
 	public String getNom() {
 		return nom;
 	}
@@ -35,6 +42,7 @@ public class Magasin {
 	public void setArticles(ArrayList<Article> articles) {
 		this.articles = articles;
 	}
+	/* GETTER AND SETTER */
 	
 	// Methode pour récupérer une ArrayList d'Article pour une référence donnée
 	public ArrayList<Article> getArticlesLouesByRef(String reference) {
@@ -89,7 +97,24 @@ public class Magasin {
 	}
 	
 	public Location louer(Client client, ArrayList<Article> articles){
-		Location location = new Location();
+		//Location location = new Location();
 		return null;
 	}
+	
+	// Méthode pour archiver les locations
+	public void archive () throws IOException {
+		// Génération du nom du fichier YEARMONTH.loc
+		String fichier = "";
+		GregorianCalendar dateEnCours = new GregorianCalendar();
+		fichier += dateEnCours.get(Calendar.YEAR);
+		fichier += dateEnCours.get(Calendar.MONTH);
+		fichier += ".loc";
+
+		// Ouverture du flux
+		DataOutputStream fluxSortieBinaire = new DataOutputStream(new FileOutputStream(fichier));
+		
+		// Fermeture du flux
+		fluxSortieBinaire.close();
+	}
+	
 }

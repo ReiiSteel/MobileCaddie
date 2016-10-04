@@ -15,6 +15,7 @@ public class Client {
 		this.adresse = adresse;
 	}
 
+	/* GETTER AND SETTER */
 	public String getNom() {
 		return nom;
 	}
@@ -34,7 +35,9 @@ public class Client {
 	public ArrayList<Location> getLocations() {
 		return locations;
 	}
+	/* GETTER AND SETTER */
 
+	// Ajoute une location au client
 	public void ajoutLocation(Location loc) {
 		this.locations.add(loc);
 	}
