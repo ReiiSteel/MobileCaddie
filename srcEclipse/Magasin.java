@@ -46,6 +46,19 @@ public class Magasin {
 	}
 	/* GETTER AND SETTER */
 	
+	public ArrayList<Location> getLocationsDateFinMoisAnnee (GregorianCalendar cal) {
+		ArrayList<Location> locationsReturned = new ArrayList<Location>();
+		Iterator itr = this.locations.iterator();
+		while(itr.hasNext()) {
+			Location loc = (Location) itr.next();
+			if((loc.getDateFin().get(Calendar.YEAR) == cal.get(Calendar.YEAR)) 
+					&& (loc.getDateFin().get(Calendar.MONTH) == cal.get(Calendar.MONTH))) {
+				locationsReturned.add(loc);
+			}			
+		}		
+		return locationsReturned;
+	}
+	
 	/**
 	 *  Methode pour récupérer une ArrayList d'Article pour une référence donnée
 	 * @param reference
@@ -138,22 +151,52 @@ public class Magasin {
 		DataOutputStream fluxSortieBinaire = new DataOutputStream(new FileOutputStream(fichier));
 		
 		// Parcours des locations
-		Iterator<Location> itr = this.locations.iterator();
+		ArrayList<Location> locationsSurDateEnCours = this.getLocationsDateFinMoisAnnee(dateEnCours);
+		Iterator<Location> itr = locationsSurDateEnCours.iterator();
 		while(itr.hasNext()) {
 			Location loc = (Location) itr.next();
-			// Location WIIWIWIWIWIWI
-			if (true) {
-				
+			int nbArticles = loc.getArticles().size();
+			String nomClient = loc.getClient().getNom();
+			
+			// Récupération de la date de début
+			int yearDebut = loc.getDateDebut().get(Calendar.YEAR);
+			int monthDebut = loc.getDateDebut().get(Calendar.MONTH);
+			int dayDebut = loc.getDateDebut().get(Calendar.DATE);
+			
+			// Récupération de la date de fin
+			int yearFin = loc.getDateFin().get(Calendar.YEAR);
+			int monthFin = loc.getDateFin().get(Calendar.MONTH);
+			int dayFin = loc.getDateFin().get(Calendar.DATE);
+			
+			/*
+				Ecriture au format : 
+					nombre d'articles loués 
+					nom client
+					jour mois année de la date de début de location
+					jour mois année de la date de fin de locatin
+					ref article
+					ref article
+					...
+			*/
+			fluxSortieBinaire.writeInt(nbArticles);
+			fluxSortieBinaire.writeChars(nomClient);
+			fluxSortieBinaire.writeInt(dayDebut);
+			fluxSortieBinaire.writeInt(monthDebut);
+			fluxSortieBinaire.writeInt(yearDebut);
+			fluxSortieBinaire.writeInt(dayFin);
+			fluxSortieBinaire.writeInt(monthFin);
+			fluxSortieBinaire.writeInt(yearFin);			
+			
+			ArrayList<Article> articles = loc.getArticles();
+			for (Article article : articles) {
+				fluxSortieBinaire.writeChars(article.getReference());
 			}
 		}
-		
-		
+				
 		// Fermeture du flux
 		fluxSortieBinaire.close();
 	}
 	
 	// Méthode pour remettre en mémoire toutes les locations en cours
-	
-	
 	
 }

@@ -3,7 +3,7 @@
 *@author Flambard William Martin Johan
 */
 public class Article {
-	
+	// Reference unique
 	private String reference;
 	private String marque;
 	private String nom;
@@ -11,6 +11,7 @@ public class Article {
 	private int nbStock;
 	
 	public Article(String nom, String reference, String modele, float prixLocationParJour, int nbStock) {
+		// ! Référence unique TODO
 		this.nom = nom;
 		this.reference = reference;
 		this.marque = modele;
