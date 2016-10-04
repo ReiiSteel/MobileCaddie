@@ -36,6 +36,7 @@ public class Magasin {
 		this.articles = articles;
 	}
 	
+	// Methode pour récupérer une ArrayList d'Article pour une référence donnée
 	public ArrayList<Article> getArticlesLouesByRef(String reference) {
 	    Iterator itr = articles.iterator();
 	    ArrayList<Article> artReturned = new ArrayList<Article>();
@@ -48,6 +49,7 @@ public class Magasin {
 		return artReturned;
 	}
 	
+	// Methode pour récupérer une ArrayList d'Article pour une marque donnée
 	public ArrayList<Article> getArticlesLouesByMarque(String marque) {
 		Iterator itr = articles.iterator();
 	    ArrayList<Article> artReturned = new ArrayList<Article>();
@@ -60,6 +62,7 @@ public class Magasin {
 		return artReturned;
 	}
 	
+	// Methode pour récupérer une ArrayList d'Article pour un nom (intitulé) donné
 	public ArrayList<Article> getArticlesLouesByNom(String nom) {
 		Iterator itr = articles.iterator();
 	    ArrayList<Article> artReturned = new ArrayList<Article>();
@@ -72,6 +75,7 @@ public class Magasin {
 		return artReturned;
 	}
 	
+	// Methode pour récupérer une ArrayList d'Article pour un prix de location par jour
 	public ArrayList<Article> getArticlesLouesByPrix(float prixParJour) {
 		Iterator itr = articles.iterator();
 	    ArrayList<Article> artReturned = new ArrayList<Article>();
