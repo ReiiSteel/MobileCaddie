@@ -36,18 +36,23 @@ public class Location {
 		return this.getMontantPeriode(this.dateFin);
 	}
 	
-	
-	public float getMontantPeriode(GregorianCalendar gcal){
-		
+	/**
+	 * Donne le montant de la location sur une periode donnee
+	 * @param finPeriode : Object GregorianCalendar correspondant à la fin de la periode
+	 * @return Le montant de la location sur une periode donnee
+	 */
+	public float getMontantPeriode(GregorianCalendar finPeriode){
+		//Initialisation
 		float montant = 0.0f;
 		
 		int nbJours = 0;
 		int jourActu = this.dateDebut.get(Calendar.DATE);
-		int nbMois = gcal.get(Calendar.MONTH) - this.dateDebut.get(Calendar.MONTH);
-		int moisActu = gcal.get(Calendar.MONTH);
-		int nbAnnees = gcal.get(Calendar.YEAR) - this.dateDebut.get(Calendar.YEAR);
+		int nbMois = finPeriode.get(Calendar.MONTH) - this.dateDebut.get(Calendar.MONTH);
+		int moisActu = finPeriode.get(Calendar.MONTH);
+		int nbAnnees = finPeriode.get(Calendar.YEAR) - this.dateDebut.get(Calendar.YEAR);
 		int anneeActu = this.dateDebut.get(Calendar.YEAR);
 		
+		//Ajout nombre de jours
 		if(moisActu == 1){
 			if(anneeActu%4==0 && anneeActu%100==0 && anneeActu%400==0){
 				nbJours = 29-jourActu;
@@ -72,6 +77,7 @@ public class Location {
 			nbJours = 31-jourActu;
 		}
 		
+		//Ajout nombre de jours par mois
 		int mois = moisActu+1;
 		for (int i = 0; i < nbMois; i++) {
 			if(mois == 1){
@@ -100,6 +106,7 @@ public class Location {
 			mois++;
 		}
 		
+		//Ajout nombre de jours par annee
 		int annee = anneeActu;
 		for (int i = 0; i < nbAnnees; i++) {
 			if(annee%4==0 && annee%100==0 && annee%400==0){
@@ -117,7 +124,26 @@ public class Location {
 		return montant;
 	}
 	
-	//end loc retire client
+	/**
+	 * Permet de savoir si une location est terminee
+	 * @return
+	 */
+	public boolean isEnd(){
+		GregorianCalendar gcal = new GregorianCalendar();
+		if(gcal.get(Calendar.YEAR) >= this.dateFin.get(Calendar.YEAR)){
+			if(gcal.get(Calendar.MONTH) >= this.dateFin.get(Calendar.MONTH)){
+				if(gcal.get(Calendar.DATE) >= this.dateFin.get(Calendar.DATE)){
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
 
 	public GregorianCalendar getDateDebut() {
 		return dateDebut;
