@@ -7,8 +7,38 @@ import java.util.ArrayList;
 
 public class Client {
 	private String nom;
-	private String prenom;
 	private String adresse;
 	private ArrayList<Location> locations;
+	
+	public Client (String nom, String adresse) {
+		this.nom = nom;
+		this.adresse = adresse;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+
+	public ArrayList<Location> getLocations() {
+		return locations;
+	}
+
+	public void ajoutLocation(Location loc) {
+		this.locations.add(loc);
+	}
+	
+	
 	
 }
