@@ -33,46 +33,117 @@ public class Location {
 	 * @return : montant a facturer
 	 */
 	public float getMontantAFacturer(){
+		return this.getMontantPeriode(this.dateFin);
+	}
+	
+	/**
+	 * Donne le montant de la location sur une periode donnee
+	 * @param finPeriode : Object GregorianCalendar correspondant à la fin de la periode
+	 * @return Le montant de la location sur une periode donnee
+	 */
+	public float getMontantPeriode(GregorianCalendar finPeriode){
+		//Initialisation
 		float montant = 0.0f;
-		int nbJours = this.dateFin.get(Calendar.DATE) - this.dateDebut.get(Calendar.DATE);
-		int nbMois = this.dateFin.get(Calendar.MONTH) - this.dateDebut.get(Calendar.MONTH);
-		int moisActu = this.dateDebut.get(Calendar.MONTH);
-		int nbAnnees = this.dateFin.get(Calendar.YEAR) - this.dateDebut.get(Calendar.YEAR);
+		
+		int nbJours = 0;
+		int jourActu = this.dateDebut.get(Calendar.DATE);
+		int nbMois = finPeriode.get(Calendar.MONTH) - this.dateDebut.get(Calendar.MONTH);
+		int moisActu = finPeriode.get(Calendar.MONTH);
+		int nbAnnees = finPeriode.get(Calendar.YEAR) - this.dateDebut.get(Calendar.YEAR);
 		int anneeActu = this.dateDebut.get(Calendar.YEAR);
+		
+		//Ajout nombre de jours
 		if(moisActu == 1){
 			if(anneeActu%4==0 && anneeActu%100==0 && anneeActu%400==0){
-				//nbJours
-				System.out.println("29 jours");
+				nbJours = 29-jourActu;
 			}
 			else{
-				System.out.println("28 jours");
+				nbJours = 28-jourActu;
 			}
 		}
 		else if(moisActu<6 && moisActu%2==0){
-			System.out.println("31 jours");
+			nbJours = 31-jourActu;
 		}
 		else if(moisActu<6 && moisActu%2!=0){
-			System.out.println("30 jours");
+			nbJours = 30-jourActu;
 		}
 		else if(moisActu==6){
-			System.out.println("31 jours");
+			nbJours = 31-jourActu;
 		}
 		else if(moisActu>6 && moisActu%2==0){
-			System.out.println("30 jours");
+			nbJours = 30-jourActu;
 		}
 		else if(moisActu>6 && moisActu%2!=0){
-			System.out.println("31 jours");
+			nbJours = 31-jourActu;
 		}
+		
+		//Ajout nombre de jours par mois
+		int mois = moisActu+1;
+		for (int i = 0; i < nbMois; i++) {
+			if(mois == 1){
+				if(anneeActu%4==0 && anneeActu%100==0 && anneeActu%400==0){
+					nbJours += 29;
+				}
+				else{
+					nbJours += 28;
+				}
+			}
+			else if(mois<6 && mois%2==0){
+				nbJours += 31;
+			}
+			else if(mois<6 && mois%2!=0){
+				nbJours += 30;
+			}
+			else if(mois==6){
+				nbJours += 31;
+			}
+			else if(mois>6 && mois%2==0){
+				nbJours += 30;
+			}
+			else if(mois>6 && mois%2!=0){
+				nbJours += 31;
+			}
+			mois++;
+		}
+		
+		//Ajout nombre de jours par annee
+		int annee = anneeActu;
+		for (int i = 0; i < nbAnnees; i++) {
+			if(annee%4==0 && annee%100==0 && annee%400==0){
+				nbJours += 366;
+			}
+			else{
+				nbJours += 365;
+			}
+			annee++;
+		}
+		
 		for ( Article article : this.articles) {
-			montant += article.getPrixLocationParJour();
+			montant += article.getPrixLocationParJour()*nbJours;
 		}
 		return montant;
 	}
 	
-	
-	//public float getMontantPeriode()
-	
-	//end loc retire client
+	/**
+	 * Permet de savoir si une location est terminee
+	 * @return
+	 */
+	public boolean isEnd(){
+		GregorianCalendar gcal = new GregorianCalendar();
+		if(gcal.get(Calendar.YEAR) >= this.dateFin.get(Calendar.YEAR)){
+			if(gcal.get(Calendar.MONTH) >= this.dateFin.get(Calendar.MONTH)){
+				if(gcal.get(Calendar.DATE) >= this.dateFin.get(Calendar.DATE)){
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
 
 	public GregorianCalendar getDateDebut() {
 		return dateDebut;
