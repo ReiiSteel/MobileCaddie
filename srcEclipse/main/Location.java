@@ -33,44 +33,89 @@ public class Location {
 	 * @return : montant a facturer
 	 */
 	public float getMontantAFacturer(){
-		float montant = 0.0f;
-		int nbJours = this.dateFin.get(Calendar.DATE) - this.dateDebut.get(Calendar.DATE);
-		int nbMois = this.dateFin.get(Calendar.MONTH) - this.dateDebut.get(Calendar.MONTH);
-		int moisActu = this.dateDebut.get(Calendar.MONTH);
-		int nbAnnees = this.dateFin.get(Calendar.YEAR) - this.dateDebut.get(Calendar.YEAR);
-		int anneeActu = this.dateDebut.get(Calendar.YEAR);
-		if(moisActu == 1){
-			if(anneeActu%4==0 && anneeActu%100==0 && anneeActu%400==0){
-				//nbJours
-				System.out.println("29 jours");
-			}
-			else{
-				System.out.println("28 jours");
-			}
-		}
-		else if(moisActu<6 && moisActu%2==0){
-			System.out.println("31 jours");
-		}
-		else if(moisActu<6 && moisActu%2!=0){
-			System.out.println("30 jours");
-		}
-		else if(moisActu==6){
-			System.out.println("31 jours");
-		}
-		else if(moisActu>6 && moisActu%2==0){
-			System.out.println("30 jours");
-		}
-		else if(moisActu>6 && moisActu%2!=0){
-			System.out.println("31 jours");
-		}
-		for ( Article article : this.articles) {
-			montant += article.getPrixLocationParJour();
-		}
-		return montant;
+		return this.getMontantPeriode(this.dateFin);
 	}
 	
 	
-	//public float getMontantPeriode()
+	public float getMontantPeriode(GregorianCalendar gcal){
+		
+		float montant = 0.0f;
+		
+		int nbJours = 0;
+		int jourActu = this.dateDebut.get(Calendar.DATE);
+		int nbMois = gcal.get(Calendar.MONTH) - this.dateDebut.get(Calendar.MONTH);
+		int moisActu = gcal.get(Calendar.MONTH);
+		int nbAnnees = gcal.get(Calendar.YEAR) - this.dateDebut.get(Calendar.YEAR);
+		int anneeActu = this.dateDebut.get(Calendar.YEAR);
+		
+		if(moisActu == 1){
+			if(anneeActu%4==0 && anneeActu%100==0 && anneeActu%400==0){
+				nbJours = 29-jourActu;
+			}
+			else{
+				nbJours = 28-jourActu;
+			}
+		}
+		else if(moisActu<6 && moisActu%2==0){
+			nbJours = 31-jourActu;
+		}
+		else if(moisActu<6 && moisActu%2!=0){
+			nbJours = 30-jourActu;
+		}
+		else if(moisActu==6){
+			nbJours = 31-jourActu;
+		}
+		else if(moisActu>6 && moisActu%2==0){
+			nbJours = 30-jourActu;
+		}
+		else if(moisActu>6 && moisActu%2!=0){
+			nbJours = 31-jourActu;
+		}
+		
+		int mois = moisActu+1;
+		for (int i = 0; i < nbMois; i++) {
+			if(mois == 1){
+				if(anneeActu%4==0 && anneeActu%100==0 && anneeActu%400==0){
+					nbJours += 29;
+				}
+				else{
+					nbJours += 28;
+				}
+			}
+			else if(mois<6 && mois%2==0){
+				nbJours += 31;
+			}
+			else if(mois<6 && mois%2!=0){
+				nbJours += 30;
+			}
+			else if(mois==6){
+				nbJours += 31;
+			}
+			else if(mois>6 && mois%2==0){
+				nbJours += 30;
+			}
+			else if(mois>6 && mois%2!=0){
+				nbJours += 31;
+			}
+			mois++;
+		}
+		
+		int annee = anneeActu;
+		for (int i = 0; i < nbAnnees; i++) {
+			if(annee%4==0 && annee%100==0 && annee%400==0){
+				nbJours += 366;
+			}
+			else{
+				nbJours += 365;
+			}
+			annee++;
+		}
+		
+		for ( Article article : this.articles) {
+			montant += article.getPrixLocationParJour()*nbJours;
+		}
+		return montant;
+	}
 	
 	//end loc retire client
 
