@@ -11,11 +11,13 @@ public class Magasin {
 	private String nom;
 	private ArrayList<Client> listeClients;
 	private ArrayList<Article> articles;
+	private ArrayList<Location> locations;
 	
 	public Magasin(String nom) {
 		this.nom = nom;
 		this.listeClients = new ArrayList<Client>();
 		this.articles = new ArrayList<Article>();
+		this.locations = new ArrayList<Location>();
 	}
 	
 	/* GETTER AND SETTER */
@@ -44,7 +46,11 @@ public class Magasin {
 	}
 	/* GETTER AND SETTER */
 	
-	// Methode pour récupérer une ArrayList d'Article pour une référence donnée
+	/**
+	 *  Methode pour récupérer une ArrayList d'Article pour une référence donnée
+	 * @param reference
+	 * @return liste des articles
+	 */
 	public ArrayList<Article> getArticlesLouesByRef(String reference) {
 	    Iterator itr = articles.iterator();
 	    ArrayList<Article> artReturned = new ArrayList<Article>();
@@ -57,7 +63,11 @@ public class Magasin {
 		return artReturned;
 	}
 	
-	// Methode pour récupérer une ArrayList d'Article pour une marque donnée
+	/**
+	 *  Methode pour récupérer une ArrayList d'Article pour une marque donnée
+	 * @param marque
+	 * @return liste des articles
+	 */
 	public ArrayList<Article> getArticlesLouesByMarque(String marque) {
 		Iterator itr = articles.iterator();
 	    ArrayList<Article> artReturned = new ArrayList<Article>();
@@ -70,7 +80,11 @@ public class Magasin {
 		return artReturned;
 	}
 	
-	// Methode pour récupérer une ArrayList d'Article pour un nom (intitulé) donné
+	/**
+	 *  Methode pour récupérer une ArrayList d'Article pour un nom (intitulé) donné
+	 * @param nom
+	 * @return liste des articles
+	 */
 	public ArrayList<Article> getArticlesLouesByNom(String nom) {
 		Iterator itr = articles.iterator();
 	    ArrayList<Article> artReturned = new ArrayList<Article>();
@@ -83,7 +97,11 @@ public class Magasin {
 		return artReturned;
 	}
 	
-	// Methode pour récupérer une ArrayList d'Article pour un prix de location par jour
+	/**
+	 *  Methode pour récupérer une ArrayList d'Article pour un prix de location par jour
+	 * @param prixParJour
+	 * @return liste des articles
+	 */
 	public ArrayList<Article> getArticlesLouesByPrix(float prixParJour) {
 		Iterator itr = articles.iterator();
 	    ArrayList<Article> artReturned = new ArrayList<Article>();
@@ -98,23 +116,44 @@ public class Magasin {
 	
 	public Location louer(Client client, ArrayList<Article> articles){
 		//Location location = new Location();
+		//client.ajoutLocation(location);
+		//this.locations.add(location);
 		return null;
 	}
 	
-	// Méthode pour archiver les locations
+	/**
+	 *  Méthode pour archiver les locations
+	 * @throws IOException
+	 */
 	public void archive () throws IOException {
 		// Génération du nom du fichier YEARMONTH.loc
 		String fichier = "";
 		GregorianCalendar dateEnCours = new GregorianCalendar();
 		fichier += dateEnCours.get(Calendar.YEAR);
-		fichier += dateEnCours.get(Calendar.MONTH);
+		int month = dateEnCours.get(Calendar.MONTH);
+		fichier += month;
 		fichier += ".loc";
 
 		// Ouverture du flux
 		DataOutputStream fluxSortieBinaire = new DataOutputStream(new FileOutputStream(fichier));
 		
+		// Parcours des locations
+		Iterator<Location> itr = this.locations.iterator();
+		while(itr.hasNext()) {
+			Location loc = (Location) itr.next();
+			// Location WIIWIWIWIWIWI
+			if (true) {
+				
+			}
+		}
+		
+		
 		// Fermeture du flux
 		fluxSortieBinaire.close();
 	}
+	
+	// Méthode pour remettre en mémoire toutes les locations en cours
+	
+	
 	
 }
