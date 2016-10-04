@@ -9,11 +9,15 @@ import java.util.ArrayList;
 public class Client {
 	private String nom;
 	private String adresse;
+	private String refClient;
 	private ArrayList<Location> locations;
 	
 	public Client (String nom, String adresse) {
 		this.nom = nom;
 		this.adresse = adresse;
+		this.locations = new ArrayList<Location>();
+		// TODO global unique ref client
+		this.refClient = "1";
 	}
 
 	/* GETTER AND SETTER */
@@ -31,6 +35,10 @@ public class Client {
 
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
+	}
+	
+	public String getRefClient() {
+		return refClient;
 	}
 
 	public ArrayList<Location> getLocations() {
