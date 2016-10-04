@@ -1,3 +1,4 @@
+package main;
 import java.io.DataOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -127,10 +128,12 @@ public class Magasin {
 		return artReturned;
 	}
 	
-	public Location louer(Client client, ArrayList<Article> articles){
-		//Location location = new Location();
-		//client.ajoutLocation(location);
-		//this.locations.add(location);
+	public Location louer(Client client, ArrayList<Article> articles, int year, int month, int day){
+		// TODO nbStock article à gérer
+		Location location = new Location(client, articles, year, month, day);
+		client.ajoutLocation(location);
+		this.locations.add(location);
+		
 		return null;
 	}
 	
