@@ -17,8 +17,8 @@ public class Location {
 	 * @param day : nombre de jours de location
 	 */
 	public Location(Client client, ArrayList<Article> articles, int year, int month, int day) {
-		GregorianCalendar datedebut = new GregorianCalendar();
-		this.dateDebut = datedebut;
+		this.articles = new ArrayList<Article>();
+		this.dateDebut = new GregorianCalendar();
 		this.client = client;
 		this.articles.addAll(articles);
 		this.dateFin = (GregorianCalendar) this.dateDebut.clone();
@@ -33,10 +33,35 @@ public class Location {
 	 */
 	public float getMontantAFacturer(){
 		float montant = 0.0f;
-		int nbAnnees = this.dateFin.get(Calendar.YEAR) - this.dateDebut.get(Calendar.YEAR);
-		int moisActu = this.dateDebut.get(Calendar.DAY_OF_MONTH);
+		int nbJours = this.dateFin.get(Calendar.DATE) - this.dateDebut.get(Calendar.DATE);
 		int nbMois = this.dateFin.get(Calendar.MONTH) - this.dateDebut.get(Calendar.MONTH);
-		int nbJours = this.dateFin.get(Calendar.DATE) - this.dateDebut.get(Calendar.DATE) + nbMois;
+		int moisActu = this.dateDebut.get(Calendar.MONTH);
+		int nbAnnees = this.dateFin.get(Calendar.YEAR) - this.dateDebut.get(Calendar.YEAR);
+		int anneeActu = this.dateDebut.get(Calendar.YEAR);
+		if(moisActu == 1){
+			if(anneeActu%4==0 && anneeActu%100==0 && anneeActu%400==0){
+				//nbJours
+				System.out.println("29 jours");
+			}
+			else{
+				System.out.println("28 jours");
+			}
+		}
+		else if(moisActu<6 && moisActu%2==0){
+			System.out.println("31 jours");
+		}
+		else if(moisActu<6 && moisActu%2!=0){
+			System.out.println("30 jours");
+		}
+		else if(moisActu==6){
+			System.out.println("31 jours");
+		}
+		else if(moisActu>6 && moisActu%2==0){
+			System.out.println("30 jours");
+		}
+		else if(moisActu>6 && moisActu%2!=0){
+			System.out.println("31 jours");
+		}
 		for ( Article article : this.articles) {
 			montant += article.getPrixLocationParJour();
 		}
