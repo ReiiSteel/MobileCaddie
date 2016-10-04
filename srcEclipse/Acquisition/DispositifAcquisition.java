@@ -3,14 +3,16 @@
 *@author Flambard William Martin Johan
 */
 package Acquisition;
-public abstract class DispositifAcquisition {
+public abstract class DispositifAcquisition extends main.Article {
 	
 	private String typeObjectif;
 	private int nbMillionsPixels;
 	private String resolution;
 	private Objectif objectif;
 	
-	public DispositifAcquisition(String typeObjectif, int nbPixels, String resolution, Objectif objectif) {
+	public DispositifAcquisition(String nom, String reference, String modele, float prixLocationParJour, int nombre,
+			String typeObjectif, int nbPixels, String resolution, Objectif objectif) {
+		super(nom, reference, modele, prixLocationParJour, nombre);
 		this.typeObjectif = typeObjectif;
 		this.nbMillionsPixels = nbPixels;
 		this.resolution = resolution;

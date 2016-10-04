@@ -4,6 +4,12 @@
 */
 package Lumiere;
 
-public abstract class AccessoireLumiere {
+public abstract class AccessoireLumiere extends main.Article {
+
+	public AccessoireLumiere(String nom, String reference, String modele,
+			float prixLocationParJour, int nbStock) {
+		super(nom, reference, modele, prixLocationParJour, nbStock);
+		// TODO Auto-generated constructor stub
+	}
 
 }
