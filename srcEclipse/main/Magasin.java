@@ -143,7 +143,6 @@ public class Magasin {
 	 * @return
 	 */
 	public Location louer(Client client, ArrayList<Article> articles, int year, int month, int day){
-		// TODO nbStock article à gérer
 		ArrayList<Article> nonLoue = (ArrayList<Article>) articles.clone(); 
 		for (Article article : nonLoue) {
 			if (!article.louer()){

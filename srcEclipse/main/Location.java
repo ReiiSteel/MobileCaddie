@@ -41,17 +41,23 @@ public class Location {
 	 */
 	public Location(Client client, ArrayList<Article> articles, int dayDeb, int monthDeb, int yearDeb, int dayFin, int monthFin, int yearFin) {
 		// TODO VERIF date
-		this.articles = new ArrayList<Article>();
-		this.dateDebut = new GregorianCalendar();
-		this.dateDebut.set(Calendar.YEAR, yearDeb);
-		this.dateDebut.set(Calendar.MONTH, monthDeb);
-		this.dateDebut.set(Calendar.DATE, dayDeb);
-		this.client = client;
-		this.articles.addAll(articles);
-		this.dateFin = (GregorianCalendar) this.dateDebut.clone();
-		this.dateFin.set(Calendar.YEAR, yearFin);
-		this.dateFin.set(Calendar.MONTH, monthFin);
-		this.dateFin.set(Calendar.DATE, dayFin);
+		if(yearDeb < yearFin){
+			if(monthDeb < monthFin){
+				if(dayDeb<dayFin){
+					this.articles = new ArrayList<Article>();
+					this.dateDebut = new GregorianCalendar();
+					this.dateDebut.set(Calendar.YEAR, yearDeb);
+					this.dateDebut.set(Calendar.MONTH, monthDeb);
+					this.dateDebut.set(Calendar.DATE, dayDeb);
+					this.client = client;
+					this.articles.addAll(articles);
+					this.dateFin = (GregorianCalendar) this.dateDebut.clone();
+					this.dateFin.set(Calendar.YEAR, yearFin);
+					this.dateFin.set(Calendar.MONTH, monthFin);
+					this.dateFin.set(Calendar.DATE, dayFin);
+				}
+			}
+		}
 	}
 	
 	/**
