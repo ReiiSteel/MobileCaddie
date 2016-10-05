@@ -49,9 +49,9 @@ public class Location {
 			this.client = client;
 			this.articles.addAll(articles);
 			this.dateFin = (GregorianCalendar) this.dateDebut.clone();
-			this.dateFin.add(Calendar.YEAR, yearFin);
-			this.dateFin.add(Calendar.MONTH, monthFin);
-			this.dateFin.add(Calendar.DATE, dayFin);
+			this.dateFin.set(Calendar.YEAR, yearFin);
+			this.dateFin.set(Calendar.MONTH, monthFin);
+			this.dateFin.set(Calendar.DATE, dayFin);
 		}
 		else{
 			System.out.println("La date de début doit précéder la date de fin.");
@@ -209,7 +209,7 @@ public class Location {
 	
 	public String toString() {
 		return ("Location concernant le client " + client.toString() + ".\n" +
-				"Elle commence le " + this.getDateDebut() + " et termine le " + this.getDateFin() + ".\n" +
+				"Elle commence le " + this.getDateDebut()+ " et termine le " + this.getDateFin() + ".\n" +
 				"Article(s) loué(s) : " + this.getArticles().toString());
 		
 	}

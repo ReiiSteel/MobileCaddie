@@ -23,7 +23,8 @@ public class Main {
 		arts.add(obj);
 		arts.add(cam);
 
-		m1.louer(c1, arts, 0, 0, 20);
+		Location loc = m1.louer(c1, arts, 0, 0, 20);
+		System.out.println(loc.toString());
 		try {
 			m1.archive();
 		} catch (IOException e) {
