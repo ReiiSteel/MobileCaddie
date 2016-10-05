@@ -29,6 +29,36 @@ public class Location {
 	}
 	
 	/**
+	 * Constructeur de la class Location
+	 * @param client : client qui fait la location
+	 * @param articles : articles loues par le client
+	 * @param yearDeb : année de début de location
+	 * @param monthDeb : mois de début de location
+	 * @param dayDeb : jour de début de location
+	 * @param yearFin : année de fin de location
+	 * @param monthFin : mois de fin de location
+	 * @param dayFin : jour de fin de location
+	 */
+	public Location(Client client, ArrayList<Article> articles, int yearDeb, int monthDeb, int dayDeb, int yearFin, int monthFin, int dayFin) {
+		if(yearDeb > yearFin || monthDeb > monthFin || dayDeb > dayFin){
+			this.articles = new ArrayList<Article>();
+			this.dateDebut = new GregorianCalendar();
+			this.dateDebut.set(Calendar.YEAR, yearDeb);
+			this.dateDebut.set(Calendar.MONTH, monthDeb);
+			this.dateDebut.set(Calendar.DATE, dayDeb);
+			this.client = client;
+			this.articles.addAll(articles);
+			this.dateFin = (GregorianCalendar) this.dateDebut.clone();
+			this.dateFin.add(Calendar.YEAR, yearFin);
+			this.dateFin.add(Calendar.MONTH, monthFin);
+			this.dateFin.add(Calendar.DATE, dayFin);
+		}
+		else{
+			System.out.println("La date de début doit précéder la date de fin.");
+		}
+	}
+	
+	/**
 	 * Donne le montant a facturer sur la période complete
 	 * @return : montant a facturer
 	 */
