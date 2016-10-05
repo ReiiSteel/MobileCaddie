@@ -139,6 +139,18 @@ public class Magasin {
 
 		return null;
 	}
+	
+	public Client getClientByRef(String ref) {
+		Iterator<Client> itr = listeClients.iterator();
+		while(itr.hasNext()) {
+			Client clientRecherche = (Client) itr.next();
+			if (clientRecherche.getRefClient() == ref) {
+				return clientRecherche;
+			}
+		}
+		Client c = new Client("NULL", "NULL");
+		return c;
+	}
 
 	/**
 	 *  Méthode pour archiver les locations
@@ -177,7 +189,7 @@ public class Magasin {
 			/*
 				Ecriture au format : 
 					nombre d'articles loués 
-					nom client
+					ref client
 					jour mois année de la date de début de location
 					jour mois année de la date de fin de locatin
 					ref article
@@ -197,6 +209,8 @@ public class Magasin {
 			for (Article article : articles) {
 				fluxSortieBinaire.writeChars(article.getReference() + ";");
 			}
+			
+			fluxSortieBinaire.writeChar('\\');
 		}
 
 		// Fermeture du flux
@@ -208,6 +222,8 @@ public class Magasin {
 	 * @throws IOException
 	 */
 	public void memLocEnCours () throws IOException {
+		// Peut être un simple print 
+		
 		// Génération du nom du fichier YEARMONTH.loc
 		String fichier = "";
 		GregorianCalendar dateEnCours = new GregorianCalendar();
@@ -222,12 +238,13 @@ public class Magasin {
 			int nbArticles = fluxBinaire.readInt();
 			char c = '\0';
 			
+			String refClient = "";
 			// Ref client
-			while(c != ';') {				
-				String nomClient = "";
+			while(c != ';') {			
 				c = fluxBinaire.readChar();
-				nomClient += c;
+				refClient += c;
 			}
+			refClient = refClient.substring(0, refClient.length()-1);
 			
 			// Dates
 			int dayDebut = fluxBinaire.readInt();
@@ -238,15 +255,30 @@ public class Magasin {
 			int yearFin = fluxBinaire.readInt();		
 			
 			c = '\0';
-			
-			ArrayList<Article> arts = new ArrayList<Article>();
+
+			String refArticle = "";
 			for (int i = 0; i < nbArticles; i++) {
-				String refArticle = "";
-				while(c != ';') {
+				while(c != '\\') {
 					c = fluxBinaire.readChar();
 					refArticle += c;
 				}
-				arts.addAll(this.getArticlesLouesByRef(refArticle));
+			}
+			
+			String[] refArticleSplit = refArticle.split(";");
+			
+			// Récupération du client
+			Client client = (Client) this.getClientByRef(refClient);
+			
+			// Récupération de l'article			
+			ArrayList<Article> articleArchive = new ArrayList<Article>();
+			for(String ref : refArticleSplit) {
+				articleArchive.addAll(this.getArticlesLouesByRef(ref));
+			}
+
+			for (int i = 0; i < nbArticles; i++) {
+				
+				Location loc = new Location(client, articleArchive, dayDebut, monthDebut, yearDebut, dayFin, monthFin, yearFin);
+				System.out.println(loc);
 			}
 		}
 		catch(EOFException e1){
@@ -255,8 +287,6 @@ public class Magasin {
 		catch(IOException e2) {
 			System.out.println("Erreur d'E/S " + e2.getMessage());
 		}
-
-		
 
 		// Fermeture du flux
 		fluxBinaire.close();
