@@ -9,14 +9,16 @@ import java.util.ArrayList;
 public class Client {
 	private String nom;
 	private String adresse;
-	private static int refClient;
+	private static int nbrefClient;
+	private int refClient;
 	private ArrayList<Location> locations;
 	
 	public Client (String nom, String adresse) {
 		this.nom = nom;
 		this.adresse = adresse;
 		this.locations = new ArrayList<Location>();
-		this.refClient ++;
+		this.nbrefClient ++;
+		this.refClient = nbrefClient;
 	}
 
 	/* GETTER AND SETTER */

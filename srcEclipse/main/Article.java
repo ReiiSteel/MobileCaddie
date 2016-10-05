@@ -50,4 +50,7 @@ public class Article {
 		}
 	}
 	
+	public String toString(){
+		return "Article todo";
+	}
 }
