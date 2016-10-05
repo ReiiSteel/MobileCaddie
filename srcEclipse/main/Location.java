@@ -206,4 +206,11 @@ public class Location {
 	public void setClient(Client client) {
 		this.client = client;
 	}
+	
+	public String toString() {
+		return ("Location concernant le client " + client.toString() + ".\n" +
+				"Elle commence le " + this.getDateDebut() + " et termine le " + this.getDateFin() + ".\n" +
+				"Article(s) loué(s) : " + this.getArticles().toString());
+		
+	}
 }

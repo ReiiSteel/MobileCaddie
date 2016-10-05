@@ -50,6 +50,9 @@ public class Client {
 		this.locations.add(loc);
 	}
 	
+	public String toString () {
+		return("nom : " + this.getNom() + "adresse" + this.getRefClient());
+	}
 	
 	
 }
