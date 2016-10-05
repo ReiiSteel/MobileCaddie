@@ -164,7 +164,7 @@ public class Magasin {
 	public Client getClientByRef(int ref) {
 		Iterator<Client> itr = listeClients.iterator();
 		while(itr.hasNext()) {
-			Client clientRecherche = (Client) itr.next();
+			Client clientRecherche = (Client) itr.next();			
 			if (clientRecherche.getRefClient() == ref) {
 				return clientRecherche;
 			}
@@ -297,6 +297,16 @@ public class Magasin {
 			}
 				
 			Location loc = new Location(client, articleArchive, dayDebut, monthDebut, yearDebut, dayFin, monthFin, yearFin);
+			System.out.println(client);
+			System.out.println(articleArchive);
+			System.out.println(dayDebut);
+			System.out.println(monthDebut);
+			System.out.println(yearDebut);
+			System.out.println(dayFin);
+			System.out.println(monthFin);
+			System.out.println(yearFin);
+			
+			System.out.println(loc);
 
 		}
 		catch(EOFException e1){

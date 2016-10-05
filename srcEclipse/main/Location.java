@@ -39,6 +39,7 @@ public class Location {
 	 * @param monthFin : mois de fin de location
 	 * @param dayFin : jour de fin de location
 	 */
+<<<<<<< HEAD
 	public Location(Client client, ArrayList<Article> articles, int yearDeb, int monthDeb, int dayDeb, int yearFin, int monthFin, int dayFin) {
 		if(yearDeb > yearFin || monthDeb > monthFin || dayDeb > dayFin){
 			this.articles = new ArrayList<Article>();
@@ -56,6 +57,21 @@ public class Location {
 		else{
 			System.out.println("La date de début doit précéder la date de fin.");
 		}
+=======
+	public Location(Client client, ArrayList<Article> articles, int dayDeb, int monthDeb, int yearDeb, int dayFin, int monthFin, int yearFin) {
+		// TODO VERIF date
+		this.articles = new ArrayList<Article>();
+		this.dateDebut = new GregorianCalendar();
+		this.dateDebut.set(Calendar.YEAR, yearDeb);
+		this.dateDebut.set(Calendar.MONTH, monthDeb);
+		this.dateDebut.set(Calendar.DATE, dayDeb);
+		this.client = client;
+		this.articles.addAll(articles);
+		this.dateFin = (GregorianCalendar) this.dateDebut.clone();
+		this.dateFin.add(Calendar.YEAR, yearFin);
+		this.dateFin.add(Calendar.MONTH, monthFin);
+		this.dateFin.add(Calendar.DATE, dayFin);
+>>>>>>> c608b37c66b014a10e8f7893dda4b83b56641d37
 	}
 	
 	/**
@@ -209,7 +225,7 @@ public class Location {
 	
 	public String toString() {
 		return ("Location concernant le client " + client.toString() + ".\n" +
-				"Elle commence le " + this.getDateDebut()+ " et termine le " + this.getDateFin() + ".\n" +
+				"Elle commence le " + this.getDateDebut().get(Calendar.DATE) + " et termine le " + this.getDateFin().get(Calendar.DATE) + ".\n" +
 				"Article(s) loué(s) : " + this.getArticles().toString());
 		
 	}
