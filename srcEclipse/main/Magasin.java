@@ -50,6 +50,14 @@ public class Magasin {
 	}
 	/* GETTER AND SETTER */
 
+	public void ajoutClient(Client client) {
+		this.listeClients.add(client);
+	}
+	
+	public void ajoutArticle(Article art) {
+		this.articles.add(art);
+	}
+	
 	public ArrayList<Location> getLocationsDateFinMoisAnnee (GregorianCalendar cal) {
 		ArrayList<Location> locationsReturned = new ArrayList<Location>();
 		Iterator itr = this.locations.iterator();
@@ -70,12 +78,10 @@ public class Magasin {
 	 */
 	public ArrayList<Article> getArticlesLouesByRef(String reference) {
 		Iterator<Article> itr = articles.iterator();
-		// TODO !!!!
-		System.out.println(itr);
 		ArrayList<Article> artReturned = new ArrayList<Article>();
 		while(itr.hasNext()) {
 			Article art = (Article) itr.next();
-			if(art.getReference() == reference) {
+			if(art.getReference().equals(reference)) {
 				artReturned.add(art);
 			}	    	
 		}
@@ -197,7 +203,7 @@ public class Magasin {
 		while(itr.hasNext()) {
 			Location loc = (Location) itr.next();
 			int nbArticles = loc.getArticles().size();
-			String refClient = String.valueOf(loc.getClient().getRefClient());
+			int refClient = loc.getClient().getRefClient();
 
 			// Récupération de la date de début
 			int yearDebut = loc.getDateDebut().get(Calendar.YEAR);
@@ -220,7 +226,7 @@ public class Magasin {
 					...
 			 */
 			fluxSortieBinaire.writeInt(nbArticles);
-			fluxSortieBinaire.writeChars(refClient + ";");
+			fluxSortieBinaire.writeInt(refClient);
 			fluxSortieBinaire.writeInt(dayDebut);
 			fluxSortieBinaire.writeInt(monthDebut);
 			fluxSortieBinaire.writeInt(yearDebut);
@@ -261,13 +267,9 @@ public class Magasin {
 			int nbArticles = fluxBinaire.readInt();
 			char c = '\0';
 			
-			String refClient = "";
 			// Ref client
-			while(c != ';') {			
-				c = fluxBinaire.readChar();
-				refClient += c;
-			}
-			refClient = refClient.substring(0, refClient.length()-1);
+			int refClient = fluxBinaire.readInt();
+			
 			
 			// Dates
 			int dayDebut = fluxBinaire.readInt();
@@ -299,16 +301,8 @@ public class Magasin {
 			}
 				
 			Location loc = new Location(client, articleArchive, dayDebut, monthDebut, yearDebut, dayFin, monthFin, yearFin);
-			System.out.println(client);
-			System.out.println(articleArchive);
-			System.out.println(dayDebut);
-			System.out.println(monthDebut);
-			System.out.println(yearDebut);
-			System.out.println(dayFin);
-			System.out.println(monthFin);
-			System.out.println(yearFin);
 			
-			System.out.println(loc);
+			System.out.println("Location désarchivé : " + loc);
 
 		}
 		catch(EOFException e1){
