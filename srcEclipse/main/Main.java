@@ -29,62 +29,12 @@ public class Main {
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-
-
-		// Génération du nom du fichier YEARMONTH.loc
-		String fichier = "";
-		GregorianCalendar dateEnCours = new GregorianCalendar();
-		fichier += dateEnCours.get(Calendar.YEAR);
-		int month = dateEnCours.get(Calendar.MONTH);
-		fichier += month;
-		fichier += ".loc";
-
-		// Ouverture du flux
-		DataInputStream fluxBinaire = new DataInputStream(new FileInputStream(fichier));
+		
 		try {
-			int nbArticles = fluxBinaire.readInt();
-			char c = '\0';
-
-			// Ref client
-			while(c != ';') {				
-				String refClient = "";
-				c = fluxBinaire.readChar();
-				refClient += c;
-			}
-
-			// Dates
-			int dayDebut = fluxBinaire.readInt();
-			int monthDebut = fluxBinaire.readInt();
-			int yearDebut = fluxBinaire.readInt();
-			int dayFin = fluxBinaire.readInt();
-			int monthFin = fluxBinaire.readInt();
-			int yearFin = fluxBinaire.readInt();		
-
-			c = '\0';
-
-			String refArticle = "";
-			for (int i = 0; i < nbArticles; i++) {
-				while(c != '\\') {
-					c = fluxBinaire.readChar();
-					refArticle += c;
-				}
-			}
-
-			String[] refArticleSplit = refArticle.split(";");
-
-			for (int i = 0; i < nbArticles; i++) {
-				System.out.println(refArticleSplit[i]);
-			}
+			m1.memLocEnCours();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
 		}
-		catch(EOFException e1){
-			System.out.println("Terminaison normale : tous les fichiers ont été lus");
-		}
-		catch(IOException e2) {
-			System.out.println("Erreur d'E/S " + e2.getMessage());
-		}
-
-		// Fermeture du flux
-		fluxBinaire.close();
 
 	}
 }
