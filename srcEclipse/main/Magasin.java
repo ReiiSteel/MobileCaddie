@@ -69,7 +69,9 @@ public class Magasin {
 	 * @return liste des articles
 	 */
 	public ArrayList<Article> getArticlesLouesByRef(String reference) {
-		Iterator itr = articles.iterator();
+		Iterator<Article> itr = articles.iterator();
+		// TODO !!!!
+		System.out.println(itr);
 		ArrayList<Article> artReturned = new ArrayList<Article>();
 		while(itr.hasNext()) {
 			Article art = (Article) itr.next();
