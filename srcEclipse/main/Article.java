@@ -40,4 +40,13 @@ public class Article {
 		return nbStock;
 	}
 	
+	public void louer(){
+		if(this.nbStock > 0){ 
+			this.nbStock -= 1; 
+		}
+		else{
+			System.out.println("L'article "+this.marque+" "+this.nom+" "+this.reference+" n'est plus disponible en stock et ne peut être loué.");
+		}
+	}
+	
 }
