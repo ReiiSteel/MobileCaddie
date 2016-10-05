@@ -295,12 +295,9 @@ public class Magasin {
 			for(String ref : refArticleSplit) {
 				articleArchive.addAll(this.getArticlesLouesByRef(ref));
 			}
-
-			for (int i = 0; i < nbArticles; i++) {
 				
-				Location loc = new Location(client, articleArchive, dayDebut, monthDebut, yearDebut, dayFin, monthFin, yearFin);
-				System.out.println(loc);
-			}
+			Location loc = new Location(client, articleArchive, dayDebut, monthDebut, yearDebut, dayFin, monthFin, yearFin);
+
 		}
 		catch(EOFException e1){
 			System.out.println("Terminaison normale : tous les fichiers ont été lus");
