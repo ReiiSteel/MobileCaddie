@@ -49,9 +49,9 @@ public class Location {
 		this.client = client;
 		this.articles.addAll(articles);
 		this.dateFin = (GregorianCalendar) this.dateDebut.clone();
-		this.dateFin.add(Calendar.YEAR, yearFin);
-		this.dateFin.add(Calendar.MONTH, monthFin);
-		this.dateFin.add(Calendar.DATE, dayFin);
+		this.dateFin.set(Calendar.YEAR, yearFin);
+		this.dateFin.set(Calendar.MONTH, monthFin);
+		this.dateFin.set(Calendar.DATE, dayFin);
 	}
 	
 	/**
