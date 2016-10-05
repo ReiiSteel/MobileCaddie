@@ -131,13 +131,34 @@ public class Magasin {
 		return artReturned;
 	}
 
+	/**
+	 * Loue des articles a un client
+	 * @param client
+	 * @param articles
+	 * @param year
+	 * @param month
+	 * @param day
+	 * @return
+	 */
 	public Location louer(Client client, ArrayList<Article> articles, int year, int month, int day){
 		// TODO nbStock article à gérer
-		Location location = new Location(client, articles, year, month, day);
-		client.ajoutLocation(location);
-		this.locations.add(location);
-
-		return null;
+		ArrayList<Article> nonLoue = (ArrayList<Article>) articles.clone(); 
+		for (Article article : nonLoue) {
+			if (!article.louer()){
+				articles.remove(article);
+			}
+		}
+		if(articles.size() > 0){
+			Location location = new Location(client, articles, year, month, day);
+			client.ajoutLocation(location);
+			this.locations.add(location);
+			return location;
+		}
+		else{
+			System.out.println("Aucun article n'est louable, car non disponible en stock");
+			return null;
+		}
+		
 	}
 
 	/**
