@@ -210,7 +210,7 @@ public class Location {
 	}
 	
 	public String toString() {
-		return ("Location concernant le client " + client.toString() + ".\n" +
+		return ("Location concernant le client " + this.client.toString() + ".\n" +
 				"Elle commence le " + this.getDateDebut().get(Calendar.DATE) + " et termine le " + this.getDateFin().get(Calendar.DATE) + ".\n" +
 				"Article(s) loué(s) : " + this.getArticles().toString());
 		
