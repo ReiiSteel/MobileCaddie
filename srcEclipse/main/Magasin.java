@@ -161,7 +161,7 @@ public class Magasin {
 		
 	}
 	
-	public Client getClientByRef(String ref) {
+	public Client getClientByRef(int ref) {
 		Iterator<Client> itr = listeClients.iterator();
 		while(itr.hasNext()) {
 			Client clientRecherche = (Client) itr.next();
@@ -195,7 +195,7 @@ public class Magasin {
 		while(itr.hasNext()) {
 			Location loc = (Location) itr.next();
 			int nbArticles = loc.getArticles().size();
-			String refClient = loc.getClient().getRefClient();
+			String refClient = String.valueOf(loc.getClient().getRefClient());
 
 			// Récupération de la date de début
 			int yearDebut = loc.getDateDebut().get(Calendar.YEAR);
@@ -288,7 +288,7 @@ public class Magasin {
 			String[] refArticleSplit = refArticle.split(";");
 			
 			// Récupération du client
-			Client client = (Client) this.getClientByRef(refClient);
+			Client client = (Client) this.getClientByRef(Integer.valueOf(refClient));
 			
 			// Récupération de l'article			
 			ArrayList<Article> articleArchive = new ArrayList<Article>();
