@@ -51,6 +51,7 @@ public class Article {
 	}
 	
 	public String toString(){
-		return "Article todo";
+		return ("L'article " + this.getNom() + " de la marque " + this.getMarque() + " avec la référence " + this.getReference() +
+				" a un prix de location par jour de " + this.getPrixLocationParJour() + "€\n");
 	}
 }

@@ -41,8 +41,8 @@ public class Location {
 	 */
 	public Location(Client client, ArrayList<Article> articles, int dayDeb, int monthDeb, int yearDeb, int dayFin, int monthFin, int yearFin) {
 		// TODO VERIF date
-		if(yearDeb < yearFin){
-			if(monthDeb < monthFin){
+		if(yearDeb <= yearFin){
+			if(monthDeb <= monthFin){
 				if(dayDeb<dayFin){
 					this.articles = new ArrayList<Article>();
 					this.dateDebut = new GregorianCalendar();
@@ -51,12 +51,15 @@ public class Location {
 					this.dateDebut.set(Calendar.DATE, dayDeb);
 					this.client = client;
 					this.articles.addAll(articles);
-					this.dateFin = (GregorianCalendar) this.dateDebut.clone();
+					this.dateFin = new GregorianCalendar();
 					this.dateFin.set(Calendar.YEAR, yearFin);
 					this.dateFin.set(Calendar.MONTH, monthFin);
 					this.dateFin.set(Calendar.DATE, dayFin);
 				}
 			}
+		}
+		else {
+			System.out.println("nul");
 		}
 	}
 	
@@ -74,6 +77,7 @@ public class Location {
 	 * @return Le montant de la location sur une periode donnee
 	 */
 	public float getMontantPeriode(GregorianCalendar finPeriode){
+		// TODO ne fonctionne pas
 		//Initialisation
 		float montant = 0.0f;
 		
@@ -212,7 +216,6 @@ public class Location {
 	public String toString() {
 		return ("Location concernant le client " + this.client.toString() + ".\n" +
 				"Elle commence le " + this.getDateDebut().get(Calendar.DATE) + " et termine le " + this.getDateFin().get(Calendar.DATE) + ".\n" +
-				"Article(s) loué(s) : " + this.getArticles().toString());
-		
+				"Article(s) loué(s) : " + this.getArticles().toString() + "\n");		
 	}
 }

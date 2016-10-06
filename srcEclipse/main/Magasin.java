@@ -203,6 +203,7 @@ public class Magasin {
 			Location loc = (Location) itr.next();
 			int nbArticles = loc.getArticles().size();
 			int refClient = loc.getClient().getRefClient();
+			float montantLoc = loc.getMontantAFacturer();
 
 			// Récupération de la date de début
 			int yearDebut = loc.getDateDebut().get(Calendar.YEAR);
@@ -226,6 +227,7 @@ public class Magasin {
 			 */
 			fluxSortieBinaire.writeInt(nbArticles);
 			fluxSortieBinaire.writeInt(refClient);
+			fluxSortieBinaire.writeFloat(montantLoc);
 			fluxSortieBinaire.writeInt(dayDebut);
 			fluxSortieBinaire.writeInt(monthDebut);
 			fluxSortieBinaire.writeInt(yearDebut);
@@ -263,49 +265,60 @@ public class Magasin {
 		// Ouverture du flux
 		DataInputStream fluxBinaire = new DataInputStream(new FileInputStream(fichier));
 		try {
-			int nbArticles = fluxBinaire.readInt();
-			char c = '\0';
-			
-			// Ref client
-			int refClient = fluxBinaire.readInt();
-			
-			
-			// Dates
-			int dayDebut = fluxBinaire.readInt();
-			int monthDebut = fluxBinaire.readInt();
-			int yearDebut = fluxBinaire.readInt();
-			int dayFin = fluxBinaire.readInt();
-			int monthFin = fluxBinaire.readInt();
-			int yearFin = fluxBinaire.readInt();		
-			
-			c = '\0';
+			while(true) {
+				int nbArticles = fluxBinaire.readInt();
+				char c = '\0';
 
-			String refArticle = "";
-			for (int i = 0; i < nbArticles; i++) {
-				while(c != '\\') {
-					c = fluxBinaire.readChar();
-					refArticle += c;
+				// Ref client
+				int refClient = fluxBinaire.readInt();
+				// Montant de la location
+				float montantLoc = fluxBinaire.readFloat();
+
+
+				// Dates
+				int dayDebut = fluxBinaire.readInt();
+				int monthDebut = fluxBinaire.readInt();
+				int yearDebut = fluxBinaire.readInt();
+				int dayFin = fluxBinaire.readInt();
+				int monthFin = fluxBinaire.readInt();
+				int yearFin = fluxBinaire.readInt();		
+
+				c = '\0';
+
+				String refArticle = "";
+				for (int i = 0; i < nbArticles; i++) {
+					while(c != '\\') {
+						c = fluxBinaire.readChar();
+						refArticle += c;
+					}
 				}
-			}
-			
-			String[] refArticleSplit = refArticle.split(";");
-			
-			// Récupération du client
-			Client client = (Client) this.getClientByRef(Integer.valueOf(refClient));
-			
-			// Récupération de l'article			
-			ArrayList<Article> articleArchive = new ArrayList<Article>();
-			for(String ref : refArticleSplit) {
-				articleArchive.addAll(this.getArticlesLouesByRef(ref));
-			}
-				
-			Location loc = new Location(client, articleArchive, dayDebut, monthDebut, yearDebut, dayFin, monthFin, yearFin);
-			
-			System.out.println("Location désarchivé : " + loc);
 
+				String[] refArticleSplit = refArticle.split(";");
+
+				// Récupération du client
+				Client client = (Client) this.getClientByRef(Integer.valueOf(refClient));
+
+				// Récupération de l'article			
+				ArrayList<Article> articleArchive = new ArrayList<Article>();
+				for(String ref : refArticleSplit) {
+					articleArchive.addAll(this.getArticlesLouesByRef(ref));
+				}
+
+				/*System.out.println(client);
+			System.out.println(articleArchive);
+			System.out.println(dayDebut);
+			System.out.println(monthDebut);
+			System.out.println(yearDebut);
+			System.out.println(dayFin);
+			System.out.println(monthFin);
+			System.out.println(yearFin);*/
+				Location loc = new Location(client, articleArchive, dayDebut, monthDebut, yearDebut, dayFin, monthFin, yearFin);
+
+				System.out.println("Location désarchivé : " + loc + " avec le montant " + montantLoc + "€");
+			}
 		}
 		catch(EOFException e1){
-			System.out.println("Terminaison normale : tous les fichiers ont été lus");
+			System.out.println("Toutes les locations ont été désarchivées");
 		}
 		catch(IOException e2) {
 			System.out.println("Erreur d'E/S " + e2.getMessage());
