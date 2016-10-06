@@ -8,7 +8,7 @@ public class Article {
 	private String reference;
 	private String marque;
 	private String nom;
-	private float prixLocationParJour;
+	private double prixLocationParJour;
 	private int nbStock;
 	
 	public Article(String nom, String reference, String marque, float prixLocationParJour, int nbStock) {
@@ -31,7 +31,7 @@ public class Article {
 		return nom;
 	}
 
-	public float getPrixLocationParJour() {
+	public double getPrixLocationParJour() {
 		return prixLocationParJour;
 	}
 

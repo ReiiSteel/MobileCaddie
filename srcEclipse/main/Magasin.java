@@ -203,7 +203,7 @@ public class Magasin {
 			Location loc = (Location) itr.next();
 			int nbArticles = loc.getArticles().size();
 			int refClient = loc.getClient().getRefClient();
-			float montantLoc = loc.getMontantAFacturer();
+			double montantLoc = loc.getMontantAFacturer();
 
 			// Récupération de la date de début
 			int yearDebut = loc.getDateDebut().get(Calendar.YEAR);
@@ -227,7 +227,7 @@ public class Magasin {
 			 */
 			fluxSortieBinaire.writeInt(nbArticles);
 			fluxSortieBinaire.writeInt(refClient);
-			fluxSortieBinaire.writeFloat(montantLoc);
+			fluxSortieBinaire.writeDouble(montantLoc);
 			fluxSortieBinaire.writeInt(dayDebut);
 			fluxSortieBinaire.writeInt(monthDebut);
 			fluxSortieBinaire.writeInt(yearDebut);
@@ -273,7 +273,7 @@ public class Magasin {
 				// Ref client
 				int refClient = fluxBinaire.readInt();
 				// Montant de la location
-				float montantLoc = fluxBinaire.readFloat();
+				double montantLoc = fluxBinaire.readDouble();
 
 
 				// Dates

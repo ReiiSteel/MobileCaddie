@@ -2,6 +2,10 @@ package main;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
+
+import Acquisition.Camera;
+import Acquisition.Objectif;
 
 public class Location {
 	private GregorianCalendar dateDebut;
@@ -70,7 +74,7 @@ public class Location {
 	 * Donne le montant a facturer sur la période complete
 	 * @return : montant a facturer
 	 */
-	public float getMontantAFacturer(){
+	public double getMontantAFacturer(){
 		return this.getMontantPeriode(this.dateFin);
 	}
 	
@@ -79,82 +83,32 @@ public class Location {
 	 * @param finPeriode : Object GregorianCalendar correspondant à la fin de la periode
 	 * @return Le montant de la location sur une periode donnee
 	 */
-	public float getMontantPeriode(GregorianCalendar finPeriode){
-		// TODO ne fonctionne pas
+	public double getMontantPeriode(GregorianCalendar finPeriode){
 		//Initialisation
-		float montant = 0.0f;
+		double montant = 0.0;
 		
 		int nbJours = 0;
-		int jourActu = this.dateDebut.get(Calendar.DATE);
-		int nbMois = finPeriode.get(Calendar.MONTH) - this.dateDebut.get(Calendar.MONTH);
-		int moisActu = finPeriode.get(Calendar.MONTH);
-		int nbAnnees = finPeriode.get(Calendar.YEAR) - this.dateDebut.get(Calendar.YEAR);
-		int anneeActu = this.dateDebut.get(Calendar.YEAR);
+		int actualYear = this.dateDebut.get(Calendar.YEAR);
 		
-		//Ajout nombre de jours
-		if(moisActu == 1){
-			if(anneeActu%4==0 && anneeActu%100==0 && anneeActu%400==0){
-				nbJours = 29-jourActu;
+		if( actualYear == this.dateFin.get(Calendar.YEAR)){
+			nbJours = this.dateFin.get(Calendar.DAY_OF_YEAR) - this.dateDebut.get(Calendar.DAY_OF_YEAR);
+		}
+		else{
+			if(actualYear%4==0 && actualYear%100==0 && actualYear%400==0){
+				nbJours += 366-this.dateDebut.get(Calendar.DAY_OF_YEAR);
 			}
 			else{
-				nbJours = 28-jourActu;
+				nbJours += 365-this.dateDebut.get(Calendar.DAY_OF_YEAR);
 			}
-		}
-		else if(moisActu<6 && moisActu%2==0){
-			nbJours = 31-jourActu;
-		}
-		else if(moisActu<6 && moisActu%2!=0){
-			nbJours = 30-jourActu;
-		}
-		else if(moisActu==6){
-			nbJours = 31-jourActu;
-		}
-		else if(moisActu>6 && moisActu%2==0){
-			nbJours = 30-jourActu;
-		}
-		else if(moisActu>6 && moisActu%2!=0){
-			nbJours = 31-jourActu;
-		}
-		
-		//Ajout nombre de jours par mois
-		int mois = moisActu+1;
-		for (int i = 0; i < nbMois; i++) {
-			if(mois == 1){
-				if(anneeActu%4==0 && anneeActu%100==0 && anneeActu%400==0){
-					nbJours += 29;
+			for (int i = actualYear+1; i < this.dateFin.get(Calendar.YEAR) ; i++) {
+				if(actualYear%4==0 && actualYear%100==0 && actualYear%400==0){
+					nbJours += 366;
 				}
 				else{
-					nbJours += 28;
+					nbJours += 365;
 				}
 			}
-			else if(mois<6 && mois%2==0){
-				nbJours += 31;
-			}
-			else if(mois<6 && mois%2!=0){
-				nbJours += 30;
-			}
-			else if(mois==6){
-				nbJours += 31;
-			}
-			else if(mois>6 && mois%2==0){
-				nbJours += 30;
-			}
-			else if(mois>6 && mois%2!=0){
-				nbJours += 31;
-			}
-			mois++;
-		}
-		
-		//Ajout nombre de jours par annee
-		int annee = anneeActu;
-		for (int i = 0; i < nbAnnees; i++) {
-			if(annee%4==0 && annee%100==0 && annee%400==0){
-				nbJours += 366;
-			}
-			else{
-				nbJours += 365;
-			}
-			annee++;
+			nbJours += this.dateFin.get(Calendar.DAY_OF_YEAR);
 		}
 		
 		for ( Article article : this.articles) {
