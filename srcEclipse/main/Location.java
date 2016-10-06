@@ -18,14 +18,17 @@ public class Location {
 	 * @param day : nombre de jours de location
 	 */
 	public Location(Client client, ArrayList<Article> articles, int nbYear, int nbMonth, int nbDay) {
-		this.articles = new ArrayList<Article>();
-		this.dateDebut = new GregorianCalendar();
-		this.client = client;
-		this.articles.addAll(articles);
-		this.dateFin = (GregorianCalendar) this.dateDebut.clone();
-		this.dateFin.add(Calendar.YEAR, nbYear);
-		this.dateFin.add(Calendar.MONTH, nbMonth);
-		this.dateFin.add(Calendar.DATE, nbDay);
+		if (nbDay > 0) {
+			this.articles = new ArrayList<Article>();
+			this.dateDebut = new GregorianCalendar();
+			this.client = client;
+			this.articles.addAll(articles);
+			this.dateFin = (GregorianCalendar) this.dateDebut.clone();
+			this.dateFin.add(Calendar.YEAR, nbYear);
+			this.dateFin.add(Calendar.MONTH, nbMonth);
+			this.dateFin.add(Calendar.DATE, nbDay);	
+		}
+		else System.out.println("Impossible de faire une location qui dure 0 jour !");
 	}
 	
 	/**
@@ -43,7 +46,7 @@ public class Location {
 		// TODO VERIF date
 		if(yearDeb <= yearFin){
 			if(monthDeb <= monthFin){
-				if(dayDeb<dayFin){
+				if(dayDeb < dayFin){
 					this.articles = new ArrayList<Article>();
 					this.dateDebut = new GregorianCalendar();
 					this.dateDebut.set(Calendar.YEAR, yearDeb);

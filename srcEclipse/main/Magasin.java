@@ -244,6 +244,7 @@ public class Magasin {
 		}
 
 		// Fermeture du flux
+		System.out.println("Toutes les locations ont été archivées");
 		fluxSortieBinaire.close();
 	}
 
