@@ -66,7 +66,7 @@ public class Location {
 			}
 		}
 		else {
-			System.out.println("nul");
+			System.out.println("Date de début et de fin incohérente");
 		}
 	}
 	
@@ -75,7 +75,7 @@ public class Location {
 	 * @return : montant a facturer
 	 */
 	public double getMontantAFacturer(){
-		return this.getMontantPeriode(this.dateFin);
+		return this.getMontantPeriodefromStart(this.dateFin);
 	}
 	
 	/**
@@ -83,38 +83,8 @@ public class Location {
 	 * @param finPeriode : Object GregorianCalendar correspondant à la fin de la periode
 	 * @return Le montant de la location sur une periode donnee
 	 */
-	public double getMontantPeriode(GregorianCalendar finPeriode){
-		//Initialisation
-		double montant = 0.0;
-		
-		int nbJours = 0;
-		int actualYear = this.dateDebut.get(Calendar.YEAR);
-		
-		if( actualYear == this.dateFin.get(Calendar.YEAR)){
-			nbJours = this.dateFin.get(Calendar.DAY_OF_YEAR) - this.dateDebut.get(Calendar.DAY_OF_YEAR);
-		}
-		else{
-			if(actualYear%4==0 && actualYear%100==0 && actualYear%400==0){
-				nbJours += 366-this.dateDebut.get(Calendar.DAY_OF_YEAR);
-			}
-			else{
-				nbJours += 365-this.dateDebut.get(Calendar.DAY_OF_YEAR);
-			}
-			for (int i = actualYear+1; i < this.dateFin.get(Calendar.YEAR) ; i++) {
-				if(actualYear%4==0 && actualYear%100==0 && actualYear%400==0){
-					nbJours += 366;
-				}
-				else{
-					nbJours += 365;
-				}
-			}
-			nbJours += this.dateFin.get(Calendar.DAY_OF_YEAR);
-		}
-		
-		for ( Article article : this.articles) {
-			montant += article.getPrixLocationParJour()*nbJours;
-		}
-		return montant;
+	public double getMontantPeriodefromStart(GregorianCalendar finPeriode){
+		return getMontantPeriode(this.dateDebut, finPeriode);
 	}
 	
 	/**

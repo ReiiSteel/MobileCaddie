@@ -1,11 +1,4 @@
 package main;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -18,12 +11,14 @@ public class Magasin {
 	private ArrayList<Client> listeClients;
 	private ArrayList<Article> articles;
 	private ArrayList<Location> locations;
+	private Archivage arch;
 
 	public Magasin(String nom) {
 		this.nom = nom;
 		this.listeClients = new ArrayList<Client>();
 		this.articles = new ArrayList<Article>();
 		this.locations = new ArrayList<Location>();
+		this.arch = new Archivage(this);
 	}
 
 	/* GETTER AND SETTER */
