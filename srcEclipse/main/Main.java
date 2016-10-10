@@ -28,13 +28,14 @@ public class Main {
 		arts.add(obj);
 		arts.add(cam);
 
-		Location loc = m1.louer(c1, arts, 0, 0, 20);
-		Location loc2 = m1.louer(c2, arts, 0, 0, 1);
-		System.out.println("Montant : " + loc.getMontantAFacturer());
-		System.out.println("Bonne location : \n" + loc.toString());
-		System.out.println("Bonne location2 : \n" + loc2.toString());
+		Location loc = m1.locationPeriodique(c1, arts, 0, 0, 20);
+		Location loc2 = m1.locationPeriodique(c2, arts, 0, 0, 1);
 		
+		Location l1 = new Location(c1, arts, 1, 1, 2015, 8, 10, 2016);
+		c1.ajoutLocation(l1);
+		m1.setLocationsEnCours(loc);
+		m1.locationTerminee(loc);
+		System.out.println(loc.isEnd());
 		
-
 	}
 }

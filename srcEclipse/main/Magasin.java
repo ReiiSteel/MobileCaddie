@@ -1,4 +1,5 @@
 package main;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -105,7 +106,7 @@ public class Magasin {
 	}
 
 	/**
-	 * Loue des articles a un client
+	 * Loue des articles a un client sur une période
 	 * @param client
 	 * @param articles
 	 * @param year
@@ -113,7 +114,7 @@ public class Magasin {
 	 * @param day
 	 * @return
 	 */
-	public Location louer(Client client, ArrayList<Article> articles, int year, int month, int day){
+	public Location locationPeriodique(Client client, ArrayList<Article> articles, int nbYear, int nbMonth, int nbDay){
 		ArrayList<Article> nonLoue = (ArrayList<Article>) articles.clone(); 
 		for (Article article : nonLoue) {
 			if (!article.louer()){
@@ -121,7 +122,7 @@ public class Magasin {
 			}
 		}
 		if(articles.size() > 0){
-			Location location = new Location(client, articles, year, month, day);
+			Location location = new Location(client, articles, nbYear, nbMonth, nbDay);
 			client.ajoutLocation(location);
 			this.locationsEnCours.add(location);
 			return location;
@@ -132,18 +133,24 @@ public class Magasin {
 		}		
 	}
 	
-	public void locationTerminee (Location loc) {
+	public void setLocationsEnCours(Location loc) {
+		this.locationsEnCours.add(loc);
+	}
+	
+	public void locationTerminee (Location loc) throws IOException {
 		if(loc.isEnd()) {
-			// Archivage
-			//this.arch.
+			// Archivage de la location
+			this.arch.nouvelleArchive(this);
 			
-			// Stock
+			// +1 Stock article
 			for (Article art : loc.getArticles()) {
 				art.retourLocation(); 
 			}
 			
 			// Supression dans les locations en cours
-			this.locationsEnCours.remove(loc); 
+			this.locationsEnCours.remove(loc);
+			
+			System.out.println("Location terminée !");
 		}
 	}
 	
