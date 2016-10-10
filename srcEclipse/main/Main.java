@@ -34,7 +34,7 @@ public class Main {
 		Location l1 = new Location(c1, arts, 1, 1, 2015, 8, 10, 2016);
 		c1.ajoutLocation(l1);
 		m1.setLocationsEnCours(loc);
-		m1.locationTerminee(loc);
+		//m1.locationTerminee(loc);
 		System.out.println(loc.isEnd());
 		
 	}
