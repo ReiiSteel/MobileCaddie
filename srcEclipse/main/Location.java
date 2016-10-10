@@ -134,13 +134,16 @@ public class Location {
 	public boolean isEnd(){
 		GregorianCalendar gcal = new GregorianCalendar();
 		if(gcal.get(Calendar.YEAR) >= this.dateFin.get(Calendar.YEAR)){
-			if(gcal.get(Calendar.MONTH) >= this.dateFin.get(Calendar.MONTH)){
+			if(gcal.get(Calendar.MONTH) + 1 >= this.dateFin.get(Calendar.MONTH)){
 				if(gcal.get(Calendar.DATE) >= this.dateFin.get(Calendar.DATE)){
 					return true;
 				} else {
 					return false;
 				}
 			} else {
+
+				System.out.println(gcal.get(Calendar.MONTH));
+				System.out.println(this.dateFin.get(Calendar.MONTH));
 				return false;
 			}
 		} else {
@@ -181,6 +184,8 @@ public class Location {
 	}
 	
 	public String toString() {
+		// TODO
+		// + 1 mois
 		return ("Location concernant le client " + this.client.toString() + ".\n" +
 				"Elle commence le " + this.getDateDebut().get(Calendar.DATE) + "/" + 
 				this.getDateDebut().get(Calendar.MONTH) + "/" + this.getDateDebut().get(Calendar.YEAR)+ " et termine le " + 
