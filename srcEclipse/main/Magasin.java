@@ -11,6 +11,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 
+import Acquisition.Objectif;
+
 public class Magasin {
 	private String nom;
 	private ArrayList<Client> listeClients;
@@ -181,74 +183,6 @@ public class Magasin {
 	}
 
 	/**
-	 *  Méthode pour archiver les locations
-	 * @throws IOException
-	 */
-	public void archive () throws IOException {
-		// Génération du nom du fichier YEARMONTH.loc
-		String fichier = "";
-		GregorianCalendar dateEnCours = new GregorianCalendar();
-		fichier += dateEnCours.get(Calendar.YEAR);
-		int month = dateEnCours.get(Calendar.MONTH);
-		fichier += month;
-		fichier += ".loc";
-
-		// Ouverture du flux
-		DataOutputStream fluxSortieBinaire = new DataOutputStream(new FileOutputStream(fichier));
-
-		// Parcours des locations
-		ArrayList<Location> locationsSurDateEnCours = this.getLocationsDateFinMoisAnnee(dateEnCours);
-		Iterator<Location> itr = locationsSurDateEnCours.iterator();
-		while(itr.hasNext()) {
-			Location loc = (Location) itr.next();
-			int nbArticles = loc.getArticles().size();
-			int refClient = loc.getClient().getRefClient();
-			double montantLoc = loc.getMontantAFacturer();
-
-			// Récupération de la date de début
-			int yearDebut = loc.getDateDebut().get(Calendar.YEAR);
-			int monthDebut = loc.getDateDebut().get(Calendar.MONTH);
-			int dayDebut = loc.getDateDebut().get(Calendar.DATE);
-
-			// Récupération de la date de fin
-			int yearFin = loc.getDateFin().get(Calendar.YEAR);
-			int monthFin = loc.getDateFin().get(Calendar.MONTH);
-			int dayFin = loc.getDateFin().get(Calendar.DATE);
-
-			/*
-				Ecriture au format : 
-					nombre d'articles loués 
-					ref client
-					jour mois année de la date de début de location
-					jour mois année de la date de fin de locatin
-					ref article
-					ref article
-					...
-			 */
-			fluxSortieBinaire.writeInt(nbArticles);
-			fluxSortieBinaire.writeInt(refClient);
-			fluxSortieBinaire.writeDouble(montantLoc);
-			fluxSortieBinaire.writeInt(dayDebut);
-			fluxSortieBinaire.writeInt(monthDebut);
-			fluxSortieBinaire.writeInt(yearDebut);
-			fluxSortieBinaire.writeInt(dayFin);
-			fluxSortieBinaire.writeInt(monthFin);
-			fluxSortieBinaire.writeInt(yearFin);			
-
-			ArrayList<Article> articles = loc.getArticles();
-			for (Article article : articles) {
-				fluxSortieBinaire.writeChars(article.getReference() + ";");
-			}
-			
-			fluxSortieBinaire.writeChar('\\');
-		}
-
-		// Fermeture du flux
-		System.out.println("Toutes les locations ont été archivées");
-		fluxSortieBinaire.close();
-	}
-
-	/**
 	 *  Méthode pour remettre en mémoire toutes les locations en cours
 	 * @throws IOException
 	 */
@@ -327,6 +261,18 @@ public class Magasin {
 
 		// Fermeture du flux
 		fluxBinaire.close();
+	}
+	
+	public static void main(String[] args) {
+		ArrayList<Article> art = new ArrayList<Article>();
+		Magasin m1 = new Magasin("Test");
+		Objectif obj = new Objectif("coucou", "ref", "modele", 5, 4, "type obj", 99442, "1920*1080");
+		m1.ajoutArticle(obj);
+		art.addAll(m1.getArticlesLouesByNom("coucou"));
+		System.out.println(art.isEmpty());
+		for (Article article : art) {
+			System.out.println(article);
+		}
 	}
 
 }
