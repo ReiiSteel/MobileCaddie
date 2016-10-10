@@ -166,11 +166,11 @@ public class Magasin {
 		return c;
 	}
 	
-	/*public double calculGain(GregorianCalendar gcd, GregorianCalendar gcf){
+	public double calculGain(GregorianCalendar gcd, GregorianCalendar gcf){
 		double montant = 0.0;
 		GregorianCalendar cal = (GregorianCalendar) gcd.clone();
 		try {
-			ArrayList<Location> locs = this.arch.getLocationsMois(cal);
+			ArrayList<Location> locs = this.arch.getLocationsMois(this ,cal);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -181,5 +181,5 @@ public class Magasin {
 	public static void main(String[] args) {
 		System.out.println(Calendar.getInstance().get(Calendar.MONTH));
 	}
-	}*/
+	
 }
