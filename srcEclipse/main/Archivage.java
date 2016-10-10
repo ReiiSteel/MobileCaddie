@@ -14,8 +14,10 @@ import java.util.Iterator;
 public class Archivage {
 
 	private ArrayList<String> fichier;
+	private Magasin m1;
 
-	public Archivage() {
+	public Archivage(Magasin m1) {
+		this.m1 = m1;
 		this.fichier = new ArrayList<String>();
 	}
 
@@ -23,7 +25,7 @@ public class Archivage {
 	 *  Méthode pour archiver les locations
 	 * @throws IOException
 	 */
-	public boolean nouvelleArchive(Magasin m1) throws IOException {
+	public boolean nouvelleArchive() throws IOException {
 		// Génération du nom du fichier YEARMONTH.loc
 		String fichier = "";
 		GregorianCalendar dateEnCours = new GregorianCalendar();
@@ -42,7 +44,6 @@ public class Archivage {
 			Location loc = (Location) itr.next();
 			int nbArticles = loc.getArticles().size();
 			int refClient = loc.getClient().getRefClient();
-			double montantLoc = loc.getMontantAFacturer();
 
 			// Récupération de la date de début
 			int yearDebut = loc.getDateDebut().get(Calendar.YEAR);
@@ -94,7 +95,7 @@ public class Archivage {
 	 * @return ArrayList<Location>
 	 * @throws IOException
 	 */
-	public ArrayList<Location> getLocationsMois(Magasin m1, GregorianCalendar cal) throws IOException {
+	public ArrayList<Location> getLocationsMois(GregorianCalendar cal) throws IOException {
 		ArrayList<Location> locationsMois = new ArrayList<Location>();
 		
 		String fichier = "";
