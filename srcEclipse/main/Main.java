@@ -33,6 +33,8 @@ public class Main {
 		System.out.println("Montant : " + loc.getMontantAFacturer());
 		System.out.println("Bonne location : \n" + loc.toString());
 		System.out.println("Bonne location2 : \n" + loc2.toString());
+		
+		
 
 	}
 }
