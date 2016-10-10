@@ -14,13 +14,13 @@ public class Magasin {
 	private String nom;
 	private ArrayList<Client> listeClients;
 	private ArrayList<Article> articles;
-	private ArrayList<Location> locations;
+	private ArrayList<Location> locationsEnCours;
 
 	public Magasin(String nom) {
 		this.nom = nom;
 		this.listeClients = new ArrayList<Client>();
 		this.articles = new ArrayList<Article>();
-		this.locations = new ArrayList<Location>();
+		this.locationsEnCours = new ArrayList<Location>();
 	}
 
 	/* GETTER AND SETTER */
@@ -59,7 +59,7 @@ public class Magasin {
 	
 	public ArrayList<Location> getLocationsDateFinMoisAnnee (GregorianCalendar cal) {
 		ArrayList<Location> locationsReturned = new ArrayList<Location>();
-		Iterator itr = this.locations.iterator();
+		Iterator itr = this.locationsEnCours.iterator();
 		while(itr.hasNext()) {
 			Location loc = (Location) itr.next();
 			if((loc.getDateFin().get(Calendar.YEAR) == cal.get(Calendar.YEAR)) 
@@ -121,14 +121,28 @@ public class Magasin {
 		if(articles.size() > 0){
 			Location location = new Location(client, articles, year, month, day);
 			client.ajoutLocation(location);
-			this.locations.add(location);
+			this.locationsEnCours.add(location);
 			return location;
 		}
 		else{
 			System.out.println("Aucun article n'est louable, car non disponible en stock");
 			return null;
+		}		
+	}
+	
+	public void locationTerminee (Location loc) {
+		if(loc.isEnd()) {
+			// Archivage
+			//this.arch.
+			
+			// Stock
+			for (Article art : loc.getArticles()) {
+				art.retourLocation(); 
+			}
+			
+			// Supression dans les locations en cours
+			this.locationsEnCours.remove(loc); 
 		}
-		
 	}
 	
 	public Client getClientByRef(int ref) {

@@ -14,10 +14,8 @@ import java.util.Iterator;
 public class Archivage {
 
 	private ArrayList<String> fichier;
-	private Magasin m1;
 
-	public Archivage(Magasin m1) {
-		this.m1 = m1;
+	public Archivage() {
 		this.fichier = new ArrayList<String>();
 	}
 
@@ -25,17 +23,17 @@ public class Archivage {
 	 *  Méthode pour archiver les locations
 	 * @throws IOException
 	 */
-	public boolean nouvelleArchive() throws IOException {
+	public boolean nouvelleArchive(Magasin m1) throws IOException {
 		// Génération du nom du fichier YEARMONTH.loc
 		String fichier = "";
 		GregorianCalendar dateEnCours = new GregorianCalendar();
 		fichier += dateEnCours.get(Calendar.YEAR);
-		int month = dateEnCours.get(Calendar.MONTH);
+		int month = dateEnCours.get(Calendar.MONTH) + 1;
 		fichier += month;
 		fichier += ".loc";
 
 		// Ouverture du flux
-		DataOutputStream fluxSortieBinaire = new DataOutputStream(new FileOutputStream(fichier));
+		DataOutputStream fluxSortieBinaire = new DataOutputStream(new FileOutputStream(fichier, true));
 
 		// Parcours des locations
 		ArrayList<Location> locationsSurDateEnCours = m1.getLocationsDateFinMoisAnnee(dateEnCours);
@@ -95,12 +93,12 @@ public class Archivage {
 	 * @return ArrayList<Location>
 	 * @throws IOException
 	 */
-	public ArrayList<Location> getLocationsMois(GregorianCalendar cal) throws IOException {
+	public ArrayList<Location> getLocationsMois(Magasin m1, GregorianCalendar cal) throws IOException {
 		ArrayList<Location> locationsMois = new ArrayList<Location>();
 		
 		String fichier = "";
 		fichier += cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH);
+		int month = cal.get(Calendar.MONTH) + 1;
 		fichier += month;
 		fichier += ".loc";
 		
