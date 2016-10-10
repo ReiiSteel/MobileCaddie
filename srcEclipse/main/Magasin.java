@@ -149,7 +149,6 @@ public class Magasin {
 	public double calculGain(GregorianCalendar gcd, GregorianCalendar gcf){
 		double montant = 0.0;
 		GregorianCalendar cal = (GregorianCalendar) gcd.clone();
-		Calendar
 		try {
 			ArrayList<Location> locs = this.arch.getLocationsMois(cal);
 		} catch (IOException e) {
@@ -157,5 +156,9 @@ public class Magasin {
 			e.printStackTrace();
 		}
 		return montant;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(Calendar.getInstance().get(Calendar.MONTH));
 	}
 }
