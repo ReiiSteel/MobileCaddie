@@ -1,17 +1,14 @@
 package main;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 
-import Acquisition.Objectif;
+import ComparatorArticle.ComparatorArticlebyMarque;
+import ComparatorArticle.ComparatorArticlebyNom;
+import ComparatorArticle.ComparatorArticlebyPrix;
+import ComparatorArticle.ComparatorArticlebyRef;
 
 public class Magasin {
 	private String nom;
@@ -84,25 +81,25 @@ public class Magasin {
 		return articlesByRef;
 	}
 
-	public ArrayList<Location> choixTri (String pref) {
-		ArrayList<Location> locationsTriees = new ArrayList<Location>();
+	public void choixTri (String pref) {
 		pref = pref.toLowerCase();
-// .sort
+		
 		switch (pref) {
 		case "nom":
+			Collections.sort(this.articles, new ComparatorArticlebyNom());
 			break;
 		case "marque":
+			Collections.sort(this.articles, new ComparatorArticlebyMarque());
 			break;
-
 		case "référence":
+			Collections.sort(this.articles, new ComparatorArticlebyRef());
 			break;
 		case "prix":
+			Collections.sort(this.articles, new ComparatorArticlebyPrix());
 			break;
-
 		default:
 			break;
 		}
-		return null;
 	}
 
 	/**
