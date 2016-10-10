@@ -114,13 +114,13 @@ public class Magasin {
 	 * @param day
 	 * @return
 	 */
+
 	public Location locationPeriodique(Client client, ArrayList<Article> articles, int nbYear, int nbMonth, int nbDay){
-		ArrayList<Article> nonLoue = (ArrayList<Article>) articles.clone(); 
-		for (Article article : nonLoue) {
-			if (!article.louer()){
-				articles.remove(article);
-			}
+		ArrayList<Article> aLouer = (ArrayList<Article>) articles.clone(); 
+		for (Article article : aLouer) {
+			articles.remove(article);
 		}
+
 		if(articles.size() > 0){
 			Location location = new Location(client, articles, nbYear, nbMonth, nbDay);
 			client.ajoutLocation(location);
@@ -164,5 +164,18 @@ public class Magasin {
 		}
 		Client c = new Client("NULL", "NULL");
 		return c;
+	}
+	
+	public double calculGain(GregorianCalendar gcd, GregorianCalendar gcf){
+		double montant = 0.0;
+		GregorianCalendar cal = (GregorianCalendar) gcd.clone();
+		Calendar
+		try {
+			ArrayList<Location> locs = this.arch.getLocationsMois(cal);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return montant;
 	}
 }
