@@ -15,12 +15,14 @@ public class Magasin {
 	private ArrayList<Client> listeClients;
 	private ArrayList<Article> articles;
 	private ArrayList<Location> locationsEnCours;
+	private Archivage arch;
 
 	public Magasin(String nom) {
 		this.nom = nom;
 		this.listeClients = new ArrayList<Client>();
 		this.articles = new ArrayList<Article>();
 		this.locationsEnCours = new ArrayList<Location>();
+		this.arch = new Archivage();
 	}
 
 	/* GETTER AND SETTER */
