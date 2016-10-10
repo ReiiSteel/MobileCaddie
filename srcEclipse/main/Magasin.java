@@ -169,11 +169,16 @@ public class Magasin {
 	public double calculGain(GregorianCalendar gcd, GregorianCalendar gcf){
 		double montant = 0.0;
 		GregorianCalendar cal = (GregorianCalendar) gcd.clone();
-		try {
-			ArrayList<Location> locs = this.arch.getLocationsMois(this ,cal);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		while(cal.get(Calendar.YEAR) <= gcf.get(Calendar.YEAR)){
+			while(cal.get(Calendar.MONTH) <= gcf.get(Calendar.MONTH)){
+				try {
+					ArrayList<Location> locs = this.arch.getLocationsMois(this ,cal);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				cal.set(Calendar.MONTH, cal.get(Calendar.MONTH)+1);
+			}
 		}
 		return montant;
 	}

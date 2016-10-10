@@ -29,7 +29,7 @@ public class Location {
 			this.articles.addAll(articles);
 			this.dateFin = (GregorianCalendar) this.dateDebut.clone();
 			this.dateFin.add(Calendar.YEAR, nbYear);
-			this.dateFin.add(Calendar.MONTH, nbMonth-1);
+			this.dateFin.add(Calendar.MONTH, nbMonth);
 			this.dateFin.add(Calendar.DATE, nbDay);	
 		}
 		else System.out.println("Impossible de faire une location qui dure 0 jour !");
@@ -54,13 +54,13 @@ public class Location {
 					this.articles = new ArrayList<Article>();
 					this.dateDebut = new GregorianCalendar();
 					this.dateDebut.set(Calendar.YEAR, yearDeb);
-					this.dateDebut.set(Calendar.MONTH, monthDeb-1);
+					this.dateDebut.set(Calendar.MONTH, monthDeb);
 					this.dateDebut.set(Calendar.DATE, dayDeb);
 					this.client = client;
 					this.articles.addAll(articles);
 					this.dateFin = new GregorianCalendar();
 					this.dateFin.set(Calendar.YEAR, yearFin);
-					this.dateFin.set(Calendar.MONTH, monthFin-1);
+					this.dateFin.set(Calendar.MONTH, monthFin);
 					this.dateFin.set(Calendar.DATE, dayFin);
 				}
 			}
