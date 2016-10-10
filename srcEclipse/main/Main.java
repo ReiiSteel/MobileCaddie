@@ -33,11 +33,11 @@ public class Main {
 		
 		GregorianCalendar cal = new GregorianCalendar();
 		Location l1 = new Location(c1, arts, 1, 1, 2015, 8, 10, 2016);
-		System.out.println(l1);
-		/*c1.ajoutLocation(l1);
+		//System.out.println(l1);
+		c1.ajoutLocation(l1);
 		m1.setLocationsEnCours(l1);
 		System.out.println(m1.getLocationsDateFinMoisAnnee(cal));
-		m1.locationTerminee(l1);*/
+		m1.locationTerminee(l1);
 		//System.out.println(m1.getArchive().getLocationsMois(m1, cal));
 		
 	}
