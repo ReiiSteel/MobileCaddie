@@ -27,6 +27,12 @@ public class Magasin {
 	}
 
 	/* GETTER AND SETTER */
+	
+	// TODO supp
+	public Archivage getArchive() {
+		return this.arch;
+	}
+	
 	public String getNom() {
 		return nom;
 	}
