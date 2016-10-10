@@ -45,12 +45,12 @@ public class Archivage {
 
 			// Récupération de la date de début
 			int yearDebut = loc.getDateDebut().get(Calendar.YEAR);
-			int monthDebut = loc.getDateDebut().get(Calendar.MONTH);
+			int monthDebut = loc.getDateDebut().get(Calendar.MONTH) + 1;
 			int dayDebut = loc.getDateDebut().get(Calendar.DATE);
 
 			// Récupération de la date de fin
 			int yearFin = loc.getDateFin().get(Calendar.YEAR);
-			int monthFin = loc.getDateFin().get(Calendar.MONTH);
+			int monthFin = loc.getDateFin().get(Calendar.MONTH) + 1;
 			int dayFin = loc.getDateFin().get(Calendar.DATE);
 
 			/*

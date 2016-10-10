@@ -38,7 +38,8 @@ public class Main {
 		m1.setLocationsEnCours(l1);
 		System.out.println(m1.getLocationsDateFinMoisAnnee(cal));
 		m1.locationTerminee(l1);
-		//System.out.println(m1.getArchive().getLocationsMois(m1, cal));
+		System.out.println(l1.isEnd());
+		System.out.println(m1.getArchive().getLocationsMois(m1, cal));
 		
 	}
 }

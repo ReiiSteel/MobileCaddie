@@ -71,13 +71,9 @@ public class Magasin {
 		Iterator itr = this.locationsEnCours.iterator();
 		while(itr.hasNext()) {
 			Location loc = (Location) itr.next();
-			System.out.println("c1");
-			System.out.println(loc.getDateFin().get(Calendar.MONTH));
-			System.out.println(cal.get(Calendar.MONTH));
 			if((loc.getDateFin().get(Calendar.YEAR) == cal.get(Calendar.YEAR)) 
 					&& (loc.getDateFin().get(Calendar.MONTH) == cal.get(Calendar.MONTH))) {
 				locationsReturned.add(loc);
-				System.out.println("c2");
 			}			
 		}		
 		return locationsReturned;

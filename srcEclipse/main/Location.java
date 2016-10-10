@@ -29,7 +29,7 @@ public class Location {
 			this.articles.addAll(articles);
 			this.dateFin = (GregorianCalendar) this.dateDebut.clone();
 			this.dateFin.add(Calendar.YEAR, nbYear);
-			this.dateFin.add(Calendar.MONTH, nbMonth - 1);
+			this.dateFin.add(Calendar.MONTH, nbMonth);
 			this.dateFin.add(Calendar.DATE, nbDay);	
 		}
 		else System.out.println("Impossible de faire une location qui dure 0 jour !");
@@ -141,9 +141,6 @@ public class Location {
 					return false;
 				}
 			} else {
-
-				System.out.println(gcal.get(Calendar.MONTH));
-				System.out.println(this.dateFin.get(Calendar.MONTH));
 				return false;
 			}
 		} else {
