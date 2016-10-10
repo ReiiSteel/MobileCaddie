@@ -141,7 +141,7 @@ public class Archivage {
 					// Récupération des articles			
 					ArrayList<Article> articleArchive = new ArrayList<Article>();
 					for(String ref : refArticleSplit) {
-						articleArchive.addAll(m1.getArticlesLouesByRef(ref));
+						articleArchive.addAll(m1.getArticleByRef(ref));
 					}
 					
 					// Debug

@@ -72,73 +72,37 @@ public class Magasin {
 		}		
 		return locationsReturned;
 	}
-
-	/**
-	 *  Methode pour récupérer une ArrayList d'Article pour une référence donnée
-	 * @param reference
-	 * @return liste des articles
-	 */
-	public ArrayList<Article> getArticlesLouesByRef(String reference) {
-		Iterator<Article> itr = articles.iterator();
-		ArrayList<Article> artReturned = new ArrayList<Article>();
-		while(itr.hasNext()) {
-			Article art = (Article) itr.next();
-			if(art.getReference().equals(reference)) {
-				artReturned.add(art);
-			}	    	
+	
+	public ArrayList<Article> getArticleByRef (String ref) {
+		ArrayList<Article> articlesByRef = new ArrayList<Article>();
+		
+		for (Article art : this.articles) {
+			if(art.getReference().equals(ref)) {
+				articlesByRef.add(art);
+			}
 		}
-		return artReturned;
+		return articlesByRef;
 	}
 
-	/**
-	 *  Methode pour récupérer une ArrayList d'Article pour une marque donnée
-	 * @param marque
-	 * @return liste des articles
-	 */
-	public ArrayList<Article> getArticlesLouesByMarque(String marque) {
-		Iterator itr = articles.iterator();
-		ArrayList<Article> artReturned = new ArrayList<Article>();
-		while(itr.hasNext()) {
-			Article art = (Article) itr.next();
-			if(art.getMarque() == marque) {
-				artReturned.add(art);
-			}	    	
-		}
-		return artReturned;
-	}
+	public ArrayList<Location> choixTri (String pref) {
+		ArrayList<Location> locationsTriees = new ArrayList<Location>();
+		pref = pref.toLowerCase();
+// .sort
+		switch (pref) {
+		case "nom":
+			break;
+		case "marque":
+			break;
 
-	/**
-	 *  Methode pour récupérer une ArrayList d'Article pour un nom (intitulé) donné
-	 * @param nom
-	 * @return liste des articles
-	 */
-	public ArrayList<Article> getArticlesLouesByNom(String nom) {
-		Iterator itr = articles.iterator();
-		ArrayList<Article> artReturned = new ArrayList<Article>();
-		while(itr.hasNext()) {
-			Article art = (Article) itr.next();
-			if(art.getNom() == nom) {
-				artReturned.add(art);
-			}	    	
-		}
-		return artReturned;
-	}
+		case "référence":
+			break;
+		case "prix":
+			break;
 
-	/**
-	 *  Methode pour récupérer une ArrayList d'Article pour un prix de location par jour
-	 * @param prixParJour
-	 * @return liste des articles
-	 */
-	public ArrayList<Article> getArticlesLouesByPrix(float prixParJour) {
-		Iterator itr = articles.iterator();
-		ArrayList<Article> artReturned = new ArrayList<Article>();
-		while(itr.hasNext()) {
-			Article art = (Article) itr.next();
-			if(art.getPrixLocationParJour() == prixParJour) {
-				artReturned.add(art);
-			}	    	
+		default:
+			break;
 		}
-		return artReturned;
+		return null;
 	}
 
 	/**
