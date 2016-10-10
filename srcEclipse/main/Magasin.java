@@ -178,17 +178,27 @@ public class Magasin {
 	
 	public double calculGain(GregorianCalendar gcd, GregorianCalendar gcf){
 		double montant = 0.0;
+		ArrayList<Location> locs = new ArrayList<Location>();
 		GregorianCalendar cal = (GregorianCalendar) gcd.clone();
 		while(cal.get(Calendar.YEAR) <= gcf.get(Calendar.YEAR)){
-			while(cal.get(Calendar.MONTH) <= gcf.get(Calendar.MONTH)){
+			if(cal.get(Calendar.YEAR) >= gcf.get(Calendar.YEAR) && cal.get(Calendar.MONTH) > gcf.get(Calendar.MONTH)){
+				break;
+			}
+			else{
 				try {
-					ArrayList<Location> locs = this.arch.getLocationsMois(this ,cal);
+					locs.addAll(this.arch.getLocationsMois(this ,cal));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} catch (NullPointerException e){
+					
+				} finally{
+					cal.set(Calendar.MONTH, cal.get(Calendar.MONTH)+1);
 				}
-				cal.set(Calendar.MONTH, cal.get(Calendar.MONTH)+1);
 			}
+		}
+		for (Location location : locs) {
+			montant += location.getMontantPeriode(gcd, gcf);
 		}
 		return montant;
 	}

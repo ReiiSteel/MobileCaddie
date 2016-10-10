@@ -29,7 +29,7 @@ public class Location {
 			this.articles.addAll(articles);
 			this.dateFin = (GregorianCalendar) this.dateDebut.clone();
 			this.dateFin.add(Calendar.YEAR, nbYear);
-			this.dateFin.add(Calendar.MONTH, nbMonth - 1);
+			this.dateFin.add(Calendar.MONTH, nbMonth);
 			this.dateFin.add(Calendar.DATE, nbDay);	
 		}
 		else System.out.println("Impossible de faire une location qui dure 0 jour !");
@@ -54,13 +54,13 @@ public class Location {
 					this.articles = new ArrayList<Article>();
 					this.dateDebut = new GregorianCalendar();
 					this.dateDebut.set(Calendar.YEAR, yearDeb);
-					this.dateDebut.set(Calendar.MONTH, monthDeb - 1);
+					this.dateDebut.set(Calendar.MONTH, monthDeb);
 					this.dateDebut.set(Calendar.DATE, dayDeb);
 					this.client = client;
 					this.articles.addAll(articles);
 					this.dateFin = new GregorianCalendar();
 					this.dateFin.set(Calendar.YEAR, yearFin);
-					this.dateFin.set(Calendar.MONTH, monthFin - 1);
+					this.dateFin.set(Calendar.MONTH, monthFin);
 					this.dateFin.set(Calendar.DATE, dayFin);
 				}
 			}
@@ -97,9 +97,17 @@ public class Location {
 		//Initialisation
 		double montant = 0.0;
 		
+		if(debutPeriode.compareTo(this.dateDebut) == -1){
+			debutPeriode = this.dateDebut;
+		}
+		if(finPeriode.compareTo(this.dateFin) == 1){
+			finPeriode = this.dateFin;
+		}
+	
 		int nbJours = 0;
 		int actualYear = debutPeriode.get(Calendar.YEAR);
 		
+		//Traitement
 		if( actualYear == finPeriode.get(Calendar.YEAR)){
 			nbJours = finPeriode.get(Calendar.DAY_OF_YEAR) - debutPeriode.get(Calendar.DAY_OF_YEAR);
 		}
@@ -134,16 +142,13 @@ public class Location {
 	public boolean isEnd(){
 		GregorianCalendar gcal = new GregorianCalendar();
 		if(gcal.get(Calendar.YEAR) >= this.dateFin.get(Calendar.YEAR)){
-			if(gcal.get(Calendar.MONTH) + 1 >= this.dateFin.get(Calendar.MONTH)){
+			if(gcal.get(Calendar.MONTH) >= this.dateFin.get(Calendar.MONTH)){
 				if(gcal.get(Calendar.DATE) >= this.dateFin.get(Calendar.DATE)){
 					return true;
 				} else {
 					return false;
 				}
 			} else {
-
-				System.out.println(gcal.get(Calendar.MONTH));
-				System.out.println(this.dateFin.get(Calendar.MONTH));
 				return false;
 			}
 		} else {
@@ -186,8 +191,8 @@ public class Location {
 	public String toString() {
 		return ("Location concernant le client " + this.client.toString() + ".\n" +
 				"Elle commence le " + this.getDateDebut().get(Calendar.DATE) + "/" + 
-				(this.getDateDebut().get(Calendar.MONTH) + 1) + "/" + this.getDateDebut().get(Calendar.YEAR)+ " et termine le " + 
-				this.getDateFin().get(Calendar.DATE) + "/" + (this.getDateFin().get(Calendar.MONTH) + 1) + "/" + this.getDateFin().get(Calendar.YEAR) + ".\n" +
+				this.getDateDebut().get(Calendar.MONTH) + "/" + this.getDateDebut().get(Calendar.YEAR)+ " et termine le " + 
+				this.getDateFin().get(Calendar.DATE) + "/" + this.getDateFin().get(Calendar.MONTH) + "/" + this.getDateFin().get(Calendar.YEAR) + ".\n" +
 				"Article(s) loué(s) : " + this.getArticles().toString() + "\n");		
 	}
 }
