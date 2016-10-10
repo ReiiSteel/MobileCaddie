@@ -31,11 +31,14 @@ public class Main {
 		/*Location loc = m1.locationPeriodique(c1, arts, 0, 0, 20);
 		Location loc2 = m1.locationPeriodique(c2, arts, 0, 0, 2);*/
 		
+		GregorianCalendar cal = new GregorianCalendar();
 		Location l1 = new Location(c1, arts, 1, 1, 2015, 8, 10, 2016);
-		//c1.ajoutLocation(l1);
-		//m1.setLocationsEnCours(loc);
-		//m1.locationTerminee(loc);
-		System.out.println(l1.isEnd());
+		System.out.println(l1);
+		/*c1.ajoutLocation(l1);
+		m1.setLocationsEnCours(l1);
+		System.out.println(m1.getLocationsDateFinMoisAnnee(cal));
+		m1.locationTerminee(l1);*/
+		//System.out.println(m1.getArchive().getLocationsMois(m1, cal));
 		
 	}
 }

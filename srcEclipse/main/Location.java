@@ -134,16 +134,10 @@ public class Location {
 	public boolean isEnd(){
 		GregorianCalendar gcal = new GregorianCalendar();
 		if(gcal.get(Calendar.YEAR) >= this.dateFin.get(Calendar.YEAR)){
-			System.out.println(gcal.get(Calendar.YEAR));
-			System.out.println(this.dateFin.get(Calendar.YEAR));
-			System.out.println("année ok");
 			if(gcal.get(Calendar.MONTH) >= this.dateFin.get(Calendar.MONTH)){
-				System.out.println("mois ok");
 				if(gcal.get(Calendar.DATE) >= this.dateFin.get(Calendar.DATE)){
 					return true;
 				} else {
-					System.out.println(gcal.get(Calendar.DATE));
-					System.out.println(this.dateFin.get(Calendar.DATE));
 					return false;
 				}
 			} else {
@@ -188,7 +182,9 @@ public class Location {
 	
 	public String toString() {
 		return ("Location concernant le client " + this.client.toString() + ".\n" +
-				"Elle commence le " + this.getDateDebut().get(Calendar.DATE) + " et termine le " + this.getDateFin().get(Calendar.DATE) + ".\n" +
+				"Elle commence le " + this.getDateDebut().get(Calendar.DATE) + "/" + 
+				this.getDateDebut().get(Calendar.MONTH) + "/" + this.getDateDebut().get(Calendar.YEAR)+ " et termine le " + 
+				this.getDateFin().get(Calendar.DATE) + "/" + this.getDateFin().get(Calendar.MONTH) + "/" + this.getDateFin().get(Calendar.YEAR) + ".\n" +
 				"Article(s) loué(s) : " + this.getArticles().toString() + "\n");		
 	}
 }
