@@ -50,6 +50,10 @@ public class Article {
 		}
 	}
 	
+	public void retourLocation() {
+		this.nbStock =+ 1;
+	}
+	
 	public String toString(){
 		return ("L'article " + this.getNom() + " de la marque " + this.getMarque() + " avec la référence " + this.getReference() +
 				" a un prix de location par jour de " + this.getPrixLocationParJour() + "€\n");

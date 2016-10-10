@@ -15,15 +15,15 @@ public class Magasin {
 	private String nom;
 	private ArrayList<Client> listeClients;
 	private ArrayList<Article> articles;
-	private ArrayList<Location> locations;
+	private ArrayList<Location> locationsEnCours;
 	private Archivage arch;
 
 	public Magasin(String nom) {
 		this.nom = nom;
 		this.listeClients = new ArrayList<Client>();
 		this.articles = new ArrayList<Article>();
-		this.locations = new ArrayList<Location>();
-		this.arch = new Archivage(this);
+		this.locationsEnCours = new ArrayList<Location>();
+		this.arch = new Archivage();
 	}
 
 	/* GETTER AND SETTER */
@@ -62,7 +62,7 @@ public class Magasin {
 	
 	public ArrayList<Location> getLocationsDateFinMoisAnnee (GregorianCalendar cal) {
 		ArrayList<Location> locationsReturned = new ArrayList<Location>();
-		Iterator itr = this.locations.iterator();
+		Iterator itr = this.locationsEnCours.iterator();
 		while(itr.hasNext()) {
 			Location loc = (Location) itr.next();
 			if((loc.getDateFin().get(Calendar.YEAR) == cal.get(Calendar.YEAR)) 
@@ -106,7 +106,7 @@ public class Magasin {
 	}
 
 	/**
-	 * Loue des articles a un client
+	 * Loue des articles a un client sur une période
 	 * @param client
 	 * @param articles
 	 * @param year
@@ -114,24 +114,44 @@ public class Magasin {
 	 * @param day
 	 * @return
 	 */
-	public Location louer(Client client, ArrayList<Article> articles, int year, int month, int day){
+
+	public Location locationPeriodique(Client client, ArrayList<Article> articles, int nbYear, int nbMonth, int nbDay){
 		ArrayList<Article> aLouer = (ArrayList<Article>) articles.clone(); 
 		for (Article article : aLouer) {
-			if (!article.louer()){
-				articles.remove(article);
-			}
+			articles.remove(article);
 		}
+
 		if(articles.size() > 0){
-			Location location = new Location(client, articles, year, month, day);
+			Location location = new Location(client, articles, nbYear, nbMonth, nbDay);
 			client.ajoutLocation(location);
-			this.locations.add(location);
+			this.locationsEnCours.add(location);
 			return location;
 		}
 		else{
 			System.out.println("Aucun article n'est louable, car non disponible en stock");
 			return null;
+		}		
+	}
+	
+	public void setLocationsEnCours(Location loc) {
+		this.locationsEnCours.add(loc);
+	}
+	
+	public void locationTerminee (Location loc) throws IOException {
+		if(loc.isEnd()) {
+			// Archivage de la location
+			this.arch.nouvelleArchive(this);
+			
+			// +1 Stock article
+			for (Article art : loc.getArticles()) {
+				art.retourLocation(); 
+			}
+			
+			// Supression dans les locations en cours
+			this.locationsEnCours.remove(loc);
+			
+			System.out.println("Location terminée !");
 		}
-		
 	}
 	
 	public Client getClientByRef(int ref) {
@@ -146,7 +166,7 @@ public class Magasin {
 		return c;
 	}
 	
-	public double calculGain(GregorianCalendar gcd, GregorianCalendar gcf){
+	/*public double calculGain(GregorianCalendar gcd, GregorianCalendar gcf){
 		double montant = 0.0;
 		GregorianCalendar cal = (GregorianCalendar) gcd.clone();
 		try {
@@ -161,4 +181,5 @@ public class Magasin {
 	public static void main(String[] args) {
 		System.out.println(Calendar.getInstance().get(Calendar.MONTH));
 	}
+	}*/
 }
