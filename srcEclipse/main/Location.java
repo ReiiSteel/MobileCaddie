@@ -79,7 +79,7 @@ public class Location {
 	}
 	
 	/**
-	 * Donne le montant de la location sur une periode donnee
+	 * Donne le montant de la location sur une periode donnee à partir du début de la location
 	 * @param finPeriode : Object GregorianCalendar correspondant à la fin de la periode
 	 * @return Le montant de la location sur une periode donnee
 	 */
@@ -109,6 +109,46 @@ public class Location {
 				}
 			}
 			nbJours += this.dateFin.get(Calendar.DAY_OF_YEAR);
+		}
+		
+		for ( Article article : this.articles) {
+			montant += article.getPrixLocationParJour()*nbJours;
+		}
+		return montant;
+	}
+	
+	/**
+	 * Donne le montant de la location sur une periode donnee
+	 * @param debutPeriode : Object GregorianCalendar correspondant au début de la periode
+	 * @param finPeriode : Object GregorianCalendar correspondant à la fin de la periode
+	 * @return Le montant de la location sur une periode donnee
+	 */
+	public double getMontantPeriode(GregorianCalendar debutPeriode, GregorianCalendar finPeriode){
+		//Initialisation
+		double montant = 0.0;
+		
+		int nbJours = 0;
+		int actualYear = debutPeriode.get(Calendar.YEAR);
+		
+		if( actualYear == finPeriode.get(Calendar.YEAR)){
+			nbJours = finPeriode.get(Calendar.DAY_OF_YEAR) - debutPeriode.get(Calendar.DAY_OF_YEAR);
+		}
+		else{
+			if(actualYear%4==0 && actualYear%100==0 && actualYear%400==0){
+				nbJours += 366-debutPeriode.get(Calendar.DAY_OF_YEAR);
+			}
+			else{
+				nbJours += 365-debutPeriode.get(Calendar.DAY_OF_YEAR);
+			}
+			for (int i = actualYear+1; i < finPeriode.get(Calendar.YEAR) ; i++) {
+				if(actualYear%4==0 && actualYear%100==0 && actualYear%400==0){
+					nbJours += 366;
+				}
+				else{
+					nbJours += 365;
+				}
+			}
+			nbJours += finPeriode.get(Calendar.DAY_OF_YEAR);
 		}
 		
 		for ( Article article : this.articles) {
