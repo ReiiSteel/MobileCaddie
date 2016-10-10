@@ -166,7 +166,7 @@ public class Magasin {
 		return c;
 	}
 	
-	public double calculGain(GregorianCalendar gcd, GregorianCalendar gcf){
+	/*public double calculGain(GregorianCalendar gcd, GregorianCalendar gcf){
 		double montant = 0.0;
 		GregorianCalendar cal = (GregorianCalendar) gcd.clone();
 		Calendar
@@ -177,5 +177,5 @@ public class Magasin {
 			e.printStackTrace();
 		}
 		return montant;
-	}
+	}*/
 }
