@@ -1,4 +1,5 @@
 package main;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -114,8 +115,8 @@ public class Magasin {
 	 * @return
 	 */
 	public Location louer(Client client, ArrayList<Article> articles, int year, int month, int day){
-		ArrayList<Article> nonLoue = (ArrayList<Article>) articles.clone(); 
-		for (Article article : nonLoue) {
+		ArrayList<Article> aLouer = (ArrayList<Article>) articles.clone(); 
+		for (Article article : aLouer) {
 			if (!article.louer()){
 				articles.remove(article);
 			}
@@ -143,5 +144,18 @@ public class Magasin {
 		}
 		Client c = new Client("NULL", "NULL");
 		return c;
+	}
+	
+	public double calculGain(GregorianCalendar gcd, GregorianCalendar gcf){
+		double montant = 0.0;
+		GregorianCalendar cal = (GregorianCalendar) gcd.clone();
+		Calendar
+		try {
+			ArrayList<Location> locs = this.arch.getLocationsMois(cal);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return montant;
 	}
 }
