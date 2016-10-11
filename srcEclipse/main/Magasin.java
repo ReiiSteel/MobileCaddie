@@ -194,6 +194,11 @@ public class Magasin {
 		for (Location location : locs) {
 			montant += location.getMontantPeriode(gcd, gcf);
 		}
+		for (Location location : this.locationsEnCours) {
+			if( (location.getDateFin().compareTo(gcf) == -1 || location.getDateFin().compareTo(gcf) == 0) && (location.getDateDebut().compareTo(gcd) == 0 || location.getDateDebut().compareTo(gcd) == 1) ){
+				montant += location.getMontantPeriode(gcd, gcf);
+			}
+		}
 		return montant;
 	}	
 }
