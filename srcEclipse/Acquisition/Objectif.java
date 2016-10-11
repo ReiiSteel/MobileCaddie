@@ -11,7 +11,6 @@ public class Objectif extends DispositifAcquisition{
 			int nbPixels, String resolution) {
 		super(nom, reference, modele, prixLocationParJour, stock, typeObjectif,
 				nbPixels, resolution);
-		// TODO Auto-generated constructor stub
 	}
 
 

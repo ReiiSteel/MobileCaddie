@@ -119,7 +119,6 @@ public class Main {
 		gcf.set(Calendar.MONTH, 0);
 		gcf.set(Calendar.DATE, 1);
 		
-		System.out.println(m1.calculGain(gcd, gcf));
 		/*
 	 		Jeu de données
 		 */
@@ -135,14 +134,20 @@ public class Main {
 			System.out.println("| Options:                                                                       |");
 			System.out.println("|        1. Afficher les locations en cours                                      |");
 			System.out.println("|        2. Afficher les clients                                                 |");
-			System.out.println("|        4. Afficher les articles                                                |");
-			System.out.println("|        5. Ajouter un article                                                   |");
-			System.out.println("|        6. Ajouter un client                                                    |");
-			System.out.println("|        7. Ajouter une location                                                 |");
-			System.out.println("|        8. Quitter                                                              |");
+			System.out.println("|        3. Afficher les articles                                                |");
+			System.out.println("|        4. Ajouter un article                                                   |");
+			System.out.println("|        5. Ajouter un client                                                    |");
+			System.out.println("|        6. Ajouter une location                                                 |");
+			System.out.println("|        7. Quitter                                                              |");
 			System.out.println("==================================================================================");	
 			
-			option = Integer.valueOf(br.readLine());
+			try{
+				option = Integer.valueOf(br.readLine());
+			}
+			catch(NumberFormatException ne){
+				System.out.println("Veuillez entrer une option correcte.");
+				option = 0;
+			}
 			
 			if(option == 1) {
 				System.out.println("==================================================================================");
@@ -161,10 +166,25 @@ public class Main {
 				}
 			}
 			else if (option == 3) {
-
+				System.out.println("==================================================================================");
+				System.out.println("|   Liste des articles du magasin                                                 |");
+				System.out.println("==================================================================================");
+				for (Article a : m1.getArticles()) {
+					System.out.println(a);
+				}
 			}
 			else if (option == 4) {
-
+				System.out.println("==================================================================================");
+				System.out.println("|   Ajout d'un article                                                           |");
+				System.out.println("==================================================================================");
+				System.out.println("	Quel article voulez vous ajouter au magasin ?");
+				System.out.println("|        1. Un appareil photo                                                    |");
+				System.out.println("|        2. Une caméra                                                           |");
+				System.out.println("|        3. Un objectif                                                          |");
+				System.out.println("|        4. Un fond de studio                                                    |");
+				System.out.println("|        5. Un                                                     |");
+				System.out.println("|        6. Ajouter une location                                                 |");
+				System.out.println("|        7. Quitter                                                              |");
 			}
 			else if (option == 5) {
 
