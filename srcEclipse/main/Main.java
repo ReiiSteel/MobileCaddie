@@ -123,13 +123,16 @@ public class Main {
 	 		Jeu de données
 		 */
 		
-		while(true) {
+		boolean breakMain = true;
+		boolean breakMain2 = true;
+		
+		while(breakMain) {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			int option;
 			
 			// Display menu graphics
-			System.out.println("==================================================================================");
-			System.out.println("|   MENU SELECTION DEMO                                                          |");
+			System.out.println("\n==================================================================================");
+			System.out.println("|   MENU TOOl                                                                    |");
 			System.out.println("==================================================================================");
 			System.out.println("| Options:                                                                       |");
 			System.out.println("|        1. Afficher les locations en cours                                      |");
@@ -150,7 +153,7 @@ public class Main {
 			}
 			
 			if(option == 1) {
-				System.out.println("==================================================================================");
+				System.out.println("\n==================================================================================");
 				System.out.println("|   Locations en cours                                                           |");
 				System.out.println("==================================================================================");
 				for (Location loc : m1.getLocationEnCours()) {
@@ -158,7 +161,7 @@ public class Main {
 				}
 			}
 			else if (option == 2) {
-				System.out.println("==================================================================================");
+				System.out.println("\n==================================================================================");
 				System.out.println("|   Clients du magasin                                                           |");
 				System.out.println("==================================================================================");
 				for (Client c : m1.getListeClients()) {
@@ -166,7 +169,7 @@ public class Main {
 				}
 			}
 			else if (option == 3) {
-				System.out.println("==================================================================================");
+				System.out.println("\n==================================================================================");
 				System.out.println("|   Liste des articles du magasin                                                 |");
 				System.out.println("==================================================================================");
 				for (Article a : m1.getArticles()) {
@@ -174,23 +177,46 @@ public class Main {
 				}
 			}
 			else if (option == 4) {
-				System.out.println("==================================================================================");
-				System.out.println("|   Ajout d'un article                                                           |");
-				System.out.println("==================================================================================");
-				System.out.println("	Quel article voulez vous ajouter au magasin ?");
-				System.out.println("|        1. Un appareil photo                                                    |");
-				System.out.println("|        2. Une caméra                                                           |");
-				System.out.println("|        3. Un objectif                                                          |");
-				System.out.println("|        4. Un fond de studio                                                    |");
-				System.out.println("|        5. Un                                                     |");
-				System.out.println("|        6. Ajouter une location                                                 |");
-				System.out.println("|        7. Quitter                                                              |");
+				while(breakMain2) {
+					System.out.println("\n==================================================================================");
+					System.out.println("|   Ajout d'un article                                                           |");
+					System.out.println("==================================================================================");
+					System.out.println("|	Quel article voulez vous ajouter au magasin ?                                |");
+					System.out.println("|        1. Un appareil photo                                                    |");
+					System.out.println("|        2. Une caméra                                                           |");
+					System.out.println("|        3. Un objectif                                                          |");
+					System.out.println("|        4. Un fond de studio                                                    |");
+					System.out.println("|        5. Un panneau LED                                                       |");
+					System.out.println("|        6. Un reflecteur                                                        |");
+					System.out.println("|        7. Un micro                                                             |");
+					System.out.println("|        8. Un trepied                                                           |");
+					System.out.println("|        9. Une grue                                                             |");
+					System.out.println("|        10. Une ventouse                                                        |");
+					System.out.println("|        11. Retour                                                              |");
+					System.out.println("==================================================================================");
+
+
+					try {
+						option = Integer.valueOf(br.readLine());
+					}
+					catch(NumberFormatException ne){
+						System.out.println("Veuillez entrer une option correcte.");
+						option = 0;
+					}
+					if (option == 11) {
+						breakMain2 = false;
+					}
+				}
 			}
 			else if (option == 5) {
-
+				
 			}
 			else if (option == 6) {
+
+			}
+			else if (option == 7) {
 				System.out.println("Le programme va se fermer...");
+				breakMain = false;
 				System.exit(0);
 			}
 			else {
