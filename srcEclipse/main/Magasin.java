@@ -28,11 +28,6 @@ public class Magasin {
 
 	/* GETTER AND SETTER */
 	
-	// TODO supp
-	public Archivage getArchive() {
-		return this.arch;
-	}
-	
 	public String getNom() {
 		return nom;
 	}
@@ -125,7 +120,9 @@ public class Magasin {
 	public Location locationPeriodique(Client client, ArrayList<Article> articles, int nbYear, int nbMonth, int nbDay){
 		ArrayList<Article> aLouer = (ArrayList<Article>) articles.clone(); 
 		for (Article article : aLouer) {
-			articles.remove(article);
+			if(!article.louer()) {
+				articles.remove(article);
+			}
 		}
 
 		if(articles.size() > 0){
@@ -198,10 +195,5 @@ public class Magasin {
 			montant += location.getMontantPeriode(gcd, gcf);
 		}
 		return montant;
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(Calendar.getInstance().get(Calendar.MONTH));
-	}
-	
+	}	
 }

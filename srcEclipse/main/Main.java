@@ -3,6 +3,8 @@ package main;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 import Acquisition.AppareilPhoto;
 import Acquisition.Camera;
@@ -58,7 +60,7 @@ public class Main {
 		/*
 		 	Jeu de données
 		 */
-		Magasin m1 = new Magasin("");
+		Magasin m1 = new Magasin("Odin");
 		
 		// Clients
 		Client c1 = new Client("Sophie", "44300 Nantes");
@@ -96,9 +98,23 @@ public class Main {
 		m1.ajoutArticle(trepied);
 		m1.ajoutArticle(ventouse);
 		
+		// Création des locations
+		ArrayList<Article> lotArticle1 = new ArrayList<Article>();
+		lotArticle1.add(appareilPhoto);
+		lotArticle1.add(objectif);
+		m1.locationPeriodique(c1, lotArticle1, 0, 0, 20);
 		
-		//
+		ArrayList<Article> lotArticle2 = new ArrayList<Article>();
+		lotArticle2.add(panneauLed);
+		lotArticle2.add(objectif);
+		m1.locationPeriodique(c2, lotArticle2, 0, 2, 0);
 		
+		GregorianCalendar gcd = new GregorianCalendar();
+		gcd.set(2015, 10, 8);
+		GregorianCalendar gcf = new GregorianCalendar();
+		gcf.set(2017, 1, 1);
+		
+		//System.out.println(m1.calculGain(gcd, gcf));
 		/*
 	 		Jeu de données
 		 */
