@@ -125,26 +125,36 @@ public class Main {
 			int option;
 			
 			// Display menu graphics
-			System.out.println("====================================");
-			System.out.println("|   MENU SELECTION DEMO            |");
-			System.out.println("====================================");
-			System.out.println("| Options:                         |");
-			System.out.println("|        1. Afficher les locations |");
-			System.out.println("|        2. Afficher les clients   |");
-			System.out.println("|        4. Afficher les articles  |");
-			System.out.println("|        5. Ajouter un article     |");
-			System.out.println("|        6. Ajouter un client      |");
-			System.out.println("|        7. Ajouter une location   |");
-			System.out.println("|        8. Quitter                |");
-			System.out.println("====================================");	
+			System.out.println("==================================================================================");
+			System.out.println("|   MENU SELECTION DEMO                                                          |");
+			System.out.println("==================================================================================");
+			System.out.println("| Options:                                                                       |");
+			System.out.println("|        1. Afficher les locations en cours                                      |");
+			System.out.println("|        2. Afficher les clients                                                 |");
+			System.out.println("|        4. Afficher les articles                                                |");
+			System.out.println("|        5. Ajouter un article                                                   |");
+			System.out.println("|        6. Ajouter un client                                                    |");
+			System.out.println("|        7. Ajouter une location                                                 |");
+			System.out.println("|        8. Quitter                                                              |");
+			System.out.println("==================================================================================");	
 			
 			option = Integer.valueOf(br.readLine());
 			
 			if(option == 1) {
-				
+				System.out.println("==================================================================================");
+				System.out.println("|   Locations en cours                                                           |");
+				System.out.println("==================================================================================");
+				for (Location loc : m1.getLocationEnCours()) {
+					System.out.println(loc);
+				}
 			}
 			else if (option == 2) {
-				
+				System.out.println("==================================================================================");
+				System.out.println("|   Clients du magasin                                                           |");
+				System.out.println("==================================================================================");
+				for (Client c : m1.getListeClients()) {
+					System.out.println(c);
+				}
 			}
 			else if (option == 3) {
 

@@ -51,6 +51,10 @@ public class Magasin {
 	public void setArticles(ArrayList<Article> articles) {
 		this.articles = articles;
 	}
+	
+	public ArrayList<Location> getLocationEnCours() {
+		return this.locationsEnCours;
+	}
 	/* GETTER AND SETTER */
 
 	public void ajoutClient(Client client) {
