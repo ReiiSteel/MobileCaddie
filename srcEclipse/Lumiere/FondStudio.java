@@ -14,9 +14,5 @@ public class FondStudio extends AccessoireLumiere{
 		super(nom, reference, modele, prixLocationParJour, nbStock);
 		this.taille = taille;
 		this.couleur = couleur;
-		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
 }

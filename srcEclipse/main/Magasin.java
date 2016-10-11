@@ -59,6 +59,7 @@ public class Magasin {
 	/* GETTER AND SETTER */
 
 	public void ajoutClient(Client client) {
+		// TODO verif qu'il n'est pas déjà dans le mag
 		this.listeClients.add(client);
 	}
 	

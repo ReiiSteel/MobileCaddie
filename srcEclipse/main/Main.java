@@ -3,11 +3,16 @@ package main;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
+import Acquisition.AppareilPhoto;
 import Acquisition.Camera;
 import Acquisition.Objectif;
+import Lumiere.FondStudio;
+import Lumiere.PanneauLED;
+import Lumiere.Reflecteur;
+import Stabilisation.Grue;
+import Stabilisation.Trepied;
+import Stabilisation.Ventouse;
 
 public class Main {
 
@@ -38,24 +43,96 @@ public class Main {
 		System.out.println(l1.isEnd());
 		System.out.println(m1.getArchive().getLocationsMois(m1, cal));*/
 		
+		/*
+		 	Jeu de données
+		 */
+		Magasin m1 = new Magasin("");
+		
+		// Clients
+		Client c1 = new Client("Sophie", "44300 Nantes");
+		Client c2 = new Client("Valentin", "Lyon");
+		Client c3 = new Client("Sandrine", "44000 Nantes");
+		Client c4 = new Client("Cédric", "Orvault");
+		Client c5 = new Client("Quentin", "44600 Saint-Nazaire");
+		Client c6 = new Client("Léa", "Paris");
+		// On ajoute les clients au magasin
+		m1.ajoutClient(c1);
+		m1.ajoutClient(c2);
+		m1.ajoutClient(c3);
+		m1.ajoutClient(c4);
+		m1.ajoutClient(c5);
+		m1.ajoutClient(c6);
+		
+		// Articles
+		AppareilPhoto appareilPhoto = new AppareilPhoto("Appareil photo", "4A", "Canon", 50f, 4, "????",4000000, "12k");
+		Camera camera = new Camera("Camera", "1I", "Sony", 2f, 50, "????", 5, "120*80");
+		Objectif objectif = new Objectif("Objectif", "PA", "Atol", 5f, 10, "????", 20, "1080*800");
+		FondStudio fondStudio = new FondStudio("Fond studio", "OP", "Colorama", 10f, 2, 2.5f, "bleu");
+		PanneauLED panneauLed = new PanneauLED("Panneau LED", "LF", "Lastolite", 15f, 1, 40);
+		Reflecteur reflecteur = new Reflecteur("Reflecteur", "OP1", "Colorama", 12f, 2, 3f);
+		Grue grue = new Grue("Grue", "FK", "Noname", 4000f, 1, 10f);
+		Trepied trepied = new Trepied("Trepied", "12", "Canon", 3f, 5, 5);
+		Ventouse ventouse = new Ventouse("Ventouse", "FF", "Nicon", 0.2f, 26, 55f);
+		// On ajoute les articles au magasin
+		m1.ajoutArticle(appareilPhoto);
+		m1.ajoutArticle(camera);
+		m1.ajoutArticle(objectif);
+		m1.ajoutArticle(fondStudio);
+		m1.ajoutArticle(panneauLed);
+		m1.ajoutArticle(reflecteur);
+		m1.ajoutArticle(grue);
+		m1.ajoutArticle(trepied);
+		m1.ajoutArticle(ventouse);
+		
+		
+		//
+		
+		/*
+	 		Jeu de données
+		 */
+		
 		while(true) {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			int option;
 			
 			// Display menu graphics
-			System.out.println("==================================");
-			System.out.println("|   MENU SELECTION DEMO          |");
-			System.out.println("==================================");
-			System.out.println("| Options:                       |");
-			System.out.println("|        1. Ajouter un article   |");
-			System.out.println("|        2. Ajouter un client    |");
-			System.out.println("|        3. Ajouter une location |");
-			System.out.println("|        4. Quitter              |");
-			System.out.println("==================================");	
+			System.out.println("====================================");
+			System.out.println("|   MENU SELECTION DEMO            |");
+			System.out.println("====================================");
+			System.out.println("| Options:                         |");
+			System.out.println("|        1. Afficher les locations |");
+			System.out.println("|        2. Afficher les clients   |");
+			System.out.println("|        4. Afficher les articles  |");
+			System.out.println("|        5. Ajouter un article     |");
+			System.out.println("|        6. Ajouter un client      |");
+			System.out.println("|        7. Ajouter une location   |");
+			System.out.println("|        8. Quitter                |");
+			System.out.println("====================================");	
 			
 			option = Integer.valueOf(br.readLine());
-			System.out.println(option);
+			
+			if(option == 1) {
+				
+			}
+			else if (option == 2) {
+				
+			}
+			else if (option == 3) {
 
+			}
+			else if (option == 4) {
+
+			}
+			else if (option == 5) {
+
+			}
+			else if (option == 6) {
+				System.out.println("Le programme va se fermer...");
+				System.exit(0);
+			}
+			else {
+				
+			}
 		}
 		
 	}

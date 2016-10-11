@@ -5,11 +5,11 @@
 package Acquisition;
 public class Camera extends DispositifAcquisition {
 
-	public Camera(String nom, String reference, String modele,
-			float prixLocationParJour, int nombre, String typeObjectif,
+	public Camera(String nom, String reference, String marque,
+			float prixLocationParJour, int stock, String typeObjectif,
 			int nbPixels, String resolution) {
 		
-		super(nom, reference, modele, prixLocationParJour, nombre, typeObjectif,
+		super(nom, reference, marque, prixLocationParJour, stock, typeObjectif,
 				nbPixels, resolution);
 	}
 	
