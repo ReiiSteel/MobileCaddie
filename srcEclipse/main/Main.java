@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import Acquisition.AppareilPhoto;
@@ -110,11 +111,11 @@ public class Main {
 		m1.locationPeriodique(c2, lotArticle2, 0, 2, 0);
 		
 		GregorianCalendar gcd = new GregorianCalendar();
-		gcd.set(2015, 10, 8);
+		gcd.set(Calendar.YEAR, 2015);
 		GregorianCalendar gcf = new GregorianCalendar();
-		gcf.set(2017, 1, 1);
+		gcd.set(Calendar.YEAR, 2017);
 		
-		//System.out.println(m1.calculGain(gcd, gcf));
+		System.out.println(m1.calculGain(gcd, gcf));
 		/*
 	 		Jeu de données
 		 */
