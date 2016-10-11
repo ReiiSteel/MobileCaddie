@@ -112,8 +112,12 @@ public class Main {
 		
 		GregorianCalendar gcd = new GregorianCalendar();
 		gcd.set(Calendar.YEAR, 2015);
+		gcd.set(Calendar.MONTH, 0);
+		gcd.set(Calendar.DATE, 1);
 		GregorianCalendar gcf = new GregorianCalendar();
-		gcd.set(Calendar.YEAR, 2017);
+		gcf.set(Calendar.YEAR, 2017);
+		gcf.set(Calendar.MONTH, 0);
+		gcf.set(Calendar.DATE, 1);
 		
 		System.out.println(m1.calculGain(gcd, gcf));
 		/*

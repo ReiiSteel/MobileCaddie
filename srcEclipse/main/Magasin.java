@@ -182,16 +182,15 @@ public class Magasin {
 				try {
 					locs.addAll(this.arch.getLocationsMois(this ,cal));
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (NullPointerException e){
-					
 				} finally{
 					cal.set(Calendar.MONTH, cal.get(Calendar.MONTH)+1);
 				}
 			}
 		}
 		for (Location location : locs) {
+			System.out.println("ajout archive");
 			montant += location.getMontantPeriode(gcd, gcf);
 		}
 		for (Location location : this.locationsEnCours) {
