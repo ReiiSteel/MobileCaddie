@@ -22,7 +22,7 @@ public class Location {
 	 * @param day : nombre de jours de location
 	 */
 	public Location(Client client, ArrayList<Article> articles, int nbYear, int nbMonth, int nbDay) {
-		if (nbDay > 0) {
+		if (nbDay > 0 || nbMonth > 0 || nbYear > 0) {
 			this.articles = new ArrayList<Article>();
 			this.dateDebut = new GregorianCalendar();
 			this.client = client;
