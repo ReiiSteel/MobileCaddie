@@ -10,7 +10,7 @@ public abstract class DispositifAcquisition extends main.Article {
 	private String resolution;
 	private Objectif objectif;
 	
-	public DispositifAcquisition(String nom, String reference, String modele, float prixLocationParJour, int nombre,
+	public DispositifAcquisition(String nom, String reference, String modele, double prixLocationParJour, int nombre,
 			String typeObjectif, int nbPixels, String resolution) {
 		super(nom, reference, modele, prixLocationParJour, nombre);
 		this.nbMillionsPixels = nbPixels;

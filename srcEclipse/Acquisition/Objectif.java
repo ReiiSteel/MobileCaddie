@@ -7,7 +7,7 @@ package Acquisition;
 public class Objectif extends DispositifAcquisition{
 
 	public Objectif(String nom, String reference, String modele,
-			float prixLocationParJour, int stock, String typeObjectif,
+			double prixLocationParJour, int stock, String typeObjectif,
 			int nbPixels, String resolution) {
 		super(nom, reference, modele, prixLocationParJour, stock, typeObjectif,
 				nbPixels, resolution);

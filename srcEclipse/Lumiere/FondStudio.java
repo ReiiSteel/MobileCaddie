@@ -5,11 +5,11 @@
 package Lumiere;
 
 public class FondStudio extends AccessoireLumiere{
-	private float taille;
+	private double taille;
 	private String couleur;
 	
 	public FondStudio(String nom, String reference, String modele,
-			float prixLocationParJour, int nbStock, float taille, String couleur) {
+			double prixLocationParJour, int nbStock, double taille, String couleur) {
 		
 		super(nom, reference, modele, prixLocationParJour, nbStock);
 		this.taille = taille;

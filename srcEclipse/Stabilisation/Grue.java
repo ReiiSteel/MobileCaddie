@@ -5,11 +5,11 @@
 package Stabilisation;
 
 public class Grue extends MaterielTournageStabilisation {
-	private float longueur;
+	private double longueur;
 	
 
 	public Grue(String nom, String reference, String modele,
-			float prixLocationParJour, int nbStock, float longueur) {
+			double prixLocationParJour, int nbStock, double longueur) {
 		super(nom, reference, modele, prixLocationParJour, nbStock);
 		this.longueur = longueur;
 	}

@@ -13,6 +13,7 @@ import Acquisition.Objectif;
 import Lumiere.FondStudio;
 import Lumiere.PanneauLED;
 import Lumiere.Reflecteur;
+import Son.Micro;
 import Stabilisation.Grue;
 import Stabilisation.Trepied;
 import Stabilisation.Ventouse;
@@ -129,15 +130,62 @@ public class Main {
 						creationCamera(stringCamera, m1);						
 					}					
 					else if (option == 3) {
-						// TODO
+						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?,\nle type d'objectif"
+								+ ", le nombre de pixels et enfin la résolution. \nPour rappel, il faut saisir toutes les options en \nles séparants"
+								+ " par un espace !");
 						String stringObjectif = br.readLine();
-						creationFondDeStudio(stringObjectif, m1);
+						creationObjectif(stringObjectif, m1);
 					}
 					else if (option == 4) {
-						// TODO
+						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?,\nla taille"
+								+ " et la couleur. \nPour rappel, il faut saisir toutes les options en \nles séparants"
+								+ " par un espace !");
 						String fondDeStudio = br.readLine();
 						creationFondDeStudio(fondDeStudio, m1);
 					}
+					else if (option == 5) {
+						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?,\n"
+								+ "et le nombre de leds. \nPour rappel, il faut saisir toutes les options en \nles séparants"
+								+ " par un espace !");
+						String panneauLed = br.readLine();
+						creationPanneauLed(panneauLed, m1);
+					}
+					else if (option == 6) {
+						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?,\n"
+								+ "et la taille du reflecteur. \nPour rappel, il faut saisir toutes les options en \nles séparants"
+								+ " par un espace !");
+						String reflecteur = br.readLine();
+						creationReflecteur(reflecteur, m1);					
+					}
+										
+					else if (option == 7) {
+						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour et le nombre?"
+								+ "\nPour rappel, il faut saisir toutes les options en \nles séparants"
+								+ " par un espace !");
+						String micro = br.readLine();
+						creationMicro(micro, m1);		
+					}
+					else if (option == 8) {
+						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?"
+								+ " et la hauteur du trepied.\nPour rappel, il faut saisir toutes les options en \nles séparants"
+								+ " par un espace !");
+						String trepied = br.readLine();
+						creationTrepied(trepied, m1);		
+					}
+					else if (option == 9) {
+						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?"
+								+ " et la longueur de la grue.\nPour rappel, il faut saisir toutes les options en \nles séparants"
+								+ " par un espace !");
+						String grue = br.readLine();
+						creationGrue(grue, m1);		
+					}
+					else if (option == 10) {
+						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?"
+								+ " et le diamètre de la ventouse.\nPour rappel, il faut saisir toutes les options en \nles séparants"
+								+ " par un espace !");
+						String ventouse = br.readLine();
+						creationVentouse(ventouse, m1);		
+					}	
 					else if (option == 11) {
 						// Retour au menu principal
 						breakMain2 = false;
@@ -202,14 +250,14 @@ public class Main {
 		m1.ajoutClient(c6);
 		
 		// Articles
-		AppareilPhoto appareilPhoto = new AppareilPhoto("Appareil photo", "4A", "Canon", 50f, 4, "????",4000000, "12k");
-		Camera camera = new Camera("Camera", "1I", "Sony", 2f, 50, "????", 5, "120*80");
-		Objectif objectif = new Objectif("Objectif", "PA", "Atol", 5f, 10, "????", 20, "1080*800");
-		FondStudio fondStudio = new FondStudio("Fond studio", "OP", "Colorama", 10f, 2, 2.5f, "bleu");
-		PanneauLED panneauLed = new PanneauLED("Panneau LED", "LF", "Lastolite", 15f, 1, 40);
-		Reflecteur reflecteur = new Reflecteur("Reflecteur", "OP1", "Colorama", 12f, 2, 3f);
-		Grue grue = new Grue("Grue", "FK", "Noname", 4000f, 1, 10f);
-		Trepied trepied = new Trepied("Trepied", "12", "Canon", 3f, 5, 5);
+		AppareilPhoto appareilPhoto = new AppareilPhoto("Appareil photo", "4A", "Canon", 50, 4, "????",4000000, "12k");
+		Camera camera = new Camera("Camera", "1I", "Sony", 2, 50, "????", 5, "120*80");
+		Objectif objectif = new Objectif("Objectif", "PA", "Atol", 5, 10, "????", 20, "1080*800");
+		FondStudio fondStudio = new FondStudio("Fond studio", "OP", "Colorama", 10, 2, 2.5f, "bleu");
+		PanneauLED panneauLed = new PanneauLED("Panneau LED", "LF", "Lastolite", 15, 1, 40);
+		Reflecteur reflecteur = new Reflecteur("Reflecteur", "OP1", "Colorama", 12, 2, 3);
+		Grue grue = new Grue("Grue", "FK", "Noname", 4000, 1, 10);
+		Trepied trepied = new Trepied("Trepied", "12", "Canon", 3, 5, 5);
 		Ventouse ventouse = new Ventouse("Ventouse", "FF", "Nicon", 0.2f, 26, 55f);
 		// On ajoute les articles au magasin
 		m1.ajoutArticle(appareilPhoto);
@@ -247,7 +295,7 @@ public class Main {
 	
 	public static void creationCamera(String stringCamera, Magasin m1) {
 		String params[] = stringCamera.split(" ");
-		Camera cam = new Camera(params[0], params[1], params[2], Float.parseFloat(params[3]), 
+		Camera cam = new Camera(params[0], params[1], params[2], Double.parseDouble(params[3]), 
 				Integer.valueOf(params[4]), params[5], Integer.valueOf(params[6]), params[7]);
 		m1.ajoutArticle(cam);
 		System.out.println(cam);
@@ -255,24 +303,65 @@ public class Main {
 	
 	public static void creationAppareilPhoto(String stringAppareilPhoto, Magasin m1) {
 		String params[] = stringAppareilPhoto.split(" ");
-		Camera app = new Camera(params[0], params[1], params[2], Float.parseFloat(params[3]), 
+		Camera app = new Camera(params[0], params[1], params[2], Double.parseDouble(params[3]), 
 				Integer.valueOf(params[4]), params[5], Integer.valueOf(params[6]), params[7]);
 		m1.ajoutArticle(app);
 	}
 	
 	public static void creationObjectif(String stringObjectif, Magasin m1) {
 		String params[] = stringObjectif.split(" ");
-		Objectif obj = new Objectif(params[0], params[1], params[2], Float.parseFloat(params[3]), 
+		Objectif obj = new Objectif(params[0], params[1], params[2], Double.parseDouble(params[3]), 
 				Integer.valueOf(params[4]), params[5], Integer.valueOf(params[6]), params[7]);
 		m1.ajoutArticle(obj);
 	}
 	
 	public static void creationFondDeStudio(String stringFondDeStudio, Magasin m1) {
 		String params[] = stringFondDeStudio.split(" ");
-		FondStudio fs = new FondStudio(params[0], params[1], params[2], Float.parseFloat(params[3]), 
+		FondStudio fs = new FondStudio(params[0], params[1], params[2], Double.parseDouble(params[3]), 
 				Integer.valueOf(params[4]), Float.parseFloat(params[5]), params[6]);
 		m1.ajoutArticle(fs);
-		System.out.println(fs);
+	}
+	
+	public static void creationPanneauLed(String stringPanneauLed, Magasin m1) {
+		String params[] = stringPanneauLed.split(" ");
+		PanneauLED panneauLed = new PanneauLED(params[0], params[1], params[2], Double.parseDouble(params[3]), 
+				Integer.valueOf(params[4]), Integer.valueOf(params[4]));
+		m1.ajoutArticle(panneauLed);
+	}
+	
+	public static void creationReflecteur(String stringReflecteur, Magasin m1) {
+		String params[] = stringReflecteur.split(" ");
+		Reflecteur ref = new Reflecteur(params[0], params[1], params[2], Double.parseDouble(params[3]), 
+				Integer.valueOf(params[4]), Double.parseDouble(params[4]));
+		m1.ajoutArticle(ref);
+	}
+	
+	public static void creationMicro(String stringMicro, Magasin m1) {
+		String params[] = stringMicro.split(" ");
+		Micro mic = new Micro(params[0], params[1], params[2], Double.parseDouble(params[3]), 
+				Integer.valueOf(params[4]));
+		m1.ajoutArticle(mic);
+	}
+
+	public static void creationTrepied(String stringTrepied, Magasin m1) {
+		String params[] = stringTrepied.split(" ");
+		Trepied trepied = new Trepied(params[0], params[1], params[2], Double.parseDouble(params[3]), 
+				Integer.valueOf(params[4]), Integer.valueOf(params[4]));
+		m1.ajoutArticle(trepied);
+	}
+	
+	public static void creationGrue(String stringGrue, Magasin m1) {
+		String params[] = stringGrue.split(" ");
+		Grue grue = new Grue(params[0], params[1], params[2], Double.parseDouble(params[3]), 
+				Integer.valueOf(params[4]), Double.parseDouble(params[4]));
+		m1.ajoutArticle(grue);
+	}
+	
+	public static void creationVentouse(String stringVentouse, Magasin m1) {
+		String params[] = stringVentouse.split(" ");
+		Ventouse ventouse = new Ventouse(params[0], params[1], params[2], Double.parseDouble(params[3]), 
+				Integer.valueOf(params[4]), Double.parseDouble(params[4]));
+		m1.ajoutArticle(ventouse);
 	}
 	
 	public static void menuPrincipal() {

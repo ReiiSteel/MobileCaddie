@@ -11,7 +11,7 @@ public class Article {
 	private double prixLocationParJour;
 	private int nbStock;
 	
-	public Article(String nom, String reference, String marque, float prixLocationParJour, int nbStock) {
+	public Article(String nom, String reference, String marque, double prixLocationParJour, int nbStock) {
 		this.nom = nom;
 		this.reference = reference;
 		this.marque = marque;
