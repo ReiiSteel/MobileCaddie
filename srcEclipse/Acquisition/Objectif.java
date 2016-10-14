@@ -4,12 +4,11 @@
 */
 package Acquisition;
 
-public class Objectif extends DispositifAcquisition{
+import main.Article;
 
-	public Objectif(String nom, String reference, String modele,
-			double prixLocationParJour, int stock, String typeObjectif,
-			int nbPixels, String resolution) {
-		super(nom, reference, modele, prixLocationParJour, stock, typeObjectif,
-				nbPixels, resolution);
+public class Objectif extends Article {
+
+	public Objectif(String nom, String reference, String modele, double prixLocationParJour, int stock) {
+		super(nom, reference, modele, prixLocationParJour, stock);
 	}
 }

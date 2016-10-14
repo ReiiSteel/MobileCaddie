@@ -20,45 +20,7 @@ import Stabilisation.Ventouse;
 
 public class Main {
 
-	public static void main(String[] args) throws IOException {
-		/*Magasin m1 = new Magasin("yo");
-		Client c1 = new Client("Nom", "Nantes");
-		Client c2 = new Client("Nom2", "Nantes aussi");
-		m1.ajoutClient(c1);
-		m1.ajoutClient(c2);
-		Objectif obj = new Objectif("Nom", "ref", "modele", 5, 40, "type obj", 99442, "1920*1080");
-		Camera cam = new Camera("Nom", "ref2", "modele", 2.5f, 40, "type obj", 999999, "1920*1080");
-		m1.ajoutArticle(obj);
-		m1.ajoutArticle(obj);
-		ArrayList<Article> arts = new ArrayList<Article>();
-		arts.add(obj);
-		arts.add(cam);
-
-		Location loc = m1.locationPeriodique(c1, arts, 0, 0, 20);
-		Location loc2 = m1.locationPeriodique(c2, arts, 0, 0, 2);
-		
-		GregorianCalendar cal = new GregorianCalendar();
-		Location l1 = new Location(c1, arts, 1, 1, 2015, 8, 10, 2016);
-		//System.out.println(l1);
-		c1.ajoutLocation(l1);
-		m1.setLocationsEnCours(l1);
-		System.out.println(m1.getLocationsDateFinMoisAnnee(cal));
-		m1.locationTerminee(l1);
-		
-		GregorianCalendar gcd = new GregorianCalendar();
-		gcd.set(Calendar.YEAR, 2015);
-		gcd.set(Calendar.MONTH, 0);
-		gcd.set(Calendar.DATE, 1);
-		GregorianCalendar gcf = new GregorianCalendar();
-		gcf.set(Calendar.YEAR, 2016);
-		gcf.set(Calendar.MONTH, 0);
-		gcf.set(Calendar.DATE, 1);
-		System.out.println(m1.calculGain(gcd, gcf));
-		
-		//System.out.println(m1.getArchive().getLocationsMois(m1, cal));
-		System.out.println(l1.isEnd());
-		System.out.println(m1.getArchive().getLocationsMois(m1, cal));*/
-		
+	public static void main(String[] args) throws IOException {		
 		// Jeu de données
 		Magasin m1 = creationJeuDeDonnees();
 		
@@ -69,7 +31,7 @@ public class Main {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			int option;
 			
-			// Display menu graphics
+			// Affiche menu graphics
 			menuPrincipal();
 			
 			try{
@@ -116,6 +78,7 @@ public class Main {
 						option = 0;
 					}
 					if (option == 1) {
+						// Appareil photo
 						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?,\nle type d'objectif"
 								+ ", le nombre de pixels et enfin la résolution. \nPour rappel, il faut saisir toutes les options en \nles séparants"
 								+ " par une virgule ! Note : il faut coller les virgules sans mettre d'espaces.\n"
@@ -124,6 +87,7 @@ public class Main {
 						creationAppareilPhoto(stringAppareilPhoto, m1);	
 					}
 					else if (option == 2) {
+						// Caméra
 						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?,\nle type d'objectif"
 								+ ", le nombre de pixels et enfin la résolution. \nPour rappel, il faut saisir toutes les options en \nles séparants"
 								+ " par une virgule ! Note : il faut coller les virgules sans mettre d'espaces.\n"
@@ -132,6 +96,7 @@ public class Main {
 						creationCamera(stringCamera, m1);						
 					}					
 					else if (option == 3) {
+						// Objectif
 						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?,\nle type d'objectif"
 								+ ", le nombre de pixels et enfin la résolution. \nPour rappel, il faut saisir toutes les options en \nles séparants"
 								+ " par une virgule ! Note : il faut coller les virgules sans mettre d'espaces.\n"
@@ -140,6 +105,7 @@ public class Main {
 						creationObjectif(stringObjectif, m1);
 					}
 					else if (option == 4) {
+						// Fond de studio
 						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?,\nla taille"
 								+ " et la couleur. \nPour rappel, il faut saisir toutes les options en \nles séparants"
 								+ " par une virgule ! Note : il faut coller les virgules sans mettre d'espaces.\n"
@@ -148,6 +114,7 @@ public class Main {
 						creationFondDeStudio(fondDeStudio, m1);
 					}
 					else if (option == 5) {
+						// Panneau LED
 						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?,\n"
 								+ "et le nombre de leds. \nPour rappel, il faut saisir toutes les options en \nles séparants"
 								+ " par une virgule ! Note : il faut coller les virgules sans mettre d'espaces.\n"
@@ -156,6 +123,7 @@ public class Main {
 						creationPanneauLed(panneauLed, m1);
 					}
 					else if (option == 6) {
+						// Reflecteur
 						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?,\n"
 								+ "et la taille du reflecteur. \nPour rappel, il faut saisir toutes les options en \nles séparants"
 								+ " par une virgule ! Note : il faut coller les virgules sans mettre d'espaces.\n"
@@ -165,6 +133,7 @@ public class Main {
 					}
 										
 					else if (option == 7) {
+						// Micro
 						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour et le nombre?"
 								+ "\nPour rappel, il faut saisir toutes les options en \nles séparants"
 								+ " par une virgule ! Note : il faut coller les virgules sans mettre d'espaces.\n"
@@ -173,6 +142,7 @@ public class Main {
 						creationMicro(micro, m1);		
 					}
 					else if (option == 8) {
+						// Trepied
 						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?"
 								+ " et la hauteur du trepied.\nPour rappel, il faut saisir toutes les options en \nles séparants"
 								+ " par une virgule ! Note : il faut coller les virgules sans mettre d'espaces.\n"
@@ -181,6 +151,7 @@ public class Main {
 						creationTrepied(trepied, m1);		
 					}
 					else if (option == 9) {
+						// Grue
 						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?"
 								+ " et la longueur de la grue.\nPour rappel, il faut saisir toutes les options en \nles séparants"
 								+ " par une virgule ! Note : il faut coller les virgules sans mettre d'espaces.\n"
@@ -189,6 +160,7 @@ public class Main {
 						creationGrue(grue, m1);		
 					}
 					else if (option == 10) {
+						// Ventouse
 						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?"
 								+ " et le diamètre de la ventouse.\nPour rappel, il faut saisir toutes les options en \nles séparants"
 								+ " par une virgule ! Note : il faut coller les virgules sans mettre d'espaces.\n"
@@ -242,15 +214,15 @@ public class Main {
 		m1.ajoutClient(c6);
 		
 		// Articles
-		AppareilPhoto appareilPhoto = new AppareilPhoto("Appareil photo", "4A", "Canon", 50, 4, "????",4000000, "12k");
-		Camera camera = new Camera("Camera", "1I", "Sony", 2, 50, "????", 5, "120*80");
-		Objectif objectif = new Objectif("Objectif", "PA", "Atol", 5, 10, "????", 20, "1080*800");
-		FondStudio fondStudio = new FondStudio("Fond studio", "OP", "Colorama", 10, 2, 2.5f, "bleu");
+		AppareilPhoto appareilPhoto = new AppareilPhoto("Appareil photo", "4A", "Canon", 50, 4, "objectif a2",4000000, "12k");
+		Camera camera = new Camera("Camera", "1I", "Sony", 2, 50, "objectif a1", 5, "120*80");
+		Objectif objectif = new Objectif("Objectif", "PA", "Atol", 5, 10);
+		FondStudio fondStudio = new FondStudio("Fond studio", "OP", "Colorama", 10, 2, 2.5, "bleu");
 		PanneauLED panneauLed = new PanneauLED("Panneau LED", "LF", "Lastolite", 15, 1, 40);
 		Reflecteur reflecteur = new Reflecteur("Reflecteur", "OP1", "Colorama", 12, 2, 3);
 		Grue grue = new Grue("Grue", "FK", "Noname", 4000, 1, 10);
 		Trepied trepied = new Trepied("Trepied", "12", "Canon", 3, 5, 5);
-		Ventouse ventouse = new Ventouse("Ventouse", "FF", "Nicon", 0.2f, 26, 55f);
+		Ventouse ventouse = new Ventouse("Ventouse", "FF", "Nicon", 0.2, 26, 55);
 		// On ajoute les articles au magasin
 		m1.ajoutArticle(appareilPhoto);
 		m1.ajoutArticle(camera);
@@ -303,7 +275,7 @@ public class Main {
 	public static void creationObjectif(String stringObjectif, Magasin m1) {
 		String params[] = stringObjectif.split(",");
 		Objectif obj = new Objectif(params[0], params[1], params[2], Double.parseDouble(params[3]), 
-				Integer.valueOf(params[4]), params[5], Integer.valueOf(params[6]), params[7]);
+				Integer.valueOf(params[4]));
 		m1.ajoutArticle(obj);
 	}
 	

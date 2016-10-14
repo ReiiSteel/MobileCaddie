@@ -8,14 +8,13 @@ public abstract class DispositifAcquisition extends main.Article {
 	private String typeObjectif;
 	private int nbMillionsPixels;
 	private String resolution;
-	private Objectif objectif;
 	
 	public DispositifAcquisition(String nom, String reference, String modele, double prixLocationParJour, int nombre,
 			String typeObjectif, int nbPixels, String resolution) {
 		super(nom, reference, modele, prixLocationParJour, nombre);
 		this.nbMillionsPixels = nbPixels;
 		this.resolution = resolution;
-		this.objectif = objectif;
+		this.typeObjectif = typeObjectif;
 	}
 
 	public String getTypeObjectif() {
@@ -41,14 +40,4 @@ public abstract class DispositifAcquisition extends main.Article {
 	public void setResolution(String resolution) {
 		this.resolution = resolution;
 	}
-
-	public Objectif getObjectif() {
-		return objectif;
-	}
-
-	public void setObjectif(Objectif objectif) {
-		this.objectif = objectif;
-	}
-	
-	
 }
