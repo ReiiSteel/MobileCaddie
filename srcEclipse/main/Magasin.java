@@ -175,6 +175,7 @@ public class Magasin {
 	}
 	
 	public double calculGain(GregorianCalendar gcd, GregorianCalendar gcf){
+		// TODO tester sur plusieurs années ?
 		double montant = 0.0;
 		ArrayList<Location> locs = new ArrayList<Location>();
 		GregorianCalendar cal = (GregorianCalendar) gcd.clone();

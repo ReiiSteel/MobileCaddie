@@ -11,7 +11,6 @@ public class AppareilPhoto extends DispositifAcquisition {
 			int nbPixels, String resolution) {
 		super(nom, reference, marque, prixLocationParJour, stock, typeObjectif,
 				nbPixels, resolution);
-		// TODO Auto-generated constructor stub
 	}
 
 	

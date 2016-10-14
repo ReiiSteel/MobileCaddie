@@ -12,6 +12,4 @@ public class Objectif extends DispositifAcquisition{
 		super(nom, reference, modele, prixLocationParJour, stock, typeObjectif,
 				nbPixels, resolution);
 	}
-
-
 }
