@@ -53,7 +53,7 @@ public class Client {
 	}
 	
 	public String toString () {
-		return("nom : " + this.getNom() + " adresse : " + this.getAdresse() + "avec la référence : " + this.getRefClient());
+		return("nom : " + this.getNom() + " adresse : " + this.getAdresse() + " avec la référence : " + this.getRefClient());
 		
 	}
 	

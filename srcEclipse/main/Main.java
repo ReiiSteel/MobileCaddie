@@ -118,42 +118,48 @@ public class Main {
 					if (option == 1) {
 						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?,\nle type d'objectif"
 								+ ", le nombre de pixels et enfin la résolution. \nPour rappel, il faut saisir toutes les options en \nles séparants"
-								+ " par un espace !");
+								+ " par une virgule ! Note : il faut coller les virgules sans mettre d'espaces.\n"
+								+ "Exemple : expression avec espace,expression,expression avec espace");
 						String stringAppareilPhoto = br.readLine();
 						creationAppareilPhoto(stringAppareilPhoto, m1);	
 					}
 					else if (option == 2) {
 						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?,\nle type d'objectif"
 								+ ", le nombre de pixels et enfin la résolution. \nPour rappel, il faut saisir toutes les options en \nles séparants"
-								+ " par un espace !");
+								+ " par une virgule ! Note : il faut coller les virgules sans mettre d'espaces.\n"
+								+ "Exemple : expression avec espace,expression,expression avec espace");
 						String stringCamera = br.readLine();
 						creationCamera(stringCamera, m1);						
 					}					
 					else if (option == 3) {
 						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?,\nle type d'objectif"
 								+ ", le nombre de pixels et enfin la résolution. \nPour rappel, il faut saisir toutes les options en \nles séparants"
-								+ " par un espace !");
+								+ " par une virgule ! Note : il faut coller les virgules sans mettre d'espaces.\n"
+								+ "Exemple : expression avec espace,expression,expression avec espace");
 						String stringObjectif = br.readLine();
 						creationObjectif(stringObjectif, m1);
 					}
 					else if (option == 4) {
 						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?,\nla taille"
 								+ " et la couleur. \nPour rappel, il faut saisir toutes les options en \nles séparants"
-								+ " par un espace !");
+								+ " par une virgule ! Note : il faut coller les virgules sans mettre d'espaces.\n"
+								+ "Exemple : expression avec espace,expression,expression avec espace");
 						String fondDeStudio = br.readLine();
 						creationFondDeStudio(fondDeStudio, m1);
 					}
 					else if (option == 5) {
 						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?,\n"
 								+ "et le nombre de leds. \nPour rappel, il faut saisir toutes les options en \nles séparants"
-								+ " par un espace !");
+								+ " par une virgule ! Note : il faut coller les virgules sans mettre d'espaces.\n"
+								+ "Exemple : expression avec espace,expression,expression avec espace");
 						String panneauLed = br.readLine();
 						creationPanneauLed(panneauLed, m1);
 					}
 					else if (option == 6) {
 						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?,\n"
 								+ "et la taille du reflecteur. \nPour rappel, il faut saisir toutes les options en \nles séparants"
-								+ " par un espace !");
+								+ " par une virgule ! Note : il faut coller les virgules sans mettre d'espaces.\n"
+								+ "Exemple : expression avec espace,expression,expression avec espace");
 						String reflecteur = br.readLine();
 						creationReflecteur(reflecteur, m1);					
 					}
@@ -161,28 +167,32 @@ public class Main {
 					else if (option == 7) {
 						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour et le nombre?"
 								+ "\nPour rappel, il faut saisir toutes les options en \nles séparants"
-								+ " par un espace !");
+								+ " par une virgule ! Note : il faut coller les virgules sans mettre d'espaces.\n"
+								+ "Exemple : expression avec espace,expression,expression avec espace");
 						String micro = br.readLine();
 						creationMicro(micro, m1);		
 					}
 					else if (option == 8) {
 						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?"
 								+ " et la hauteur du trepied.\nPour rappel, il faut saisir toutes les options en \nles séparants"
-								+ " par un espace !");
+								+ " par une virgule ! Note : il faut coller les virgules sans mettre d'espaces.\n"
+								+ "Exemple : expression avec espace,expression,expression avec espace");
 						String trepied = br.readLine();
 						creationTrepied(trepied, m1);		
 					}
 					else if (option == 9) {
 						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?"
 								+ " et la longueur de la grue.\nPour rappel, il faut saisir toutes les options en \nles séparants"
-								+ " par un espace !");
+								+ " par une virgule ! Note : il faut coller les virgules sans mettre d'espaces.\n"
+								+ "Exemple : expression avec espace,expression,expression avec espace");
 						String grue = br.readLine();
 						creationGrue(grue, m1);		
 					}
 					else if (option == 10) {
 						System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?"
 								+ " et le diamètre de la ventouse.\nPour rappel, il faut saisir toutes les options en \nles séparants"
-								+ " par un espace !");
+								+ " par une virgule ! Note : il faut coller les virgules sans mettre d'espaces.\n"
+								+ "Exemple : expression avec espace,expression,expression avec espace");
 						String ventouse = br.readLine();
 						creationVentouse(ventouse, m1);		
 					}	
@@ -196,25 +206,7 @@ public class Main {
 				}
 			}
 			else if (option == 5) {
-				while(breakMain2) {
-					System.out.println("\n==================================================================================");
-					System.out.println("|   Nouveau client                                                               |");
-					System.out.println("==================================================================================");
-					System.out.println("Nom :");					
-
-
-					try {
-						option = Integer.valueOf(br.readLine());
-					}
-					catch(NumberFormatException ne){
-						System.out.println("Veuillez entrer une option correcte.");
-						option = 0;
-					}
-					if (option == 11) {
-						breakMain2 = false;
-					}
-				}
-				
+				creationNouveauClient(m1);				
 			}
 			else if (option == 6) {
 
@@ -294,7 +286,7 @@ public class Main {
 	}
 	
 	public static void creationCamera(String stringCamera, Magasin m1) {
-		String params[] = stringCamera.split(" ");
+		String params[] = stringCamera.split(",");
 		Camera cam = new Camera(params[0], params[1], params[2], Double.parseDouble(params[3]), 
 				Integer.valueOf(params[4]), params[5], Integer.valueOf(params[6]), params[7]);
 		m1.ajoutArticle(cam);
@@ -302,66 +294,104 @@ public class Main {
 	}
 	
 	public static void creationAppareilPhoto(String stringAppareilPhoto, Magasin m1) {
-		String params[] = stringAppareilPhoto.split(" ");
+		String params[] = stringAppareilPhoto.split(",");
 		Camera app = new Camera(params[0], params[1], params[2], Double.parseDouble(params[3]), 
 				Integer.valueOf(params[4]), params[5], Integer.valueOf(params[6]), params[7]);
 		m1.ajoutArticle(app);
 	}
 	
 	public static void creationObjectif(String stringObjectif, Magasin m1) {
-		String params[] = stringObjectif.split(" ");
+		String params[] = stringObjectif.split(",");
 		Objectif obj = new Objectif(params[0], params[1], params[2], Double.parseDouble(params[3]), 
 				Integer.valueOf(params[4]), params[5], Integer.valueOf(params[6]), params[7]);
 		m1.ajoutArticle(obj);
 	}
 	
 	public static void creationFondDeStudio(String stringFondDeStudio, Magasin m1) {
-		String params[] = stringFondDeStudio.split(" ");
+		String params[] = stringFondDeStudio.split(",");
 		FondStudio fs = new FondStudio(params[0], params[1], params[2], Double.parseDouble(params[3]), 
 				Integer.valueOf(params[4]), Float.parseFloat(params[5]), params[6]);
 		m1.ajoutArticle(fs);
 	}
 	
 	public static void creationPanneauLed(String stringPanneauLed, Magasin m1) {
-		String params[] = stringPanneauLed.split(" ");
+		String params[] = stringPanneauLed.split(",");
 		PanneauLED panneauLed = new PanneauLED(params[0], params[1], params[2], Double.parseDouble(params[3]), 
 				Integer.valueOf(params[4]), Integer.valueOf(params[4]));
 		m1.ajoutArticle(panneauLed);
 	}
 	
 	public static void creationReflecteur(String stringReflecteur, Magasin m1) {
-		String params[] = stringReflecteur.split(" ");
+		String params[] = stringReflecteur.split(",");
 		Reflecteur ref = new Reflecteur(params[0], params[1], params[2], Double.parseDouble(params[3]), 
 				Integer.valueOf(params[4]), Double.parseDouble(params[4]));
 		m1.ajoutArticle(ref);
 	}
 	
 	public static void creationMicro(String stringMicro, Magasin m1) {
-		String params[] = stringMicro.split(" ");
+		String params[] = stringMicro.split(",");
 		Micro mic = new Micro(params[0], params[1], params[2], Double.parseDouble(params[3]), 
 				Integer.valueOf(params[4]));
 		m1.ajoutArticle(mic);
 	}
 
 	public static void creationTrepied(String stringTrepied, Magasin m1) {
-		String params[] = stringTrepied.split(" ");
+		String params[] = stringTrepied.split(",");
 		Trepied trepied = new Trepied(params[0], params[1], params[2], Double.parseDouble(params[3]), 
 				Integer.valueOf(params[4]), Integer.valueOf(params[4]));
 		m1.ajoutArticle(trepied);
 	}
 	
 	public static void creationGrue(String stringGrue, Magasin m1) {
-		String params[] = stringGrue.split(" ");
+		String params[] = stringGrue.split(",");
 		Grue grue = new Grue(params[0], params[1], params[2], Double.parseDouble(params[3]), 
 				Integer.valueOf(params[4]), Double.parseDouble(params[4]));
 		m1.ajoutArticle(grue);
 	}
 	
 	public static void creationVentouse(String stringVentouse, Magasin m1) {
-		String params[] = stringVentouse.split(" ");
+		String params[] = stringVentouse.split(",");
 		Ventouse ventouse = new Ventouse(params[0], params[1], params[2], Double.parseDouble(params[3]), 
 				Integer.valueOf(params[4]), Double.parseDouble(params[4]));
 		m1.ajoutArticle(ventouse);
+	}
+	
+	public static void creationNouveauClient(Magasin m1) {
+		boolean breakMain2 = true;
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		while(breakMain2) {
+			System.out.println("\n==================================================================================");
+			System.out.println("|   Nouveau client                                                               |");
+			System.out.println("==================================================================================");
+			System.out.println("Saisissez le nom et l'adresse du client."
+					+ "\nPour rappel, il faut saisir toutes les options en \nles séparants"
+					+ " par une virgule ! Note : il faut coller les virgules sans mettre d'espaces.\n"
+					+ "Exemple : expression avec espace,expression,expression avec espace\n"
+					+ "Tapez retour pour retourner en arrière.");
+			
+			String stringClient = "";
+			try {
+				stringClient = br.readLine();
+				if (stringClient.equals("retour")) {
+					// Retour menu principal
+					breakMain2 = false;
+				}
+				else {
+					String params[] = stringClient.split(",");
+					Client c = new Client(params[0],params[1]);
+					m1.ajoutClient(c);
+					System.out.println("Le client a bien été rajouté au magasin !");
+					System.out.println(c);
+					// Retour menu principal
+					breakMain2  = false;
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			
+		}
 	}
 	
 	public static void menuPrincipal() {
