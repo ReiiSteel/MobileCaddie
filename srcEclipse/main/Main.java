@@ -25,11 +25,10 @@ public class Main {
 		Magasin m1 = creationJeuDeDonnees();
 		
 		boolean breakMain = true;
-		boolean breakMain2 = true;
 		
 		while(breakMain) {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-			int option;
+			int option = 0;
 			
 			// Affiche menu graphics
 			menuPrincipal();
@@ -41,7 +40,6 @@ public class Main {
 				System.out.println("Veuillez entrer une option correcte.");
 				option = 0;
 			}
-			
 			if(option == 1) {
 				System.out.println("\n==================================================================================");
 				System.out.println("|   Locations en cours                                                           |");
@@ -67,6 +65,7 @@ public class Main {
 				}
 			}
 			else if (option == 4) {
+				boolean breakMain2 = true;
 				while(breakMain2) {
 					// Menu pour choisir un article à ajouter
 						menuAjoutArticle();						
@@ -181,7 +180,7 @@ public class Main {
 				creationNouveauClient(m1);				
 			}
 			else if (option == 6) {
-
+				creationLocation(m1);
 			}
 			else if (option == 7) {
 				System.out.println("Le programme va se fermer...");
@@ -205,6 +204,8 @@ public class Main {
 		Client c4 = new Client("Cédric", "Orvault");
 		Client c5 = new Client("Quentin", "44600 Saint-Nazaire");
 		Client c6 = new Client("Léa", "Paris");
+		Client c7 = new Client("Sneaky", "92 boulevard des belges, Nantes");
+		
 		// On ajoute les clients au magasin
 		m1.ajoutClient(c1);
 		m1.ajoutClient(c2);
@@ -212,6 +213,7 @@ public class Main {
 		m1.ajoutClient(c4);
 		m1.ajoutClient(c5);
 		m1.ajoutClient(c6);
+		m1.ajoutClient(c7);
 		
 		// Articles
 		AppareilPhoto appareilPhoto = new AppareilPhoto("Appareil photo", "4A", "Canon", 50, 4, "objectif a2",4000000, "12k");
@@ -366,9 +368,88 @@ public class Main {
 		}
 	}
 	
+	public static void creationLocation(Magasin m1) {
+		boolean breakMain2 = true;
+		int refClient = 0;
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		while(breakMain2) {
+			System.out.println("\n==================================================================================");
+			System.out.println("|   Nouvelle location                                                            |");
+			System.out.println("==================================================================================");
+			System.out.println("Choisissez un client en rentrant sa référence : ");
+			// Affiche la liste des clients
+			for (Client c : m1.getListeClients()) {
+				System.out.println(c);
+			}
+			try{
+				refClient = Integer.valueOf(br.readLine());
+			}
+			catch (IOException e) {
+				System.out.println("Veuillez entrer une option correcte.");
+			}
+			
+			// Récupération du client avec la référence saisie par l'utilisateur
+			Client clientLocation = m1.getClientByRef(refClient);
+			
+			// On vérifie que le client existe bien dans le magasin avant de continuer
+			if(clientLocation != null) {
+				String stringArticle = "";
+				System.out.println("Selectionnez un ou plusieurs articles par sa référence : ");
+				System.out.println("Séparer les articles par une virgule sans espaces ! Exemple : article1,article2\n\n");
+				// Affichage des articles disponibles à la location
+				for (Article a : m1.getArticles()) {
+					System.out.println(a);
+				}
+				try{
+					stringArticle = br.readLine();
+				}
+				catch (IOException e) {
+					System.out.println("Veuillez entrer une option correcte.");
+				}
+				
+				// Récupération des articles avec les références saisies par l'utilisateur
+				ArrayList<Article> articlesLocation = new ArrayList<Article>();
+				String articles[] = stringArticle.split(",");
+				for (String refArticle : articles) {
+					articlesLocation.addAll(m1.getArticleByRef(refArticle));
+				}
+				
+				// Si il y a des articles à louer on continue la location
+				if(!articlesLocation.isEmpty()) {
+					String stringDureeLocation = "";
+					System.out.println("Saisissez la durée de la location sous la forme nombreDeJours,nombreDeMois,nombreD'années\n"
+							+ "Exemple : 10,3,0 pour une location de 10 jours et trois mois.");
+					try{
+						stringDureeLocation = br.readLine();						
+					}
+					catch (IOException e) {
+						System.out.println("Veuillez entrer une option correcte.");
+					}
+					
+					String dureeLocation[] = stringDureeLocation.split(",");
+					// On fait ensuite la location au niveau du magasin
+					Location loc = m1.locationPeriodique(clientLocation, articlesLocation, Integer.valueOf(dureeLocation[2]), Integer.valueOf(dureeLocation[1]),
+							Integer.valueOf(dureeLocation[0]));
+
+					System.out.println("La location a bien été ajoutée !");
+					System.out.println("Montant à facturer au client : " + loc.getMontantAFacturer() + "€");
+					// On revient dans le menu principal
+					breakMain2 = false;
+				}
+				else {
+					System.out.println("Il n'y a aucun article à louer, impossible de continuer la location !");
+				}
+			}
+			else {
+				System.out.println("Veuillez selectionner un client existant !");
+			}
+		}
+	}
+	
 	public static void menuPrincipal() {
 		System.out.println("\n==================================================================================");
-		System.out.println("|   MENU TOOl                                                                    |");
+		System.out.println("|   MENU PRINCIPAL                                                               |");
 		System.out.println("==================================================================================");
 		System.out.println("| Options:                                                                       |");
 		System.out.println("|        1. Afficher les locations en cours                                      |");

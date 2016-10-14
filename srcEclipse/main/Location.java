@@ -191,8 +191,8 @@ public class Location {
 	public String toString() {
 		return ("Location concernant le client " + this.client.toString() + ".\n" +
 				"Elle commence le " + this.getDateDebut().get(Calendar.DATE) + "/" + 
-				this.getDateDebut().get(Calendar.MONTH) + "/" + this.getDateDebut().get(Calendar.YEAR)+ " et termine le " + 
-				this.getDateFin().get(Calendar.DATE) + "/" + this.getDateFin().get(Calendar.MONTH) + "/" + this.getDateFin().get(Calendar.YEAR) + ".\n" +
+				(this.getDateDebut().get(Calendar.MONTH) + 1) + "/" + this.getDateDebut().get(Calendar.YEAR)+ " et termine le " + 
+				this.getDateFin().get(Calendar.DATE) + "/" + (this.getDateFin().get(Calendar.MONTH) + 1)  + "/" + this.getDateFin().get(Calendar.YEAR) + ".\n" +
 				"Article(s) loué(s) : " + this.getArticles().toString() + "\n");		
 	}
 }

@@ -39,7 +39,7 @@ public class Article {
 		return nbStock;
 	}
 	
-	public boolean louer(){
+	public boolean estLouable(){
 		if(this.nbStock > 0){ 
 			this.nbStock -= 1;
 			return true;

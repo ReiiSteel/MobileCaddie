@@ -57,6 +57,16 @@ public class Magasin {
 	}
 	/* GETTER AND SETTER */
 
+	public boolean clientExiste(int refClient) {
+		boolean existe = false;
+		for (Client c : this.listeClients) {
+			if(c.getRefClient() == refClient) {
+				existe = true;
+			}
+		}
+		return existe;
+	}
+	
 	public void ajoutClient(Client client) {
 		// TODO verif qu'il n'est pas déjà dans le mag
 		this.listeClients.add(client);
@@ -124,7 +134,7 @@ public class Magasin {
 	public Location locationPeriodique(Client client, ArrayList<Article> articles, int nbYear, int nbMonth, int nbDay){
 		ArrayList<Article> aLouer = (ArrayList<Article>) articles.clone(); 
 		for (Article article : aLouer) {
-			if(!article.louer()) {
+			if(!article.estLouable()) {
 				articles.remove(article);
 			}
 		}
