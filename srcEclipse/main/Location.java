@@ -75,7 +75,7 @@ public class Location {
 	 * @return : montant a facturer
 	 */
 	public double getMontantAFacturer(){
-		return this.getMontantPeriodedepuisDebut(this.dateFin);
+		return this.getMontantPeriodeDepuisDebut(this.dateFin);
 	}
 	
 	/**
@@ -83,7 +83,7 @@ public class Location {
 	 * @param finPeriode : Object GregorianCalendar correspondant à la fin de la periode
 	 * @return Le montant de la location sur une periode donnee
 	 */
-	public double getMontantPeriodedepuisDebut(GregorianCalendar finPeriode){
+	public double getMontantPeriodeDepuisDebut(GregorianCalendar finPeriode){
 		return getMontantPeriode(this.dateDebut, finPeriode);
 	}
 	
