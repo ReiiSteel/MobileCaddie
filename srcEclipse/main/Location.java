@@ -6,7 +6,11 @@ import java.util.Locale;
 
 import Acquisition.Camera;
 import Acquisition.Objectif;
-
+/**
+ * Classe représentant une location
+ *@author Flambard William Martin Johan
+ * 
+ */
 public class Location {
 	private GregorianCalendar dateDebut;
 	private GregorianCalendar dateFin;
@@ -47,10 +51,6 @@ public class Location {
 	 * @param dayFin : jour de fin de location
 	 */
 	public Location(Client client, ArrayList<Article> articles, int dayDeb, int monthDeb, int yearDeb, int dayFin, int monthFin, int yearFin) {
-		// TODO VERIF date
-		if(yearDeb <= yearFin){
-			if(monthDeb <= monthFin){
-				if(dayDeb < dayFin){
 					this.articles = new ArrayList<Article>();
 					this.dateDebut = new GregorianCalendar();
 					this.dateDebut.set(Calendar.YEAR, yearDeb);
@@ -62,12 +62,6 @@ public class Location {
 					this.dateFin.set(Calendar.YEAR, yearFin);
 					this.dateFin.set(Calendar.MONTH, monthFin);
 					this.dateFin.set(Calendar.DATE, dayFin);
-				}
-			}
-		}
-		else {
-			System.out.println("Date de début et de fin incohérente");
-		}
 	}
 	
 	/**
@@ -139,7 +133,7 @@ public class Location {
 	 * Permet de savoir si une location est terminee
 	 * @return
 	 */
-	public boolean isEnd(){
+	public boolean isEnd() {
 		GregorianCalendar gcal = new GregorianCalendar();
 		if(gcal.get(Calendar.YEAR) >= this.dateFin.get(Calendar.YEAR)){
 			if(gcal.get(Calendar.MONTH) >= this.dateFin.get(Calendar.MONTH)){
@@ -156,6 +150,7 @@ public class Location {
 		}
 	}
 
+	// Getter and setter
 	public GregorianCalendar getDateDebut() {
 		return dateDebut;
 	}
@@ -188,6 +183,9 @@ public class Location {
 		this.client = client;
 	}
 	
+	/**
+	 * To String
+	 */
 	public String toString() {
 		return ("Location concernant le client " + this.client.toString() + ".\n" +
 				"Elle commence le " + this.getDateDebut().get(Calendar.DATE) + "/" + 

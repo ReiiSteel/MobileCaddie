@@ -11,6 +11,11 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 
+/**
+ * 
+ *@author Flambard William Martin Johan
+ *
+ */
 public class Archivage {
 
 	private ArrayList<String> fichier;
@@ -20,10 +25,13 @@ public class Archivage {
 	}
 
 	/**
-	 *  Méthode pour archiver les locations
+	 * Méthode pour archiver les locations
+	 * @param m1 : magasin associé à l'archive
+	 * @param loc : location à archiver
+	 * @return : vrai si la location a été archivée
 	 * @throws IOException
 	 */
-	public boolean nouvelleArchive(Magasin m1) throws IOException {
+	public boolean nouvelleArchive(Magasin m1, Location loc) throws IOException {
 		// Génération du nom du fichier YEARMONTH.loc
 		String fichier = "";
 		GregorianCalendar dateEnCours = new GregorianCalendar();
@@ -35,25 +43,21 @@ public class Archivage {
 		// Ouverture du flux
 		DataOutputStream fluxSortieBinaire = new DataOutputStream(new FileOutputStream(fichier, true));
 
-		// Parcours des locations
-		ArrayList<Location> locationsSurDateEnCours = m1.getLocationsDateFinMoisAnnee(dateEnCours);
-		Iterator<Location> itr = locationsSurDateEnCours.iterator();
-		while(itr.hasNext()) {
-			Location loc = (Location) itr.next();
-			int nbArticles = loc.getArticles().size();
-			int refClient = loc.getClient().getRefClient();
 
-			// Récupération de la date de début
-			int yearDebut = loc.getDateDebut().get(Calendar.YEAR);
-			int monthDebut = loc.getDateDebut().get(Calendar.MONTH) + 1;
-			int dayDebut = loc.getDateDebut().get(Calendar.DATE);
+		int nbArticles = loc.getArticles().size();
+		int refClient = loc.getClient().getRefClient();
 
-			// Récupération de la date de fin
-			int yearFin = loc.getDateFin().get(Calendar.YEAR);
-			int monthFin = loc.getDateFin().get(Calendar.MONTH) + 1;
-			int dayFin = loc.getDateFin().get(Calendar.DATE);
+		// Récupération de la date de début
+		int yearDebut = loc.getDateDebut().get(Calendar.YEAR);
+		int monthDebut = loc.getDateDebut().get(Calendar.MONTH) + 1;
+		int dayDebut = loc.getDateDebut().get(Calendar.DATE);
 
-			/*
+		// Récupération de la date de fin
+		int yearFin = loc.getDateFin().get(Calendar.YEAR);
+		int monthFin = loc.getDateFin().get(Calendar.MONTH) + 1;
+		int dayFin = loc.getDateFin().get(Calendar.DATE);
+
+		/*
 			Ecriture au format : 
 				nombre d'articles loués 
 				ref client
@@ -62,23 +66,23 @@ public class Archivage {
 				ref article
 				ref article
 							...
-			 */
-			fluxSortieBinaire.writeInt(nbArticles);
-			fluxSortieBinaire.writeInt(refClient);
-			fluxSortieBinaire.writeInt(dayDebut);
-			fluxSortieBinaire.writeInt(monthDebut);
-			fluxSortieBinaire.writeInt(yearDebut);
-			fluxSortieBinaire.writeInt(dayFin);
-			fluxSortieBinaire.writeInt(monthFin);
-			fluxSortieBinaire.writeInt(yearFin);			
-
-			ArrayList<Article> articles = loc.getArticles();
-			for (Article article : articles) {
-				fluxSortieBinaire.writeChars(article.getReference() + ";");
-			}
-
-			fluxSortieBinaire.writeChar('\\');
+		 */
+		fluxSortieBinaire.writeInt(nbArticles);
+		fluxSortieBinaire.writeInt(refClient);
+		fluxSortieBinaire.writeInt(dayDebut);
+		fluxSortieBinaire.writeInt(monthDebut);
+		fluxSortieBinaire.writeInt(yearDebut);
+		fluxSortieBinaire.writeInt(dayFin);
+		fluxSortieBinaire.writeInt(monthFin);
+		fluxSortieBinaire.writeInt(yearFin);			
+		// Articles
+		ArrayList<Article> articles = loc.getArticles();
+		for (Article article : articles) {
+			fluxSortieBinaire.writeChars(article.getReference() + ";");
 		}
+		// Fin de la location
+		fluxSortieBinaire.writeChar('\\');
+
 
 		// Fermeture du flux
 		System.out.println("Toutes les locations ont été archivées");
@@ -87,21 +91,22 @@ public class Archivage {
 	}
 
 	/**
-	 * 
-	 * @param Magasin
-	 * @param GregorianCalendar
-	 * @return ArrayList<Location>
+	 * Méthode pour récupérer une archive à partir d'un mois
+	 * @param Magasin : magasin lié à l'archive
+	 * @param GregorianCalendar : mois de l'archive
+	 * @return ArrayList<Location> : liste de locations désarchivées
 	 * @throws IOException
 	 */
 	public ArrayList<Location> getLocationsMois(Magasin m1, GregorianCalendar cal) throws IOException {
 		ArrayList<Location> locationsMois = new ArrayList<Location>();
-		
+		// Génération du nom du fichier YEARMONTH.loc
 		String fichier = "";
 		fichier += cal.get(Calendar.YEAR);
 		int month = cal.get(Calendar.MONTH) + 1;
 		fichier += month;
 		fichier += ".loc";
-		
+
+		// Verification de la présence de l'archive
 		if(this.fichier.contains(fichier)) {
 			// Ouverture du flux
 			DataInputStream fluxBinaire = new DataInputStream(new FileInputStream(fichier));
@@ -123,6 +128,7 @@ public class Archivage {
 
 					c = '\0';
 
+					// Récupération des articles
 					String refArticle = "";
 					for (int i = 0; i < nbArticles; i++) {
 						while(c != '\\') {
@@ -141,18 +147,7 @@ public class Archivage {
 					for(String ref : refArticleSplit) {
 						articleArchive.addAll(m1.getArticleByRef(ref));
 					}
-					
-					// Debug
-					/*System.out.println(client);
-						System.out.println(articleArchive);
-						System.out.println(dayDebut);
-						System.out.println(monthDebut);
-						System.out.println(yearDebut);
-						System.out.println(dayFin);
-						System.out.println(monthFin);
-						System.out.println(yearFin);*/
-					
-					Location loc = new Location(client, articleArchive, dayDebut, monthDebut, yearDebut, dayFin, monthFin, yearFin);
+					Location loc = new Location(client, articleArchive, dayDebut, monthDebut-1, yearDebut, dayFin, monthFin-1, yearFin);
 					locationsMois.add(loc);
 				}
 			}
@@ -169,8 +164,8 @@ public class Archivage {
 			return locationsMois;
 		}
 		else {
-			System.out.println("Archive non trouvée ! " + fichier);
-			return null;
+			ArrayList<Location> loc = new ArrayList<Location>();
+			return loc;
 		}
 	}
 }
