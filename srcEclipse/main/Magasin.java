@@ -127,7 +127,7 @@ public class Magasin {
 	}
 
 	/**
-	 * Tri les locations en cours
+	 * Tri les articles
 	 * @param pref : préférence de l'utilisateur
 	 */
 	public void choixTri (String pref) {

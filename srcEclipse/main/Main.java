@@ -5,11 +5,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 
 import Acquisition.AppareilPhoto;
 import Acquisition.Camera;
 import Acquisition.Objectif;
+import ComparatorArticle.ComparatorArticlebyMarque;
+import ComparatorArticle.ComparatorArticlebyNom;
+import ComparatorArticle.ComparatorArticlebyRef;
 import Lumiere.FondStudio;
 import Lumiere.PanneauLED;
 import Lumiere.Reflecteur;
@@ -56,13 +60,7 @@ public class Main {
 				menuClient(m1);
 			}
 			else if (option == 3) {
-				// Affiche les articles du magasin
-				System.out.println("\n==================================================================================");
-				System.out.println("|   Liste des articles du magasin                                                 |");
-				System.out.println("==================================================================================");
-				for (Article a : m1.getArticles()) {
-					System.out.println(a);
-				}
+				menuArticles(m1);
 			}
 			else if (option == 4) {
 				// Menu pour ajouter un article
@@ -80,7 +78,7 @@ public class Main {
 				// Menu permettant d'avoir le montant gagné par le magasin sur une période
 				menuMontantPeriodique(m1);
 			}
-			
+
 			else if (option == 8) {
 				// Permet d'avoir la liste des locations archivées ce mois-ci (pratique pour tester si les archives fonctionnent)
 				ArrayList<Location> locationArchiveMoisCourant = new ArrayList<Location>();
@@ -164,7 +162,7 @@ public class Main {
 
 		/*
 			Location juste pour tester la terminaison d'une location avec une date de fin inférieur à aujourd'hui.
-			
+
 			Dans le logiciel final, on ne doit pas utiliser cette méthode pour faire une location mais utiliser plutôt m1.locationPeriodique.
 			Attention : pas de gestion de stock !
 		 */
@@ -184,7 +182,7 @@ public class Main {
 		lotArticle5.add(appareilPhoto);
 		Location locDeTest3 = new Location(c7, lotArticle5, 20, 2, 2015, 5, 9, 2016);
 		m1.setLocationsEnCours(c7, locDeTest3);
-		
+
 		return m1;
 	}
 
@@ -200,7 +198,7 @@ public class Main {
 		m1.ajoutArticle(cam);
 		System.out.println(cam);
 	}
-	
+
 	/**
 	 * Permet d'ajouter un appareil photo au magasin
 	 * @param stringAppareilPhoto : chaine de caractère contenant les paramètres pour le constructeur
@@ -463,7 +461,6 @@ public class Main {
 	 * @param m1 : magasin concerné
 	 */
 	public static void menuLocationEnCours(Magasin m1) {
-		// TODO TRI !!!!
 		// Booléen de la boucle secondaire. Si ce booléen est à faux, le programme revient à la boucle principale
 		boolean breakMain2 = true;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -484,6 +481,7 @@ public class Main {
 
 			try {
 				option = Integer.valueOf(br.readLine());
+
 				if(option == 0) {
 					// On revient à la boucle principale sans terminer de locations
 					breakMain2 = false;
@@ -512,7 +510,7 @@ public class Main {
 		boolean breakMain2 = true;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int option = 0;
-		
+
 		while(breakMain2) {
 			System.out.println("\n==================================================================================");
 			System.out.println("|   Clients du magasin                                                           |");
@@ -544,6 +542,43 @@ public class Main {
 				e.printStackTrace();
 			}
 		}		
+	}
+
+	/**
+	 * Affiche les articles et gère le tri
+	 * @param m1 : magasin concerné
+	 */
+	public static void menuArticles(Magasin m1) {
+		// Booléen de la boucle secondaire. Si ce booléen est à faux, le programme revient à la boucle principale
+		boolean breakMain2 = true;
+		String pref = "";
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		while(breakMain2) {
+			System.out.println("\n==================================================================================");
+			System.out.println("|   Liste des articles du magasin                                                 |");
+			System.out.println("==================================================================================");
+			for (Article a : m1.getArticles()) {
+				System.out.println(a);
+			}
+			System.out.println("Pour trier par nom saisissez nom ; par marque saisissez marque ;\n"
+					+ "par référence saisissez référence ; par prix saisissez prix\n"
+					+ "Saisissez retour pour revenir en arrière.");
+			
+			try {
+				pref = br.readLine();
+				if("retour".equals(pref)) {
+					breakMain2 = false;
+				}
+				else {
+					m1.choixTri(pref);	
+				}
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 	/**
@@ -580,7 +615,7 @@ public class Main {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 			if (option == 1) {
 				// Appareil photo
 				System.out.println("Saisissez le nom, la référence, le modèle, le prix de location par jour, le nombre?,\nle type d'objectif"
@@ -720,7 +755,7 @@ public class Main {
 		gcf.set(Calendar.DATE, Integer.valueOf(paramsCalendarFin[0]));
 		gcf.set(Calendar.MONTH, Integer.valueOf(paramsCalendarFin[1]));
 		gcf.set(Calendar.YEAR, Integer.valueOf(paramsCalendarFin[2]));
-		
+
 		// Récupération du montant sur la période à l'aide des Calendar
 		System.out.println("Le montant gagné sur cette période est de : " + m1.calculGain(gcd, gcf) + "€");
 	}
