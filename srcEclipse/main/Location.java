@@ -187,6 +187,6 @@ public class Location {
 				"Elle commence le " + this.getDateDebut().get(Calendar.DATE) + "/" + 
 				(this.getDateDebut().get(Calendar.MONTH) + 1) + "/" + this.getDateDebut().get(Calendar.YEAR)+ " et termine le " + 
 				this.getDateFin().get(Calendar.DATE) + "/" + (this.getDateFin().get(Calendar.MONTH) + 1)  + "/" + this.getDateFin().get(Calendar.YEAR) + ".\n" +
-				"Article(s) loué(s) : " + this.getArticles().toString() + "\n");		
+				"Article(s) loué(s) : " + this.getArticles().toString() + "\nMontant total gagné grâce à la location : " + this.getMontantAFacturer() + "\n");		
 	}
 }
