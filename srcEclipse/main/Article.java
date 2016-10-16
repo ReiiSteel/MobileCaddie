@@ -9,7 +9,7 @@ public abstract class Article {
 	private String marque;
 	private String nom;
 	private double prixLocationParJour;
-	private int nbStock;
+	private int stock;
 	
 	/**
 	 * Constructeur Article
@@ -19,12 +19,12 @@ public abstract class Article {
 	 * @param prixLocationParJour : prix par jour de location
 	 * @param stock : nombre d'article
 	 */
-	public Article(String nom, String reference, String marque, double prixLocationParJour, int nbStock) {
+	public Article(String nom, String reference, String marque, double prixLocationParJour, int stock) {
 		this.nom = nom;
 		this.reference = reference;
 		this.marque = marque;
 		this.prixLocationParJour = prixLocationParJour;
-		this.nbStock = nbStock;	
+		this.stock = stock;	
 	}
 	
 	// Getter and setter
@@ -44,8 +44,8 @@ public abstract class Article {
 		return prixLocationParJour;
 	}
 
-	public int getNbStock() {
-		return nbStock;
+	public int getStock() {
+		return stock;
 	}
 	
 	/**
@@ -54,8 +54,8 @@ public abstract class Article {
 	 * @return boolean
 	 */
 	public boolean estLouable(){
-		if(this.nbStock > 0){ 
-			this.nbStock -= 1;
+		if(this.stock > 0){ 
+			this.stock -= 1;
 			return true;
 		}
 		else{
@@ -68,7 +68,7 @@ public abstract class Article {
 	 * Gère le retour d'une location
 	 */
 	public void retourLocation() {
-		this.nbStock =+ 1;
+		this.stock =+ 1;
 	}
 	
 	/**
@@ -76,6 +76,6 @@ public abstract class Article {
 	 */
 	public String toString(){
 		return ("L'article " + this.getNom() + " de la marque " + this.getMarque() + " avec la référence " + this.getReference() +
-				" a un prix de location par jour de " + this.getPrixLocationParJour() + "€ Il en reste " + this.getNbStock() + " dans le magasin ! \n");
+				" a un prix de location par jour de " + this.getPrixLocationParJour() + "€ Il en reste " + this.getStock() + " dans le magasin ! \n");
 	}
 }

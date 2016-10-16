@@ -22,7 +22,7 @@ public class Client {
 		this.nom = nom;
 		this.adresse = adresse;
 		this.locations = new ArrayList<Location>();
-		this.nbrefClient ++;
+		Client.nbrefClient ++;
 		this.refClient = nbrefClient;
 	}
 

@@ -2,10 +2,6 @@ package main;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Locale;
-
-import Acquisition.Camera;
-import Acquisition.Objectif;
 /**
  * Classe représentant une location
  *@author Flambard William Martin Johan
@@ -21,9 +17,9 @@ public class Location {
 	 * Constructeur de la class Location
 	 * @param client : client qui fait la location
 	 * @param articles : articles loues par le client
-	 * @param year : nombre d'annees de location
-	 * @param month : nombre de mois de location
-	 * @param day : nombre de jours de location
+	 * @param nbYear : nombre d'annees de location
+	 * @param nbMonth : nombre de mois de location
+	 * @param nbDay : nombre de jours de location
 	 */
 	public Location(Client client, ArrayList<Article> articles, int nbYear, int nbMonth, int nbDay) {
 		if (nbDay > 0 || nbMonth > 0 || nbYear > 0) {
@@ -131,7 +127,7 @@ public class Location {
 	
 	/**
 	 * Permet de savoir si une location est terminee
-	 * @return
+	 * @return : boolean location terminée
 	 */
 	public boolean isEnd() {
 		GregorianCalendar gcal = new GregorianCalendar();

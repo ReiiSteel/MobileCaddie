@@ -5,15 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.GregorianCalendar;
 
 import Acquisition.AppareilPhoto;
 import Acquisition.Camera;
 import Acquisition.Objectif;
-import ComparatorArticle.ComparatorArticlebyMarque;
-import ComparatorArticle.ComparatorArticlebyNom;
-import ComparatorArticle.ComparatorArticlebyRef;
 import Lumiere.FondStudio;
 import Lumiere.PanneauLED;
 import Lumiere.Reflecteur;
@@ -584,7 +580,7 @@ public class Main {
 	/**
 	 * Permet d'ajouter un article au magasin
 	 * @param m1 : magasin concerné
-	 * @throws IOException
+	 * @throws IOException : buffer
 	 */
 	public static void menuAjoutArticle(Magasin m1) throws IOException {
 		// Booléen de la boucle secondaire. Si ce booléen est à faux, le programme revient à la boucle principale

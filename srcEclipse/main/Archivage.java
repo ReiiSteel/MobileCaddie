@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
 
 /**
  * 
@@ -29,7 +28,7 @@ public class Archivage {
 	 * @param m1 : magasin associé à l'archive
 	 * @param loc : location à archiver
 	 * @return : vrai si la location a été archivée
-	 * @throws IOException
+	 * @throws IOException : E/S
 	 */
 	public boolean nouvelleArchive(Magasin m1, Location loc) throws IOException {
 		// Génération du nom du fichier YEARMONTH.loc
@@ -92,10 +91,10 @@ public class Archivage {
 
 	/**
 	 * Méthode pour récupérer une archive à partir d'un mois
-	 * @param Magasin : magasin lié à l'archive
-	 * @param GregorianCalendar : mois de l'archive
-	 * @return ArrayList<Location> : liste de locations désarchivées
-	 * @throws IOException
+	 * @param m1 : magasin lié à l'archive
+	 * @param cal : mois de l'archive
+	 * @return ArrayList : liste de locations désarchivées
+	 * @throws IOException : E/S
 	 */
 	public ArrayList<Location> getLocationsMois(Magasin m1, GregorianCalendar cal) throws IOException {
 		ArrayList<Location> locationsMois = new ArrayList<Location>();

@@ -98,19 +98,6 @@ public class Magasin {
 	}
 	
 	
-	public ArrayList<Location> getLocationsDateFinMoisAnnee (GregorianCalendar cal) {
-		ArrayList<Location> locationsReturned = new ArrayList<Location>();
-		Iterator<Location> itr = this.locationsEnCours.iterator();
-		while(itr.hasNext()) {
-			Location loc = (Location) itr.next();
-			if((loc.getDateFin().get(Calendar.YEAR) == cal.get(Calendar.YEAR)) 
-					&& (loc.getDateFin().get(Calendar.MONTH) == cal.get(Calendar.MONTH))) {
-				locationsReturned.add(loc);
-			}			
-		}		
-		return locationsReturned;
-	}
-	
 	/**
 	 * @param ref : référence d'un article
 	 * @return Une liste d'article ayant la référence ref
@@ -133,6 +120,7 @@ public class Magasin {
 	public void choixTri (String pref) {
 		pref = pref.toLowerCase();
 		
+		// Comparator
 		switch (pref) {
 		case "nom":
 			Collections.sort(this.articles, new ComparatorArticlebyNom());
@@ -158,16 +146,19 @@ public class Magasin {
 	 * @param nbYear : nombre d'années de la location
 	 * @param nbMonth : nombre de mois de la location
 	 * @param nbDay : nombre de jour de la location
-	 * @return
+	 * @return : Location
 	 */
 	public Location locationPeriodique(Client client, ArrayList<Article> articles, int nbYear, int nbMonth, int nbDay){
-		ArrayList<Article> aLouer = (ArrayList<Article>) articles.clone(); 
+		ArrayList<Article> aLouer = new ArrayList<Article>();
+		aLouer.addAll(articles);
+		// On loue seulement les articles qui sont louable
 		for (Article article : aLouer) {
 			if(!article.estLouable()) {
 				articles.remove(article);
 			}
 		}
 
+		// Création de la location, ajout dans les locations en cours et dans les locations du client
 		if(articles.size() > 0){
 			Location location = new Location(client, articles, nbYear, nbMonth, nbDay);
 			client.ajoutLocation(location);
@@ -194,7 +185,7 @@ public class Magasin {
 	/**
 	 * Permet de terminer une location
 	 * @param loc : location à terminer
-	 * @throws IOException
+	 * @throws IOException : E/S
 	 */
 	public void locationTerminee (Location loc) throws IOException {
 		if(loc.isEnd()) {
@@ -261,14 +252,8 @@ public class Magasin {
 			montant += location.getMontantPeriode(gcd, gcf);
 		}
 		for (Location location : this.locationsEnCours) {
-			/*// Pour gérer le Calendar qui commence les mois à janvier = 0 ...
-			GregorianCalendar cal2 = (GregorianCalendar) location.getDateFin().clone();
-			GregorianCalendar cal3 = (GregorianCalendar) location.getDateDebut().clone();
-			cal2.set(Calendar.MONTH, location.getDateFin().get(Calendar.MONTH) +1);
-			cal3.set(Calendar.MONTH, location.getDateDebut().get(Calendar.MONTH) +1);
-			*/
+			System.out.println(location.getDateDebut().get(Calendar.MONTH));
 			if( (location.getDateFin().compareTo(gcf) == -1 || location.getDateFin().compareTo(gcf) == 0) && (location.getDateDebut().compareTo(gcd) == 0 || location.getDateDebut().compareTo(gcd) == 1) ){
-				System.out.println(location);
 				montant += location.getMontantPeriode(gcd, gcf);
 			}
 		}

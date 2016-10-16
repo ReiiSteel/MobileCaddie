@@ -12,7 +12,7 @@ public class Objectif extends Article {
 	 * Constructeur Objectif
 	 * @param nom : nom de l'article
 	 * @param reference : référence de l'article
-	 * @param marque : marque de l'article
+	 * @param modele : marque de l'article
 	 * @param prixLocationParJour : prix par jour de location
 	 * @param stock : nombre d'article
 	 */
